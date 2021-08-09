@@ -1,2 +1,1081 @@
   [1m[35m (237.4ms)[0m  [1m[35mCREATE DATABASE "medapp_dev" ENCODING = 'unicode'[0m
   [1m[35m (241.8ms)[0m  [1m[35mCREATE DATABASE "medapp_test" ENCODING = 'unicode'[0m
+  [1m[35m (40.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateActiveStorageTables (20210809182104)
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.4ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (14.0ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (16.7ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809182104"]]
+  [1m[36mTRANSACTION (5.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStudents (20210809184237)
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809184237"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTeachers (20210809184243)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "background" text, "income" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809184243"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE TABLE "meditations" ("id" bigserial primary key, "med_type" character varying, "title" character varying, "description" text, "est_length" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-08-09 18:59:27.427031"], ["updated_at", "2021-08-09 18:59:27.427031"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.6ms)[0m  [1m[35mDROP TABLE "meditations"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (1.5ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE TABLE "meditations" ("id" bigserial primary key, "med_type" character varying, "title" character varying, "description" text, "est_length" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlays (20210809190223)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "plays" ("id" bigserial primary key, "student_id" integer, "meditation_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809190223"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlays (20210809190223)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mDROP TABLE "plays"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.8ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809190223"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mDROP TABLE "meditations"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (1.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE TABLE "meditations" ("id" bigserial primary key, "med_type" character varying, "title" character varying, "description" text, "est_length" integer, "teacher_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePlays (20210809190223)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "plays" ("id" bigserial primary key, "student_id" integer, "meditation_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809190223"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlays (20210809190223)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE "plays"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809190223"]]
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.4ms)[0m  [1m[35mDROP TABLE "meditations"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTeachers (20210809184243)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.6ms)[0m  [1m[35mDROP TABLE "teachers"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (1.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809184243"]]
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTeachers (20210809184243)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.2ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "background" text, "image_url" text, "income" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809184243"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "meditations" ("id" bigserial primary key, "med_type" character varying, "title" character varying, "description" text, "est_length" integer, "teacher_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePlays (20210809190223)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "plays" ("id" bigserial primary key, "student_id" integer, "meditation_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809190223"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/users" for 127.0.0.1 at 2021-08-09 15:30:38 -0500
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as JSON
+  Parameters: {"email"=>"asdasd", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"teacher", "user"=>{"email"=>"asdasd", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"teacher"}}
+[31mUnpermitted parameters: :confirmPassword, :type, :user[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTeacher Create (3.6ms)[0m  [1m[32mINSERT INTO "teachers" ("email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "asdasd"], ["password_digest", "$2a$12$j.6i42iRGqNHZ/XcVFLXLeOrwaEshiC1nJMOm44H0iV8UZqpg2.IG"], ["created_at", "2021-08-09 20:30:39.355330"], ["updated_at", "2021-08-09 20:30:39.355330"]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (1.14ms)
+Completed 201 Created in 364ms (Views: 21.8ms | ActiveRecord: 14.1ms | Allocations: 14452)
+
+
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-09 15:36:59 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-09 15:36:59 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 15:37:17 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlays (20210809190223)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.8ms)[0m  [1m[35mDROP TABLE "plays"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.9ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809190223"]]
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE "meditations"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (1.0ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTeachers (20210809184243)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE "teachers"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (1.0ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809184243"]]
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateStudents (20210809184237)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.8ms)[0m  [1m[35mDROP TABLE "students"[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (1.2ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20210809184237"]]
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1366625389493605920)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateStudents (20210809184237)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.5ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809184237"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTeachers (20210809184243)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE TABLE "teachers" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "background" text, "image_url" text DEFAULT 'https://clipground.com/images/avatar-clipart-free-6.png', "income" decimal DEFAULT 0.0, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809184243"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMeditations (20210809185615)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE TABLE "meditations" ("id" bigserial primary key, "med_type" character varying, "title" character varying, "description" text, "est_length" integer, "teacher_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809185615"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePlays (20210809190223)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "plays" ("id" bigserial primary key, "student_id" integer, "meditation_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210809190223"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1366625389493605920)[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/users" for 127.0.0.1 at 2021-08-09 15:59:31 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as JSON
+  Parameters: {"name"=>"Grant", "email"=>"g@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"teacher", "user"=>{"name"=>"Grant", "email"=>"g@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"teacher"}}
+[31mUnpermitted parameters: :confirmPassword, :type, :user[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTeacher Exists? (2.6ms)[0m  [1m[34mSELECT 1 AS one FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTeacher Create (0.7ms)[0m  [1m[32mINSERT INTO "teachers" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Grant"], ["email", "g@g.com"], ["password_digest", "$2a$12$FVTmHH5o.Lwg2FRQD1VNYufGD4M2unclGIoCipunkx.kHeagxzyBu"], ["created_at", "2021-08-09 20:59:31.528039"], ["updated_at", "2021-08-09 20:59:31.528039"]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (0.54ms)
+Completed 201 Created in 303ms (Views: 8.6ms | ActiveRecord: 9.3ms | Allocations: 13331)
+
+
+Started POST "/users" for 127.0.0.1 at 2021-08-09 16:01:10 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"name"=>"Grant", "email"=>"g@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"student", "user"=>{"name"=>"Grant", "email"=>"g@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"student"}}
+[31mUnpermitted parameters: :confirmPassword, :type, :user[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mStudent Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mStudent Create (0.7ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Grant"], ["email", "g@g.com"], ["password_digest", "$2a$12$l/HDTfSMr3Vlog8P0Y/psO/nQzrg8KeZ4ZE4VgXjxHlFOl91imW5e"], ["created_at", "2021-08-09 21:01:10.547385"], ["updated_at", "2021-08-09 21:01:10.547385"]]
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+[active_model_serializers] Rendered StudentSerializer with ActiveModelSerializers::Adapter::Attributes (9.09ms)
+Completed 500 Internal Server Error in 320ms (ActiveRecord: 14.7ms | Allocations: 11297)
+
+
+  
+NoMethodError (undefined method `listens' for #<Student:0x00007fd96fde4c20>):
+  
+app/controllers/users_controller.rb:8:in `create'
+Started POST "/users" for 127.0.0.1 at 2021-08-09 16:02:24 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"name"=>"Grant", "email"=>"g@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"student", "user"=>{"name"=>"Grant", "email"=>"g@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"student"}}
+[31mUnpermitted parameters: :confirmPassword, :type, :user[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mStudent Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 422 Unprocessable Entity in 280ms (Views: 2.4ms | ActiveRecord: 8.5ms | Allocations: 9291)
+
+
+Started POST "/users" for 127.0.0.1 at 2021-08-09 16:02:35 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"name"=>"Grant", "email"=>"gg@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"student", "user"=>{"name"=>"Grant", "email"=>"gg@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"student"}}
+[31mUnpermitted parameters: :confirmPassword, :type, :user[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mStudent Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "gg@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mStudent Create (0.4ms)[0m  [1m[32mINSERT INTO "students" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Grant"], ["email", "gg@g.com"], ["password_digest", "$2a$12$ypqaqp.uwxWoduS1pu2XL..NZ6itnYbnGCH5G/xbq4rqim28WAhGe"], ["created_at", "2021-08-09 21:02:35.410341"], ["updated_at", "2021-08-09 21:02:35.410341"]]
+  ↳ app/controllers/users_controller.rb:4:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:4:in `create'
+[active_model_serializers]   [1m[36mPlay Load (1.1ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."student_id" = $1[0m  [["student_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:8:in `create'
+[active_model_serializers] Rendered StudentSerializer with ActiveModelSerializers::Adapter::Attributes (32.72ms)
+Completed 200 OK in 307ms (Views: 29.0ms | ActiveRecord: 6.9ms | Allocations: 9416)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 16:02:35 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:24:15 -0500
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/Users/grant/flatiron/code/mod5/Project/medapp/app/controllers/log_in_controller.rb:12: syntax error, unexpected ':', expecting `end'
+       head: :no_content, status: 204
+           ^
+/Users/grant/flatiron/code/mod5/Project/medapp/app/controllers/log_in_controller.rb:21: syntax error, unexpected end-of-input, expecting `end'):
+  
+app/controllers/log_in_controller.rb:12: syntax error, unexpected ':', expecting `end'
+app/controllers/log_in_controller.rb:21: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/log_in_controller.rb:12: syntax error, unexpected ':', expecting `end'
+app/controllers/log_in_controller.rb:21: syntax error, unexpected end-of-input, expecting `end'
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:25:00 -0500
+  
+SyntaxError (/Users/grant/flatiron/code/mod5/Project/medapp/app/controllers/log_in_controller.rb:21: syntax error, unexpected end-of-input, expecting `end'):
+  
+app/controllers/log_in_controller.rb:21: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/log_in_controller.rb:21: syntax error, unexpected end-of-input, expecting `end'
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:25:52 -0500
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (4.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE (g@g.com) LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 4.6ms | Allocations: 4891)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column "g" does not exist
+LINE 1: SELECT "teachers".* FROM "teachers" WHERE (g@g.com) LIMIT $1
+                                                   ^
+):
+  
+app/controllers/log_in_controller.rb:8:in `create'
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:29:08 -0500
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.7ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 295ms (ActiveRecord: 7.3ms | Allocations: 9637)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:29:19 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 257ms (ActiveRecord: 0.4ms | Allocations: 688)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:31:17 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 245ms (ActiveRecord: 0.5ms | Allocations: 594)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:32:32 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 261ms (ActiveRecord: 0.5ms | Allocations: 594)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:33:39 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 262ms (ActiveRecord: 0.4ms | Allocations: 594)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:37:18 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 250ms (ActiveRecord: 0.3ms | Allocations: 574)
+
+
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-09 16:46:27 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-09 16:46:27 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-09 16:46:27 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:48:15 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 291ms (ActiveRecord: 9.6ms | Allocations: 2774)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 16:48:16 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 16:48:29 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 16:48:31 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 16:48:35 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 16:48:58 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 264ms (ActiveRecord: 0.6ms | Allocations: 575)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 16:48:58 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-09 16:56:04 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-09 16:56:05 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-09 16:56:05 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 16:59:56 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:00:01 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:01:24 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 262ms (ActiveRecord: 11.4ms | Allocations: 2842)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:01:24 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:01:28 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:01:37 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student", "log_in"=>{"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student"}}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "gg@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:6:in `create'
+Completed 204 No Content in 264ms (ActiveRecord: 8.1ms | Allocations: 5459)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:01:37 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:03:02 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:03:07 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:03:13 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"student", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"student"}}
+  [1m[36mStudent Load (1.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:6:in `create'
+Completed 204 No Content in 256ms (ActiveRecord: 1.0ms | Allocations: 641)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:03:13 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:03:16 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:03:29 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 245ms (ActiveRecord: 0.5ms | Allocations: 663)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:03:29 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:04:22 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:04:28 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 244ms (ActiveRecord: 0.6ms | Allocations: 664)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:04:28 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:04:46 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:04:51 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:05:17 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 253ms (ActiveRecord: 0.3ms | Allocations: 659)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:06:35 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:06:42 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 253ms (ActiveRecord: 0.4ms | Allocations: 641)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:07:11 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:07:16 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 248ms (ActiveRecord: 0.4ms | Allocations: 658)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:08:05 -0500
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:08:05 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:08:16 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"j@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"j@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "j@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+Completed 404 Not Found in 33ms (Views: 2.2ms | ActiveRecord: 2.6ms | Allocations: 5667)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:08:21 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"j@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"j@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "j@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 404 Not Found in 3ms (Views: 0.6ms | ActiveRecord: 0.5ms | Allocations: 617)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:10:00 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 404 Not Found in 3ms (Views: 0.5ms | ActiveRecord: 0.4ms | Allocations: 597)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:11:01 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 404 Not Found in 3ms (Views: 0.5ms | ActiveRecord: 0.4ms | Allocations: 611)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:11:15 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.7ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 404 Not Found in 4ms (Views: 0.7ms | ActiveRecord: 0.7ms | Allocations: 617)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:11:29 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+Completed 404 Not Found in 2ms (Views: 0.5ms | ActiveRecord: 0.4ms | Allocations: 596)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:11:35 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 404 Not Found in 3ms (Views: 0.6ms | ActiveRecord: 0.4ms | Allocations: 596)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:11:45 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:11:47 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:11:50 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:11:54 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 404 Not Found in 3ms (Views: 0.5ms | ActiveRecord: 0.4ms | Allocations: 595)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:12:18 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 404 Not Found in 3ms (Views: 0.7ms | ActiveRecord: 0.3ms | Allocations: 596)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:13:14 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 277ms (ActiveRecord: 4.8ms | Allocations: 4290)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:13:22 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 249ms (ActiveRecord: 0.6ms | Allocations: 644)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:13:48 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 264ms (ActiveRecord: 0.3ms | Allocations: 648)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:14:05 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 252ms (ActiveRecord: 0.3ms | Allocations: 661)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:14:17 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:14:25 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 252ms (ActiveRecord: 0.3ms | Allocations: 649)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:14:27 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 243ms (ActiveRecord: 0.4ms | Allocations: 648)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:14:27 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.2ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 260ms (ActiveRecord: 0.2ms | Allocations: 664)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:14:27 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 248ms (ActiveRecord: 0.3ms | Allocations: 648)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:14:28 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 250ms (ActiveRecord: 0.4ms | Allocations: 658)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:14:55 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 270ms (ActiveRecord: 0.3ms | Allocations: 662)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:15:02 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:15:10 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 273ms (ActiveRecord: 6.8ms | Allocations: 5547)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:15:36 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 250ms (ActiveRecord: 0.4ms | Allocations: 652)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:16:59 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 246ms (ActiveRecord: 0.3ms | Allocations: 668)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:21:01 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:21:06 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.2ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 404 Not Found in 5ms (Views: 1.7ms | ActiveRecord: 0.2ms | Allocations: 713)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:21:12 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 267ms (ActiveRecord: 0.4ms | Allocations: 659)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:21:38 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:21:44 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"jj@j.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "jj@j.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 3ms (Views: 0.4ms | ActiveRecord: 0.3ms | Allocations: 595)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:21:49 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 262ms (ActiveRecord: 0.3ms | Allocations: 576)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:23:44 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:23:52 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:23:55 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:23:56 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:24:02 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 269ms (ActiveRecord: 0.5ms | Allocations: 649)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:24:06 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:24:07 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:24:30 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 251ms (ActiveRecord: 0.3ms | Allocations: 647)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:24:30 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:25:09 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:25:16 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 265ms (ActiveRecord: 0.6ms | Allocations: 644)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:25:16 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:28:47 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:30:40 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 266ms (ActiveRecord: 0.4ms | Allocations: 573)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:31:16 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 263ms (ActiveRecord: 0.4ms | Allocations: 650)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:35:43 -0500
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:35:56 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (4.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 404 Not Found in 38ms (Views: 2.2ms | ActiveRecord: 11.1ms | Allocations: 5667)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:36:05 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 3ms (Views: 0.5ms | ActiveRecord: 0.3ms | Allocations: 617)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:36:29 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 3ms (Views: 0.4ms | ActiveRecord: 0.4ms | Allocations: 617)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:37:01 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.3ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 404 Not Found in 2ms (Views: 0.5ms | ActiveRecord: 0.3ms | Allocations: 617)
+
+
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:37:09 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"student", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"student"}}
+  [1m[36mStudent Load (2.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:6:in `create'
+Completed 204 No Content in 289ms (ActiveRecord: 10.8ms | Allocations: 5589)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:37:09 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:37:14 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:37:21 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 404 Not Found in 3ms (Views: 0.5ms | ActiveRecord: 0.5ms | Allocations: 595)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:38:06 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/users" for 127.0.0.1 at 2021-08-09 17:38:33 -0500
+Processing by UsersController#create as JSON
+  Parameters: {"name"=>"Grant", "email"=>"g@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"teacher", "user"=>{"name"=>"Grant", "email"=>"g@g.com", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "type"=>"teacher"}}
+[31mUnpermitted parameters: :confirmPassword, :type, :user[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTeacher Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTeacher Create (3.7ms)[0m  [1m[32mINSERT INTO "teachers" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Grant"], ["email", "g@g.com"], ["password_digest", "$2a$12$3ffgbGD2BumIyAnEN0qoNe/6uqHEFr.GrEuxXx30.6zcoU5oLbbRG"], ["created_at", "2021-08-09 22:38:33.686229"], ["updated_at", "2021-08-09 22:38:33.686229"]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (0.51ms)
+Completed 200 OK in 298ms (Views: 18.6ms | ActiveRecord: 7.7ms | Allocations: 7719)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:38:33 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-09 17:38:43 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+Completed 204 No Content in 268ms (ActiveRecord: 0.4ms | Allocations: 654)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:38:43 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:38:44 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:41:05 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:41:06 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:41:07 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:41:09 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:41:54 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-09 17:41:55 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
