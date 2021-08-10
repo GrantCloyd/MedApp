@@ -4,6 +4,7 @@ import CreatePage from "./components/CreatePage"
 import LogInPage from "./components/LogInPage"
 import SignUpPage from "./components/SignUpPage"
 import Navbar from "./components/Navbar"
+import PlayMeditation from "./components/PlayMeditation"
 import { Route, Switch } from "react-router-dom"
 import { useState } from "react"
 
@@ -37,6 +38,7 @@ function App() {
          <hr />
          <Route path="/landing" component={() => <Landing loggedIn={loggedIn} />} />
          <hr />
+         <Route path="/playingnow" component={() => <PlayMeditation />} />
       </div>
    )
 }

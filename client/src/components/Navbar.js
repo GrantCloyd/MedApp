@@ -25,6 +25,7 @@ export default function Navbar({ loggedIn, setLogInType }) {
             ) : (
                <>
                   <li>Find Meditations</li>
+                  <NavLink to="/playingnow">Play Meditation</NavLink>
                </>
             )}
             <li onClick={handleLogOut}>Logout</li>

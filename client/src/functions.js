@@ -9,3 +9,7 @@ export const createConfig = (method, obj = "") => {
       body: JSON.stringify(obj),
    }
 }
+
+export const makeLinkForBlob = blob => {
+   return `http://localhost:3000${blob}`
+}

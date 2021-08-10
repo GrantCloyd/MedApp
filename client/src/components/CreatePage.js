@@ -28,22 +28,10 @@ export default function CreatePage({ userData }) {
       for (let key in newMed) {
          formData.append(key, newMed[key])
       }
-      // const res = await fetch("/meditations", {
-      //    method: "POST",
-      //    body: JSON.stringify(formData),
-      //    headers: { "Content-Type": "multipart/form-data", Accept: "application/json" },
-      // })
-      // const data = await res.json()
+
       axios.post("http://localhost:3000/meditations", formData).then(res => {
          console.log(res)
       })
-      // if (data.ok) {
-      //    console.log(data)
-      //    setSuccess(true)
-      //    setTimeout(() => setSuccess(false), 3000)
-      // } else {
-      //    setErrors(data.error)
-      // }
    }
 
    return (
