@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { medTypes } from "../constants"
 import { handleChange, createConfig } from "../functions"
+import axios from "axios"
 
 export default function CreatePage({ userData }) {
    const initialState = {
@@ -17,18 +18,32 @@ export default function CreatePage({ userData }) {
    const [errors, setErrors] = useState(false)
 
    const handleNewMed = e => handleChange(e, setNewMed, newMed)
-   const handleFile = e => setNewMed({ ...newMed, audio_file: e.target.files[0] })
+   const handleFile = e => {
+      setNewMed({ ...newMed, audio_file: e.target.files[0] })
+   }
    async function handleSubmit(e) {
       e.preventDefault()
-      const res = await fetch("/meditations", createConfig("POST", newMed))
-      const data = await res.json()
-      if (data.ok) {
-         console.log(data)
-         setSuccess(true)
-         setTimeout(() => setSuccess(false), 3000)
-      } else {
-         setErrors(data.error)
+
+      const formData = new FormData()
+      for (let key in newMed) {
+         formData.append(key, newMed[key])
       }
+      // const res = await fetch("/meditations", {
+      //    method: "POST",
+      //    body: JSON.stringify(formData),
+      //    headers: { "Content-Type": "multipart/form-data", Accept: "application/json" },
+      // })
+      // const data = await res.json()
+      axios.post("http://localhost:3000/meditations", formData).then(res => {
+         console.log(res)
+      })
+      // if (data.ok) {
+      //    console.log(data)
+      //    setSuccess(true)
+      //    setTimeout(() => setSuccess(false), 3000)
+      // } else {
+      //    setErrors(data.error)
+      // }
    }
 
    return (
@@ -54,7 +69,9 @@ export default function CreatePage({ userData }) {
                placeholder="description"
             />
             <label htmlFor="med_type">Type</label>
-            <select onChange={handleNewMed}>{medTypes}</select>
+            <select name="med_type" onChange={handleNewMed}>
+               {medTypes}
+            </select>
             <label htmlFor="est_length">Length in Minutes</label>
             <input
                value={newMed.est_length}
