@@ -1,3 +1,5 @@
 class MeditationSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :audio_file
+  
+
 end

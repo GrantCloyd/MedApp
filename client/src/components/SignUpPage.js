@@ -1,5 +1,7 @@
 import React, { useState } from "react"
-import { HEADERS } from "../constants"
+
+import { createConfig } from "../functions"
+import { handleChange } from "../functions"
 import { useHistory } from "react-router-dom"
 
 export default function SignUpPage() {
@@ -12,16 +14,13 @@ export default function SignUpPage() {
    }
    const [signUp, setSignUp] = useState(initialState)
    const history = useHistory()
+   const handleSignUpChange = e => handleChange(e, setSignUp, signUp)
 
-   const handleChange = e => setSignUp({ ...signUp, [e.target.name]: e.target.value })
    async function handleSignUp(e) {
       e.preventDefault()
       if (signUp.password === signUp.confirmPassword) {
-         let configObj = {
-            method: "POST",
-            headers: HEADERS,
-            body: JSON.stringify(signUp),
-         }
+         const configObj = createConfig("POST", signUp)
+
          const res = await fetch("/users", configObj)
          const data = await res.json()
          if (res.ok) {
@@ -41,7 +40,7 @@ export default function SignUpPage() {
          <form onSubmit={handleSignUp}>
             <label htmlFor="name">Name</label>
             <input
-               onChange={handleChange}
+               onChange={handleSignUpChange}
                value={signUp.name}
                type="text"
                name="name"
@@ -50,7 +49,7 @@ export default function SignUpPage() {
             <label htmlFor="email">Email</label>
 
             <input
-               onChange={handleChange}
+               onChange={handleSignUpChange}
                value={signUp.email}
                type="text"
                name="email"
@@ -58,7 +57,7 @@ export default function SignUpPage() {
             />
             <label htmlFor="password">Password</label>
             <input
-               onChange={handleChange}
+               onChange={handleSignUpChange}
                value={signUp.password}
                type="password"
                autoComplete="new-password"
@@ -67,7 +66,7 @@ export default function SignUpPage() {
             />
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
-               onChange={handleChange}
+               onChange={handleSignUpChange}
                value={signUp.confirmPassword}
                type="password"
                autoComplete="new-password"
@@ -76,13 +75,13 @@ export default function SignUpPage() {
             />
             <label htmlFor="teacher">Teacher</label>
             <input
-               onChange={handleChange}
+               onChange={handleSignUpChange}
                type="radio"
                id="teacher"
                value="teacher"
                name="type"></input>
             <label htmlFor="student">Student</label>
-            <input onChange={handleChange} type="radio" value="student" name="type" />
+            <input onChange={handleSignUpChange} type="radio" value="student" name="type" />
             <button>Submit</button>
          </form>
       </div>

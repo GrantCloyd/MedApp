@@ -9,12 +9,16 @@ class LogInController < ApplicationController
     end
       if user && user.authenticate(params[:password])
        session[:user_id] = user.id
-       head :no_content, status: 204
+       render json: user
       else
       render json: {error: "Email and/or Password not found"}, status: 404
     end
     end
    
+    def destroy
+      session.delete(:user_id)
+      
+    end
 
     
 end

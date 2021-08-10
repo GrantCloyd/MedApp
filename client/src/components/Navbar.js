@@ -1,11 +1,15 @@
 import React from "react"
 import { useHistory, NavLink } from "react-router-dom"
+import { createConfig } from "../functions"
 
 export default function Navbar({ loggedIn, setLogInType }) {
    const history = useHistory()
-   const handleLogOut = () => {
+   async function handleLogOut() {
       setLogInType(false)
-      history.push("/")
+      const res = await fetch("/log_in", createConfig("DELETE"))
+      if (res.ok) {
+         history.push("/")
+      }
    }
 
    return (

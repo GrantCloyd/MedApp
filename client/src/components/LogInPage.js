@@ -1,29 +1,26 @@
 import React, { useState } from "react"
 import { useHistory, Link } from "react-router-dom"
-import { HEADERS } from "../constants"
+import { handleChange, createConfig } from "../functions"
 
-export default function LogInPage({ setLogInType }) {
+export default function LogInPage({ setLogInType, setUserData }) {
    const initialState = {
       email: "",
       password: "",
       type: "student",
    }
    const [logIn, setLogIn] = useState(initialState)
+   const handleLogInChange = e => handleChange(e, setLogIn, logIn)
    const history = useHistory()
 
-   const handleChange = e => setLogIn({ ...logIn, [e.target.name]: e.target.value })
    async function handleLogIn(e) {
       e.preventDefault()
-      const configObj = {
-         method: "POST",
-         headers: HEADERS,
-         body: JSON.stringify(logIn),
-      }
+      const configObj = createConfig("POST", logIn)
 
       const res = await fetch("/log_in", configObj)
-
-      if (res.status === 204) {
+      const data = await res.json()
+      if (data.id) {
          setLogInType(logIn.type)
+         setUserData(data)
          history.push("/landing")
       } else {
          alert("Password and/or email do not match")
@@ -36,7 +33,7 @@ export default function LogInPage({ setLogInType }) {
          <form onSubmit={handleLogIn}>
             <label htmlFor="email">Email</label>
             <input
-               onChange={handleChange}
+               onChange={handleLogInChange}
                value={logIn.email}
                type="text"
                name="email"
@@ -44,7 +41,7 @@ export default function LogInPage({ setLogInType }) {
             />
             <label htmlFor="password">Password</label>
             <input
-               onChange={handleChange}
+               onChange={handleLogInChange}
                value={logIn.password}
                type="password"
                autoComplete="new-password"
@@ -53,13 +50,13 @@ export default function LogInPage({ setLogInType }) {
             />
             <label htmlFor="teacher">Teacher</label>
             <input
-               onChange={handleChange}
+               onChange={handleLogInChange}
                type="radio"
                id="teacher"
                value="teacher"
                name="type"></input>
             <label htmlFor="student">Student</label>
-            <input onChange={handleChange} type="radio" value="student" name="type" />
+            <input onChange={handleLogInChange} type="radio" value="student" name="type" />
             <button>Submit</button>
          </form>
          <p>

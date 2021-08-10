@@ -9,14 +9,19 @@ import { useState } from "react"
 
 function App() {
    const [loggedIn, setLoggedIn] = useState(false)
-   console.log(loggedIn)
+   const [userData, setUserData] = useState(null)
+   console.log(loggedIn, userData)
 
    const setLogInType = userType => setLoggedIn(userType)
 
    if (loggedIn === false) {
       return (
          <Switch>
-            <Route path="/" exact component={() => <LogInPage setLogInType={setLogInType} />} />
+            <Route
+               path="/"
+               exact
+               component={() => <LogInPage setUserData={setUserData} setLogInType={setLogInType} />}
+            />
             <Route path="/signup" exact component={SignUpPage} />
          </Switch>
       )
@@ -27,12 +32,11 @@ function App() {
          <h1>Med App</h1>
          <hr />
          <Navbar setLogInType={setLogInType} loggedIn={loggedIn} />
-         <Switch>
-            <Route path="/landing" component={() => <Landing loggedIn={loggedIn} />} />
-            <hr />
-            <Route path="/create" component={CreatePage} />
-            <hr />
-         </Switch>
+
+         <Route path="/create" component={() => <CreatePage userData={userData} />} />
+         <hr />
+         <Route path="/landing" component={() => <Landing loggedIn={loggedIn} />} />
+         <hr />
       </div>
    )
 }
