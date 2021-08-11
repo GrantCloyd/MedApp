@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import { useHistory, Link } from "react-router-dom"
 import { handleChange, createConfig } from "../functions"
-import { login } from "./store/reducer"
+import { loginT } from "./store/teacherReducer"
+import { loginS } from "./store/studentReducer"
+
 import { useDispatch } from "react-redux"
 
 export default function LogInPage({ setLogInType, setUserData }) {
@@ -25,8 +27,8 @@ export default function LogInPage({ setLogInType, setUserData }) {
       const data = await res.json()
       if (data.id) {
          setLogInType(logIn.type)
+         logIn.type === "teacher" ? dispatch(loginT(data)) : dispatch(loginS(data))
          setUserData(data)
-         dispatch(login(data))
          history.push("/landing")
       } else {
          alert("Password and/or email do not match")

@@ -5,7 +5,6 @@ import App from "./App"
 import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
 import gloablstore from "./components/store/gloablstore"
-//import { teacherReducer } from "./components/store/reducer"
 
 ReactDOM.render(
    <Provider store={gloablstore}>

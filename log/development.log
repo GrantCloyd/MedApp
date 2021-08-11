@@ -6233,3 +6233,536 @@ Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:01:37 -0500
   
 ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
   
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:09:28 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:12:33 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:12:38 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:12:45 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.5ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (14.93ms)
+Completed 200 OK in 273ms (Views: 12.3ms | ActiveRecord: 14.5ms | Allocations: 9409)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:12:46 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:12:50 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:14:08 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:14:13 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:15:49 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:16:19 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:16:41 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:16:49 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.4ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.3ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (13.1ms)
+Completed 200 OK in 265ms (Views: 11.2ms | ActiveRecord: 2.7ms | Allocations: 7186)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:16:49 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:19:08 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:28:08 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:28:11 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:28:16 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (1.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.4ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (14.61ms)
+Completed 200 OK in 290ms (Views: 12.3ms | ActiveRecord: 13.9ms | Allocations: 9381)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:28:17 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:28:19 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:30:17 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:30:23 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.3ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (13.28ms)
+Completed 200 OK in 268ms (Views: 11.5ms | ActiveRecord: 2.7ms | Allocations: 7193)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:30:23 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:30:24 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:30:29 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:30:33 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:30:39 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.4ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (15.5ms)
+Completed 200 OK in 282ms (Views: 14.0ms | ActiveRecord: 2.5ms | Allocations: 7188)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:30:39 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started DELETE "/log_in" for 127.0.0.1 at 2021-08-11 12:32:26 -0500
+Processing by LogInController#destroy as JSON
+  Parameters: {"_json"=>"", "log_in"=>{"_json"=>""}}
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 172)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:32:26 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:32:32 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.3ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (16.96ms)
+Completed 200 OK in 273ms (Views: 15.3ms | ActiveRecord: 2.6ms | Allocations: 7175)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:32:32 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:32:55 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:37:45 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:37:52 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:37:55 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:38:07 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.6ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (15.59ms)
+Completed 200 OK in 276ms (Views: 12.8ms | ActiveRecord: 15.0ms | Allocations: 9383)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:38:08 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:38:09 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:47:45 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:47:56 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:48:02 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:48:07 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:48:11 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.6ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.5ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (15.57ms)
+Completed 200 OK in 281ms (Views: 12.8ms | ActiveRecord: 13.2ms | Allocations: 9409)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:48:11 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:48:12 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started DELETE "/log_in" for 127.0.0.1 at 2021-08-11 12:48:16 -0500
+Processing by LogInController#destroy as JSON
+  Parameters: {"_json"=>"", "log_in"=>{"_json"=>""}}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 178)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:48:16 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:48:21 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student", "log_in"=>{"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student"}}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "gg@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:6:in `create'
+[active_model_serializers]   [1m[36mPlay Load (4.4ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."student_id" = $1[0m  [["student_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers] Rendered StudentSerializer with ActiveModelSerializers::Adapter::Attributes (11.65ms)
+Completed 200 OK in 273ms (Views: 8.2ms | ActiveRecord: 14.4ms | Allocations: 7954)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:48:22 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:48:23 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started DELETE "/log_in" for 127.0.0.1 at 2021-08-11 12:50:22 -0500
+Processing by LogInController#destroy as JSON
+  Parameters: {"_json"=>"", "log_in"=>{"_json"=>""}}
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 168)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:50:22 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:50:32 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student", "log_in"=>{"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student"}}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "gg@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:6:in `create'
+[active_model_serializers]   [1m[36mPlay Load (0.4ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."student_id" = $1[0m  [["student_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers] Rendered StudentSerializer with ActiveModelSerializers::Adapter::Attributes (1.92ms)
+Completed 200 OK in 254ms (Views: 1.8ms | ActiveRecord: 0.8ms | Allocations: 1747)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:50:33 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:50:36 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:51:26 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:51:34 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student", "log_in"=>{"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student"}}
+  [1m[36mStudent Load (1.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "gg@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:6:in `create'
+[active_model_serializers]   [1m[36mPlay Load (0.4ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."student_id" = $1[0m  [["student_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers] Rendered StudentSerializer with ActiveModelSerializers::Adapter::Attributes (14.06ms)
+Completed 200 OK in 344ms (Views: 21.3ms | ActiveRecord: 15.5ms | Allocations: 13568)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:51:35 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:51:36 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started DELETE "/log_in" for 127.0.0.1 at 2021-08-11 12:53:11 -0500
+Processing by LogInController#destroy as JSON
+  Parameters: {"_json"=>"", "log_in"=>{"_json"=>""}}
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 178)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:53:11 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 12:59:43 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.5ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.4ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (110.21ms)
+Completed 200 OK in 386ms (Views: 90.3ms | ActiveRecord: 39.4ms | Allocations: 34039)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:59:44 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started DELETE "/log_in" for 127.0.0.1 at 2021-08-11 12:59:46 -0500
+Processing by LogInController#destroy as JSON
+  Parameters: {"_json"=>"", "log_in"=>{"_json"=>""}}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 169)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 12:59:46 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 13:01:07 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 13:01:22 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher", "log_in"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "type"=>"teacher"}}
+  [1m[36mTeacher Load (0.7ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:8:in `create'
+[active_model_serializers]   [1m[36mMeditation Load (0.3ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations" WHERE "meditations"."teacher_id" = $1[0m  [["teacher_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `audio_file'
+[active_model_serializers] Rendered TeacherSerializer with ActiveModelSerializers::Adapter::Attributes (22.88ms)
+Completed 200 OK in 284ms (Views: 20.3ms | ActiveRecord: 4.1ms | Allocations: 7181)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 13:01:22 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 13:01:24 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started DELETE "/log_in" for 127.0.0.1 at 2021-08-11 13:01:39 -0500
+Processing by LogInController#destroy as JSON
+  Parameters: {"_json"=>"", "log_in"=>{"_json"=>""}}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 168)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 13:01:39 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/log_in" for 127.0.0.1 at 2021-08-11 13:01:47 -0500
+Processing by LogInController#create as JSON
+  Parameters: {"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student", "log_in"=>{"email"=>"gg@g.com", "password"=>"[FILTERED]", "type"=>"student"}}
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = $1 LIMIT $2[0m  [["email", "gg@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/log_in_controller.rb:6:in `create'
+[active_model_serializers]   [1m[36mPlay Load (0.5ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."student_id" = $1[0m  [["student_id", 1]]
+[active_model_serializers]   ↳ app/controllers/log_in_controller.rb:12:in `create'
+[active_model_serializers] Rendered StudentSerializer with ActiveModelSerializers::Adapter::Attributes (3.81ms)
+Completed 200 OK in 249ms (Views: 3.7ms | ActiveRecord: 1.2ms | Allocations: 1738)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 13:01:47 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started DELETE "/log_in" for 127.0.0.1 at 2021-08-11 13:01:49 -0500
+Processing by LogInController#destroy as JSON
+  Parameters: {"_json"=>"", "log_in"=>{"_json"=>""}}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 164)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-11 13:01:49 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  

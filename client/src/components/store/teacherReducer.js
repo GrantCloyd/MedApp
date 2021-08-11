@@ -15,10 +15,12 @@ export const teacherSlice = createSlice({
    name: "teacher",
    initialState: initialState,
    reducers: {
-      login: (state, action) => (state = action.payload),
+      loginT: (state, action) => (state = { ...action.payload, type: "teacher" }),
+      updateT: (state, action) => (state = action.payload),
+      logoutT: (state, action) => (state = initialState),
    },
 })
 
-export const { login } = teacherSlice.actions
+export const { loginT, updateT, logoutT } = teacherSlice.actions
 
 export default teacherSlice.reducer
