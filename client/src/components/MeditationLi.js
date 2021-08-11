@@ -72,7 +72,7 @@ export default function MeditationLi({ m }) {
                <ReactPlayer controls={true} height="50px" url={makeLinkForBlob(m.audio_file)} />
             )}{" "}
             Title: {m.title} || Description: {m.description} || Type: {m.med_type} || Length:{" "}
-            {m.est_length}
+            {m.est_length} ||
             <button onClick={handlePreview}>Preview</button>{" "}
             <button onClick={handleEdit}>Edit</button>{" "}
             <button onClick={handleDelete}>Delete</button>{" "}

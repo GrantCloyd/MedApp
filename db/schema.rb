@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_08_09_190223) do
   create_table "plays", force: :cascade do |t|
     t.integer "student_id"
     t.integer "meditation_id"
+    t.integer "length"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

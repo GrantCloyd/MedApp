@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import ReactPlayer from "react-player"
-import { makeLinkForBlob } from "../functions"
+import { makeLinkForBlob, createConfig } from "../functions"
+import { useSelector } from "react-redux"
 
 export default function PlayMeditation() {
    const initialState = {
@@ -8,24 +9,31 @@ export default function PlayMeditation() {
    }
    const [medData, setMedData] = useState(initialState)
    const [playTime, setPlayTime] = useState(0)
+   const userId = useSelector(state => state.student.id)
 
    //onPause create a pop-up that asks if you would like to conclude?
 
    useEffect(() => {
       async function getMed() {
-         const res = await fetch("/meditations/10")
+         const res = await fetch("/meditations/9")
          const data = await res.json()
          setMedData(data)
-         console.log(data)
       }
       getMed()
    }, [])
 
-   const testing = () => {
-      console.log(Math.round(playTime / 60))
+   async function handleListen() {
+      const res = await fetch(
+         "/plays",
+         createConfig("POST", {
+            student_id: userId,
+            meditation_id: medData.id,
+            length: Math.round(playTime / 60),
+         })
+      )
+      const data = await res.json()
+      console.log(data)
    }
-
-   testing()
 
    return (
       <div>
@@ -39,7 +47,7 @@ export default function PlayMeditation() {
                setPlayTime(state.playedSeconds)
             }}
             onSeek={() => console.log("seeking")}
-            onEnded={() => console.log("Over")}
+            onEnded={handleListen}
             playing={true}
             controls={true}
             height="50px"
