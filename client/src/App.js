@@ -7,23 +7,15 @@ import SignUpPage from "./components/SignUpPage"
 import Navbar from "./components/Navbar"
 import PlayMeditation from "./components/PlayMeditation"
 import { Route, Switch } from "react-router-dom"
-import { useState } from "react"
+import { useSelector } from "react-redux"
 
 function App() {
-   const [loggedIn, setLoggedIn] = useState(false)
-   const [userData, setUserData] = useState(null)
-   console.log(loggedIn, userData)
+   let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
 
-   const setLogInType = userType => setLoggedIn(userType)
-
-   if (loggedIn === false) {
+   if (user.name === "") {
       return (
          <Switch>
-            <Route
-               path="/"
-               exact
-               component={() => <LogInPage setUserData={setUserData} setLogInType={setLogInType} />}
-            />
+            <Route path="/" exact component={LogInPage} />
             <Route path="/signup" exact component={SignUpPage} />
          </Switch>
       )
@@ -33,18 +25,15 @@ function App() {
       <div className="App">
          <h1>Med App</h1>
          <hr />
-         <Navbar setLogInType={setLogInType} loggedIn={loggedIn} />
+         <Navbar />
 
-         <Route path="/create" component={() => <CreatePage userData={userData} />} />
+         <Route path="/create" component={CreatePage} />
          <hr />
-         <Route path="/landing" component={() => <Landing loggedIn={loggedIn} />} />
+         <Route path="/landing" component={Landing} />
          <hr />
-         <Route
-            path="/profile"
-            component={() => <ProfilePage loggedIn={loggedIn} userData={userData} />}
-         />
+         <Route path="/profile" component={ProfilePage} />
          <hr />
-         <Route path="/playingnow" component={() => <PlayMeditation />} />
+         <Route path="/playingnow" component={PlayMeditation} />
       </div>
    )
 }

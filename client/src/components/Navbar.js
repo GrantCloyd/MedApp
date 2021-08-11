@@ -5,12 +5,12 @@ import { useSelector, useDispatch } from "react-redux"
 import { logoutT } from "./store/teacherReducer"
 import { logoutS } from "./store/studentReducer"
 
-export default function Navbar({ loggedIn, setLogInType }) {
+export default function Navbar() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
    const dispatch = useDispatch()
    const history = useHistory()
+
    async function handleLogOut() {
-      setLogInType(false)
       const res = await fetch("/log_in", createConfig("DELETE"))
       if (res.ok) {
          dispatch(logoutT())

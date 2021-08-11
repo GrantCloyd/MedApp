@@ -2,15 +2,17 @@ import React, { useState } from "react"
 import { medTypes } from "../constants"
 import { handleChange } from "../functions"
 import axios from "axios"
+import { useSelector } from "react-redux"
 
-export default function CreatePage({ userData }) {
+export default function CreatePage() {
+   let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
    const initialState = {
       title: "",
       description: "",
       med_type: "breath",
       est_length: "",
       audio_file: "",
-      teacher_id: userData.id,
+      teacher_id: user.id,
    }
 
    const [newMed, setNewMed] = useState(initialState)

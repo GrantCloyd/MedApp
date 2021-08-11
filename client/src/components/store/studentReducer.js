@@ -12,7 +12,7 @@ export const studentSlice = createSlice({
    name: "student",
    initialState: initialState,
    reducers: {
-      loginS: (state, action) => (state = action.payload),
+      loginS: (state, action) => (state = { ...action.payload, type: "student" }),
       updateS: (state, action) => (state = action.payload),
       logoutS: state => (state = initialState),
    },
