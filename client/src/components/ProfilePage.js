@@ -19,7 +19,6 @@ export default function ProfilePage() {
       e.preventDefault()
       const res = await fetch(`/${user.type}s/${user.id}`, createConfig("PATCH", profileEdit))
       const data = await res.json()
-      console.log(data)
       user.type === "teacher" ? dispatch(loginT(data)) : dispatch(loginS(data))
       setToggleEdit(false)
    }

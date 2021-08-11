@@ -16,11 +16,34 @@ export const teacherSlice = createSlice({
    initialState: initialState,
    reducers: {
       loginT: (state, action) => (state = { ...action.payload, type: "teacher" }),
-      updateT: (state, action) => (state = action.payload),
+      updateMed: (state, action) => {
+         return {
+            ...state,
+            meditations: state.meditations.map(m => {
+               if (m.id === action.payload.id) {
+                  return action.payload
+               } else {
+                  return m
+               }
+            }),
+         }
+      },
+      deleteMed: (state, action) => {
+         return {
+            ...state,
+            meditations: state.meditations.filter(m => m.id !== action.payload),
+         }
+      },
       logoutT: (state, action) => (state = initialState),
+      addMed: (state, action) => {
+         return {
+            ...state,
+            meditations: [...state.meditations, action.payload],
+         }
+      },
    },
 })
 
-export const { loginT, updateT, logoutT } = teacherSlice.actions
+export const { loginT, updateMed, addMed, deleteMed, logoutT } = teacherSlice.actions
 
 export default teacherSlice.reducer

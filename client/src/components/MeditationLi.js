@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import { medTypes } from "../constants"
+import { updateMed, deleteMed } from "./store/teacherReducer"
+import { useDispatch } from "react-redux"
 
 import { handleChange, createConfig, makeLinkForBlob } from "../functions"
 import ReactPlayer from "react-player"
 
 export default function MeditationLi({ m }) {
    let initialState = { ...m }
+   const dispatch = useDispatch()
 
    const [togglePreview, setTogglePreview] = useState(false)
    const [toggleEdit, setToggleEdit] = useState(false)
@@ -20,13 +23,14 @@ export default function MeditationLi({ m }) {
       const res = await fetch(`/meditations/${m.id}`, createConfig("PATCH", patchObj))
       const data = await res.json()
       console.log(data)
+      dispatch(updateMed(data))
       setToggleEdit(!toggleEdit)
    }
 
    async function handleDelete() {
       const res = await fetch(`meditations/${m.id}`, createConfig("DELETE"))
       const data = await res.json()
-      console.log(data)
+      dispatch(deleteMed(data))
    }
 
    return (

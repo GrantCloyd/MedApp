@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
       private 
 
       def update_params
-         params.permit(:name, :email )
+         params.permit(:name, :email)
       end
 
 
