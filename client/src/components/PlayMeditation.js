@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState } from "react"
 import ReactPlayer from "react-player"
 import { makeLinkForBlob } from "../functions"
 
@@ -8,6 +8,8 @@ export default function PlayMeditation() {
    }
    const [medData, setMedData] = useState(initialState)
    const [playTime, setPlayTime] = useState(0)
+
+   //onPause create a pop-up that asks if you would like to conclude?
 
    useEffect(() => {
       async function getMed() {

@@ -15,8 +15,8 @@ export default function Navbar({ loggedIn, setLogInType }) {
    return (
       <div>
          <ul>
-            <NavLink to="/landing">Home</NavLink>
-            <li>Profile</li>
+            <NavLink to="/landing">Home</NavLink> ||
+            <NavLink to="/profile">Profile</NavLink> ||
             {loggedIn === "teacher" ? (
                <>
                   <NavLink to="/create">Create</NavLink>

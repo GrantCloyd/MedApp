@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { medTypes } from "../constants"
-import { handleChange, createConfig } from "../functions"
+import { handleChange } from "../functions"
 import axios from "axios"
 
 export default function CreatePage({ userData }) {
@@ -36,7 +36,7 @@ export default function CreatePage({ userData }) {
 
    return (
       <div>
-         <h2>Hello!</h2>
+         <h2>Create and Upload </h2>
          {success && <p>File Uploaded!</p>}
          {errors && <p>{errors}</p>}
          <form onSubmit={handleSubmit}>

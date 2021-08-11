@@ -5,16 +5,16 @@ export const HEADERS = {
 
 export const medTypes = (
    <>
-      <option value="breath">Breath</option>
-      <option value="emotions">Emotions</option>
-      <option value="listening">Metta</option>
-      <option value="bodyscan">Insight</option>
-      <option value="bodyscan">Body Scan</option>
-      <option value="listening">Listening</option>
-      <option value="seeing">Seeing</option>
-      <option value="walking">Walking</option>
-      <option value="concentration">Concentration</option>
-      <option value="nondual">Non-Dual</option>
-      <option value="sleep">Sleep</option>
+      <option value="Breath">Breath</option>
+      <option value="Emotions">Emotions</option>
+      <option value="Metta">Metta</option>
+      <option value="Insight">Insight</option>
+      <option value="Bodyscan">Body Scan</option>
+      <option value="Listening">Listening</option>
+      <option value="Seeing">Seeing</option>
+      <option value="Walking">Walking</option>
+      <option value="Concentration">Concentration</option>
+      <option value="Nondual">Non-Dual</option>
+      <option value="Sleep">Sleep</option>
    </>
 )

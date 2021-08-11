@@ -1,5 +1,6 @@
 import "./App.css"
 import Landing from "./components/Landing"
+import ProfilePage from "./components/ProfilePage"
 import CreatePage from "./components/CreatePage"
 import LogInPage from "./components/LogInPage"
 import SignUpPage from "./components/SignUpPage"
@@ -37,6 +38,11 @@ function App() {
          <Route path="/create" component={() => <CreatePage userData={userData} />} />
          <hr />
          <Route path="/landing" component={() => <Landing loggedIn={loggedIn} />} />
+         <hr />
+         <Route
+            path="/profile"
+            component={() => <ProfilePage loggedIn={loggedIn} userData={userData} />}
+         />
          <hr />
          <Route path="/playingnow" component={() => <PlayMeditation />} />
       </div>
