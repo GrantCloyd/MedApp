@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { useHistory, Link } from "react-router-dom"
 import { handleChange, createConfig } from "../functions"
+import { login } from "./store/reducer"
+import { useDispatch } from "react-redux"
 
 export default function LogInPage({ setLogInType, setUserData }) {
    const initialState = {
@@ -8,6 +10,9 @@ export default function LogInPage({ setLogInType, setUserData }) {
       password: "",
       type: "student",
    }
+
+   const dispatch = useDispatch()
+
    const [logIn, setLogIn] = useState(initialState)
    const handleLogInChange = e => handleChange(e, setLogIn, logIn)
    const history = useHistory()
@@ -21,6 +26,7 @@ export default function LogInPage({ setLogInType, setUserData }) {
       if (data.id) {
          setLogInType(logIn.type)
          setUserData(data)
+         dispatch(login(data))
          history.push("/landing")
       } else {
          alert("Password and/or email do not match")

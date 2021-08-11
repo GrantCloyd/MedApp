@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit"
+
 const initialState = {
    name: "",
    email: "",
@@ -6,11 +8,17 @@ const initialState = {
    background: "",
    income: "",
    meditations: [],
+   type: "teacher",
 }
 
-export function teacherReducer(state = initialState, action) {
-   switch (action.type) {
-      default:
-         return state
-   }
-}
+export const teacherSlice = createSlice({
+   name: "teacher",
+   initialState: initialState,
+   reducers: {
+      login: (state, action) => (state = action.payload),
+   },
+})
+
+export const { login } = teacherSlice.actions
+
+export default teacherSlice.reducer
