@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import SearchTeacher from "./SearchTeacher"
-import SearchLength from "./SearchLength"
-import SearchType from "./SearchType"
+import SearchLengthType from "./SearchLengthType"
 
 export default function SearchMeditations() {
    const [displayTeacher, setDisplayTeacher] = useState(false)
@@ -26,7 +25,7 @@ export default function SearchMeditations() {
          <button onClick={() => setDisplayLength(!displayLength)}>By Length or Type</button>
          {displayTeacher && <SearchTeacher meditations={meditations} />}
 
-         {displayLength && <SearchLength meditations={meditations} />}
+         {displayLength && <SearchLengthType meditations={meditations} />}
       </div>
    )
 }
