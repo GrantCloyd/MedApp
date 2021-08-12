@@ -5,46 +5,79 @@ import { useHistory } from "react-router-dom"
 
 export default function SearchLength({ meditations }) {
    const [toggleOpen, setToggleOpen] = useState(false)
-   const [currFiltered, setCurrFiltered] = useState(false)
+   const [time, setTime] = useState(0)
+   const [type, setType] = useState("--select-one--")
    const [filter, setFiltered] = useState(meditations)
    const history = useHistory()
 
    const handleSelection = id => history.push(`/playingnow/${id}`)
 
+   // const handleTypeFilter = e => {
+   //    console.log(e.target.value)
+   //    const filtered = meditations
+   //       .filter(m => m.med_type === e.target.value)
+   //       .map(m => <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />)
+   //    setFiltered(filtered)
+
+   //    setToggleOpen(true)
+   // }
+
+   // const handleLengthFilter = e => {
+   //    const time = e.target.value
+   //    console.log(time)
+
+   //    const filtered = () => {
+   //       if (+time === 0) {
+
+   //          return meditations
+   //       }
+   //       if (time < 30) {
+   //          return meditations.filter(m => m.est_length <= time && m.est_length >= time - 4)
+   //       }
+   //       if (time === 30) {
+   //          return meditations.filter(m => m.est_length <= time && m.est_length >= time - 9)
+   //       } else {
+   //          return meditations.filter(m => m.est_length <= time && m.est_length >= time - 14)
+   //       }
+   //    }
+   //    setFiltered(
+   //       filtered().map(m => <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />)
+   //    )
+
    const handleTypeFilter = e => {
-      console.log(e.target.value)
-      const filtered = meditations
-         .filter(m => m.med_type === e.target.value)
-         .map(m => <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />)
-      setFiltered(filtered)
-      setCurrFiltered(true)
-      if (e.target.value === "--select-one--") return setCurrFiltered(false)
-      setToggleOpen(true)
+      setType(e.target.value)
    }
 
    const handleLengthFilter = e => {
-      const time = e.target.value
-      console.log(time)
+      setTime(e.target.value)
+   }
 
-      const filtered = () => {
-         if (+time === 0) {
-            setCurrFiltered(false)
+   const handleFilter = (time, type) => {
+      const filteredType = () => {
+         if (type === "--select-one--") {
             return meditations
-         }
-         if (time < 30) {
-            return meditations.filter(m => m.est_length <= time && m.est_length >= time - 4)
-         }
-         if (time === 30) {
-            return meditations.filter(m => m.est_length <= time && m.est_length >= time - 9)
          } else {
-            return meditations.filter(m => m.est_length <= time && m.est_length >= time - 14)
+            return meditations.filter(m => m.med_type === type)
          }
       }
-      setFiltered(
-         filtered().map(m => <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />)
-      )
 
-      if (time > 0) return setCurrFiltered(true)
+      const filteredLength = () => {
+         if (+time === 0) {
+            return filteredType()
+         }
+         if (time < 30) {
+            return filteredType().filter(m => m.est_length <= time && m.est_length >= time - 4)
+         }
+         if (time === 30) {
+            return filteredType().filter(m => m.est_length <= time && m.est_length >= time - 9)
+         } else {
+            return filteredType().filter(m => m.est_length <= time && m.est_length >= time - 14)
+         }
+      }
+      const filtered = filteredLength().map(m => (
+         <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />
+      ))
+      setFiltered(filtered)
       setToggleOpen(true)
    }
 
@@ -65,6 +98,7 @@ export default function SearchLength({ meditations }) {
          </select>
          You're looking for types!
          <select onChange={handleTypeFilter}>{medTypes}</select>
+         <button onClick={() => handleFilter(time, type)}> Search!</button>
          <ul>{toggleOpen && filter}</ul>
          <hr />
       </div>
