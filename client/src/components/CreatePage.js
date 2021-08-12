@@ -45,6 +45,7 @@ export default function CreatePage() {
          })
          .then(() => {
             setSuccess(true)
+            setNewMed(initialState)
             setTimeout(() => history.push("/profile"), 2500)
          })
       //.then(data => console.log(data))

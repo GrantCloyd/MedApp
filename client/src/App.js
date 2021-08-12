@@ -2,6 +2,7 @@ import "./App.css"
 import Landing from "./components/Landing"
 import ProfilePage from "./components/ProfilePage"
 import CreatePage from "./components/CreatePage"
+import SearchMeditations from "./components/SearchMeditations"
 import LogInPage from "./components/LogInPage"
 import SignUpPage from "./components/SignUpPage"
 import Navbar from "./components/Navbar"
@@ -33,7 +34,9 @@ function App() {
          <hr />
          <Route path="/profile" component={ProfilePage} />
          <hr />
-         <Route path="/playingnow" component={PlayMeditation} />
+         <Route path="/search" component={SearchMeditations} />
+         <hr />
+         <Route exact path="/playingnow/:id" component={PlayMeditation} />
       </div>
    )
 }

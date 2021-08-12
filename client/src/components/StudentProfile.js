@@ -1,26 +1,29 @@
 import React from "react"
 import { useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
 
 export default function StudentProfile() {
    const user = useSelector(state => state.student)
-   const recentPlays = user.plays.map(p => p.meditation)
+   const history = useHistory()
+   const recentPlays = user.plays.slice(user.plays.length - 5, user.plays.length)
+
    const recentMeds = recentPlays.map(m => (
-      <li key={m.created_at}>
+      <li key={m.id}>
          {" "}
-         Title: {m.title} || Description: {m.description} || From: Pending Feat ||
-         <button>Play Again</button>
+         Listened on: {new Date(m.created_at).toLocaleString()} || Title: {m.meditation.title} ||
+         From: {m.teacher_name} ||
+         <button onClick={() => history.push(`/playingnow/${m.meditation.id}`)}>Play Again</button>
       </li>
    ))
 
-   console.log(recentPlays)
    console.log(recentMeds)
 
    return (
       <div>
          <h2>You're a student!</h2>
          <p>Student stats</p>
-         <p> Sessions: {user.plays.length}</p>
-
+         <p> Total Sessions: {user.total_listens}</p>
+         <p>Total Time Meditated: {user.total_time} minutes </p>
          <ul>{recentMeds}</ul>
       </div>
    )

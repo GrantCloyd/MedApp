@@ -1,9 +1,9 @@
 class PlaySerializer < ActiveModel::Serializer
-  attributes :id, :length, :meditation, :teacher
+  attributes :id, :length, :meditation, :created_at, :teacher_name
   
  
-  def teacher 
-   object.meditation.teacher
+  def teacher_name 
+   object.meditation.teacher.name
 
   end 
     

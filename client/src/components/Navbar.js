@@ -9,6 +9,7 @@ export default function Navbar() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
    const dispatch = useDispatch()
    const history = useHistory()
+   const lastId = user.plays[user.plays.length - 1].id
 
    async function handleLogOut() {
       const res = await fetch("/log_in", createConfig("DELETE"))
@@ -31,8 +32,8 @@ export default function Navbar() {
                </>
             ) : (
                <>
-                  <li>Find Meditations</li>
-                  <NavLink to="/playingnow">Play Meditation</NavLink>
+                  <NavLink to="/search">Find Meditations</NavLink> ||
+                  <NavLink to={`/playingnow/${lastId}`}>Play Last Meditation</NavLink>
                </>
             )}
             <li onClick={handleLogOut}>Logout</li>

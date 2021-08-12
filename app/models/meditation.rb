@@ -4,4 +4,7 @@ class Meditation < ApplicationRecord
     has_many :plays
     has_one_attached :audio_file
 
+
+    
+
 end

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
 import ReactPlayer from "react-player"
 import { makeLinkForBlob, createConfig } from "../functions"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { addPlay } from "./store/studentReducer"
+import { useHistory, useParams } from "react-router-dom"
 
 export default function PlayMeditation() {
    const initialState = {
@@ -9,18 +11,24 @@ export default function PlayMeditation() {
    }
    const [medData, setMedData] = useState(initialState)
    const [playTime, setPlayTime] = useState(0)
+   const [success, setSucess] = useState(false)
    const userId = useSelector(state => state.student.id)
+   const dispatch = useDispatch()
+   const history = useHistory()
+   const id = useParams().id
+
+   console.log(useParams())
 
    //onPause create a pop-up that asks if you would like to conclude?
 
    useEffect(() => {
       async function getMed() {
-         const res = await fetch("/meditations/9")
+         const res = await fetch(`/meditations/${id}`)
          const data = await res.json()
          setMedData(data)
       }
       getMed()
-   }, [])
+   }, [id])
 
    async function handleListen() {
       const res = await fetch(
@@ -32,7 +40,9 @@ export default function PlayMeditation() {
          })
       )
       const data = await res.json()
-      console.log(data)
+      dispatch(addPlay(data))
+      setSucess(true)
+      setTimeout(() => history.push("/profile"), 2500)
    }
 
    return (
@@ -53,6 +63,7 @@ export default function PlayMeditation() {
             height="50px"
             url={makeLinkForBlob(medData.audio_file)}
          />
+         {success && <p>Congrats on finishing!</p>}
       </div>
    )
 }
