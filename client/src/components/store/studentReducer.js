@@ -7,6 +7,7 @@ const initialState = {
    total_listens: 0,
    total_time: 0,
    plays: [],
+   follows: [],
    type: "student",
 }
 

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :follows
   resources :plays
   resources :meditations
   resources :teachers

@@ -5,4 +5,5 @@ class Student < ApplicationRecord
     validates :name, presence: true
     has_secure_password
     has_many :plays
+    has_many :follows
 end

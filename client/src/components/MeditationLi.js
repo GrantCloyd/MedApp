@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { medTypes } from "../constants"
 import { updateMed, deleteMed } from "./store/teacherReducer"
 import { useDispatch } from "react-redux"
+import MedLineItem from "./MedLineItem"
 
 import { handleChange, createConfig, makeLinkForBlob } from "../functions"
 import ReactPlayer from "react-player"
@@ -71,8 +72,7 @@ export default function MeditationLi({ m }) {
             {togglePreview && (
                <ReactPlayer controls={true} height="50px" url={makeLinkForBlob(m.audio_file)} />
             )}{" "}
-            Title: {m.title} || Description: {m.description} || Type: {m.med_type} || Length:{" "}
-            {m.est_length} ||
+            <MedLineItem m={m} />
             <button onClick={handlePreview}>Preview</button>{" "}
             <button onClick={handleEdit}>Edit</button>{" "}
             <button onClick={handleDelete}>Delete</button>{" "}
