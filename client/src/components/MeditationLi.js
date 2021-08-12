@@ -68,7 +68,7 @@ export default function MeditationLi({ m }) {
                </form>
             </div>
          )}
-         <li>
+         <>
             {togglePreview && (
                <ReactPlayer controls={true} height="50px" url={makeLinkForBlob(m.audio_file)} />
             )}{" "}
@@ -76,7 +76,7 @@ export default function MeditationLi({ m }) {
             <button onClick={handlePreview}>Preview</button>{" "}
             <button onClick={handleEdit}>Edit</button>{" "}
             <button onClick={handleDelete}>Delete</button>{" "}
-         </li>
+         </>
       </>
    )
 }

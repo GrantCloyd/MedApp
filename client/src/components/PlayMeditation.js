@@ -17,8 +17,6 @@ export default function PlayMeditation() {
    const history = useHistory()
    const id = useParams().id
 
-   console.log(useParams())
-
    //onPause create a pop-up that asks if you would like to conclude?
 
    useEffect(() => {
@@ -26,9 +24,10 @@ export default function PlayMeditation() {
          const res = await fetch(`/meditations/${id}`)
          const data = await res.json()
          setMedData(data)
+         console.log(data)
       }
       getMed()
-   }, [id])
+   }, [])
 
    async function handleListen() {
       const res = await fetch(

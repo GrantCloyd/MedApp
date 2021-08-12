@@ -6,6 +6,7 @@ import SearchMeditations from "./components/SearchMeditations"
 import LogInPage from "./components/LogInPage"
 import SignUpPage from "./components/SignUpPage"
 import Navbar from "./components/Navbar"
+import ViewTeacher from "./components/ViewTeacher"
 import PlayMeditation from "./components/PlayMeditation"
 import { Route, Switch } from "react-router-dom"
 import { useSelector } from "react-redux"
@@ -37,6 +38,8 @@ function App() {
          <Route path="/search" component={SearchMeditations} />
          <hr />
          <Route exact path="/playingnow/:id" component={PlayMeditation} />
+         <hr />
+         <Route exact path="/teachers/:id" component={ViewTeacher} />
       </div>
    )
 }

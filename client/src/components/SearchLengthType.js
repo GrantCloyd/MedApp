@@ -54,7 +54,6 @@ export default function SearchLengthType({ meditations }) {
          <hr />
          You're looking for Length!
          <select onChange={handleLengthFilter}>
-            <select></select>
             <option value={0}>--select-one--</option>
             <option value={5}>5 Minutes</option>
             <option value={10}>10 Minutes</option>

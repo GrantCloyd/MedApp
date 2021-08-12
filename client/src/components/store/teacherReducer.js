@@ -7,6 +7,7 @@ const initialState = {
    image_url: "",
    background: "",
    income: "",
+   total_listens: "",
    meditations: [],
    type: "teacher",
 }
