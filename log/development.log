@@ -15594,3 +15594,111 @@ Processing by MeditationsController#index as */*
 Completed 200 OK in 59ms (Views: 50.4ms | ActiveRecord: 8.6ms | Allocations: 16480)
 
 
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-12 11:09:36 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-12 11:09:38 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/meditations" for 127.0.0.1 at 2021-08-12 11:09:38 -0500
+Processing by MeditationsController#index as */*
+  [1m[36mMeditation Load (1.4ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations"[0m
+  ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mTeacher Load (0.7ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mCACHE Teacher Load (0.0ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mCACHE Teacher Load (0.0ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mCACHE Teacher Load (0.0ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 22], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 22]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `listens'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 11]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `listens'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 10]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `listens'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 9]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `listens'
+[active_model_serializers]   [1m[36mPlay Load (0.3ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 11]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mPlay Load (0.4ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 9]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (45.1ms)
+Completed 200 OK in 73ms (Views: 72.3ms | ActiveRecord: 20.4ms | Allocations: 18683)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-12 11:10:53 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2021-08-12 11:10:53 -0500
+Started GET "/meditations" for 127.0.0.1 at 2021-08-12 11:10:53 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Processing by MeditationsController#index as */*
+  [1m[36mMeditation Load (0.6ms)[0m  [1m[34mSELECT "meditations".* FROM "meditations"[0m
+  ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mTeacher Load (0.9ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mCACHE Teacher Load (0.0ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mCACHE Teacher Load (0.0ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mCACHE Teacher Load (0.0ms)[0m  [1m[34mSELECT "teachers".* FROM "teachers" WHERE "teachers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 22], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 22]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `listens'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 11], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 11]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `listens'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 10], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 10]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `listens'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 9], ["record_type", "Meditation"], ["name", "audio_file"], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:14:in `audio_file'
+[active_model_serializers]   [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 9]]
+[active_model_serializers]   ↳ app/serializers/meditation_serializer.rb:8:in `listens'
+[active_model_serializers]   [1m[36mPlay Load (0.3ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 11]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers]   [1m[36mPlay Load (0.4ms)[0m  [1m[34mSELECT "plays".* FROM "plays" WHERE "plays"."meditation_id" = $1[0m  [["meditation_id", 9]]
+[active_model_serializers]   ↳ app/controllers/meditations_controller.rb:7:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (47.04ms)
+Completed 200 OK in 51ms (Views: 42.9ms | ActiveRecord: 8.0ms | Allocations: 16478)
+
+
+Started GET "/babel/parser/lib/index.js" for 127.0.0.1 at 2021-08-12 11:14:46 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/babel/parser/lib/index.js"):
+  

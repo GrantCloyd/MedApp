@@ -5,24 +5,30 @@ import { useHistory } from "react-router-dom"
 
 export default function SearchLength({ meditations }) {
    const [toggleOpen, setToggleOpen] = useState(false)
+   const [currFiltered, setCurrFiltered] = useState(false)
    const [filter, setFiltered] = useState(meditations)
    const history = useHistory()
 
    const handleSelection = id => history.push(`/playingnow/${id}`)
 
    const handleTypeFilter = e => {
+      console.log(e.target.value)
       const filtered = meditations
          .filter(m => m.med_type === e.target.value)
          .map(m => <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />)
       setFiltered(filtered)
+      setCurrFiltered(true)
+      if (e.target.value === "--select-one--") return setCurrFiltered(false)
       setToggleOpen(true)
    }
 
    const handleLengthFilter = e => {
       const time = e.target.value
       console.log(time)
+
       const filtered = () => {
-         if (time === 0) {
+         if (+time === 0) {
+            setCurrFiltered(false)
             return meditations
          }
          if (time < 30) {
@@ -37,6 +43,8 @@ export default function SearchLength({ meditations }) {
       setFiltered(
          filtered().map(m => <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />)
       )
+
+      if (time > 0) return setCurrFiltered(true)
       setToggleOpen(true)
    }
 
