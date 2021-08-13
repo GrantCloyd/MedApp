@@ -12,6 +12,7 @@ export default function SignUpPage() {
       confirmPassword: "",
       type: "student",
    }
+   const [errors, setErrors] = useState(false)
    const [signUp, setSignUp] = useState(initialState)
    const history = useHistory()
    const handleSignUpChange = e => handleChange(e, setSignUp, signUp)
@@ -19,6 +20,7 @@ export default function SignUpPage() {
    async function handleSignUp(e) {
       e.preventDefault()
       if (signUp.password === signUp.confirmPassword) {
+         setErrors(false)
          const configObj = createConfig("POST", signUp)
 
          const res = await fetch("/users", configObj)
@@ -26,17 +28,17 @@ export default function SignUpPage() {
          if (res.ok) {
             history.push("/")
          } else {
-            alert(data.error)
+            setErrors(data.error)
          }
       } else {
-         alert("make sure passwords match")
+         setErrors("make sure passwords match")
       }
    }
 
    return (
       <div>
          <h2>Sign Up Here!</h2>
-
+         {errors && <p>{errors}</p>}
          <form onSubmit={handleSignUp}>
             <label htmlFor="name">Name</label>
             <input

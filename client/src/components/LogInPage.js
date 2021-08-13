@@ -15,12 +15,14 @@ export default function LogInPage() {
 
    const dispatch = useDispatch()
 
+   const [errors, setErrors] = useState(false)
    const [logIn, setLogIn] = useState(initialState)
    const handleLogInChange = e => handleChange(e, setLogIn, logIn)
    const history = useHistory()
 
    async function handleLogIn(e) {
       e.preventDefault()
+      setErrors(false)
       const configObj = createConfig("POST", logIn)
 
       const res = await fetch("/log_in", configObj)
@@ -30,13 +32,14 @@ export default function LogInPage() {
 
          history.push("/landing")
       } else {
-         alert("Password and/or email do not match")
+         setErrors("Password and/or email do not match")
       }
    }
 
    return (
       <div>
          <h2>Log-In Here!</h2>
+         {errors && <p>{errors}</p>}
          <form onSubmit={handleLogIn}>
             <label htmlFor="email">Email</label>
             <input
