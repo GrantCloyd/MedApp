@@ -1,10 +1,9 @@
 import React, { useState } from "react"
 import { handleChange, createConfig } from "../functions"
 import { useDispatch } from "react-redux"
-import { addMessageT, deleteChatT } from "./store/teacherReducer"
-import { addMessageS, deleteChatS } from "./store/studentReducer"
+import { addMessage, deleteChat } from "./store/teacherReducer"
 
-export default function ChatContainer({ userType, userName, c }) {
+export default function ChatContainer({ handleDelete, handleAdd, userType, userName, c }) {
    const initialMessage = {
       content: "",
       teacher_id: c.teacher_id,
@@ -19,12 +18,13 @@ export default function ChatContainer({ userType, userName, c }) {
    const handleContent = e => handleChange(e, setMessage, message)
    async function handleMessageSubmit(e) {
       e.preventDefault()
-      console.log(message)
+
       const res = await fetch(`/messages`, createConfig("POST", message))
       const data = await res.json()
       if (data.id) {
-         userType === "teacher" ? dispatch(addMessageT(data)) : dispatch(addMessageS(data))
-         setMessage(initialMessage)
+         //dispatch(addMessage(data))
+         setMessage({ ...initialMessage, content: "" })
+         handleAdd()
       } else {
          setErrors(`Something went wrong: ${data.error}`)
       }
@@ -33,15 +33,7 @@ export default function ChatContainer({ userType, userName, c }) {
    async function handleCloseChat(id) {
       const res = await fetch(`/chats/${id}`, createConfig("DELETE"))
       const data = await res.json()
-      if (data.id) {
-         if (userType === "teacher") {
-            dispatch(deleteChatT(data))
-         } else {
-            dispatch(deleteChatS(data))
-         }
-      } else {
-         setErrors(`Something went wrong: ${data.error}`)
-      }
+      data.id ? handleDelete() : setErrors(`Something went wrong: ${data.error}`)
    }
 
    return (

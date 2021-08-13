@@ -2,12 +2,14 @@ class ChatsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     def find_by_teacher
-     chats = Chat.all.find_by(teacher_id: params[:id])
+    
+     chats = Chat.all.select {|c| c.teacher_id == params[:id].to_i}
      render json: chats
     end
    
     def find_by_student
-     chats = Chat.all.find_by(student_id: params[:id])
+        
+     chats = Chat.all.select {|c| c.student_id == params[:id].to_i}
      render json: chats
     end
 

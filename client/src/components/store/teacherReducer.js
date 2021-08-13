@@ -43,16 +43,19 @@ export const teacherSlice = createSlice({
             meditations: [...state.meditations, action.payload],
          }
       },
-      addMessageT: (state, action) => {
+      addMessage: (state, action) => {
          state.chats.find(c => c.id === +action.payload.chat_id).messages.push(action.payload)
       },
-      deleteChatT: (state, action) => {
+      deleteChat: (state, action) => {
          return { ...state, chats: state.chats.filter(c => c.id !== action.payload.id) }
+      },
+      setChatsT: (state, action) => {
+         return { ...state, chats: [action.payload] }
       },
    },
 })
 
-export const { loginT, updateMed, deleteChatT, addMessageT, addMed, deleteMed, logoutT } =
+export const { loginT, setChatsT, updateMed, deleteChat, addMessage, addMed, deleteMed, logoutT } =
    teacherSlice.actions
 
 export default teacherSlice.reducer

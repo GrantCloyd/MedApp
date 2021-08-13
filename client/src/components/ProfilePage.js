@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 export default function ProfilePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
-   const { name, email, image_url, background, id } = user
+   const { name, email, image_url, background, id, chats } = user
    const [profileEdit, setProfileEdit] = useState({ name, email, image_url, background, id })
    const [toggleEdit, setToggleEdit] = useState(false)
    const dispatch = useDispatch()

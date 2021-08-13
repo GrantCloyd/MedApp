@@ -8,6 +8,7 @@ const initialState = {
    total_time: 0,
    plays: [],
    follows: [],
+   chats: [],
    type: "student",
 }
 
@@ -34,27 +35,16 @@ export const studentSlice = createSlice({
             follows: state.follows.filter(f => f.id !== action.payload),
          }
       },
-      addMessageS: (state, action) => {
-         state.chats.find(c => c.id === +action.payload.chat_id).messages.push(action.payload)
-      },
-      deleteChatS: (state, action) => {
-         return { ...state, chats: state.chats.filter(c => c.id !== action.payload.id) }
-      },
       addChat: (state, action) => {
          return { ...state, chats: [...state.chats, action.payload] }
+      },
+      setChatsS: (state, action) => {
+         return { ...state, chats: [action.payload] }
       },
    },
 })
 
-export const {
-   addChat,
-   loginS,
-   addMessageS,
-   deleteChatS,
-   addPlay,
-   addFollow,
-   removeFollow,
-   logoutS,
-} = studentSlice.actions
+export const { addChat, loginS, setChatsS, addPlay, addFollow, removeFollow, logoutS } =
+   studentSlice.actions
 
 export default studentSlice.reducer
