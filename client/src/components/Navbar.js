@@ -29,14 +29,14 @@ export default function Navbar() {
             {user.type === "teacher" ? (
                <>
                   <NavLink to="/create">Create</NavLink> ||
-                  <NavLink to="/interact">Interact</NavLink>
                </>
             ) : (
                <>
                   <NavLink to="/search">Find Meditations</NavLink> ||
-                  <NavLink to={`/playingnow/${lastId}`}>Play Last Meditation</NavLink>
                </>
-            )}
+            )}{" "}
+            ||
+            <NavLink to="/interact">Interact</NavLink>
             <li onClick={handleLogOut}>Logout</li>
          </ul>
          <hr />

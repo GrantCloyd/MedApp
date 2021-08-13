@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { handleChange, createConfig } from "../functions"
+import { addChat } from "./store/studentReducer"
+import { useDispatch } from "react-redux"
 
 export default function FollowInfo({ teacherName, teacherId, userId, userName }) {
    const initialDonation = { amount: 0, message: "", teacher_id: teacherId, student_id: userId }
@@ -16,6 +18,7 @@ export default function FollowInfo({ teacherName, teacherId, userId, userName })
    const [donation, setDonation] = useState(initialDonation)
    const [question, setQuestion] = useState(initialQuestion)
    const [response, setResponse] = useState(false)
+   const dispatch = useDispatch()
 
    const handleQuestion = e => handleChange(e, setQuestion, question)
    const handleDonation = e => handleChange(e, setDonation, donation)
@@ -28,6 +31,7 @@ export default function FollowInfo({ teacherName, teacherId, userId, userName })
       console.log(data)
 
       if (data.message) {
+         dispatch(addChat({ ...data.chat, messages: [data.message] }))
          setResponse("Message sent!")
          setQuestion(initialQuestion)
          setTimeout(() => {
