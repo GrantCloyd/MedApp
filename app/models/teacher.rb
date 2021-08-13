@@ -6,4 +6,5 @@ class Teacher < ApplicationRecord
     has_secure_password
     has_many :meditations
     has_many :follows
+    has_many :chats
 end

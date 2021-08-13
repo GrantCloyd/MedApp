@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get '/chats/teachers/:id', to: 'chats#find_by_teacher'
+  get '/chats/students/:id', to: 'chats#find_by_student'
+  resources :chats
+  resources :messages
   resources :follows
   resources :plays
   resources :meditations

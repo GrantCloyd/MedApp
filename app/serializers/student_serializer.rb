@@ -2,6 +2,7 @@ class StudentSerializer < ActiveModel::Serializer
   attributes :id, :name, :email, :total_listens, :total_time
   has_many :plays
   has_many :follows
+  has_many :chats
 
   def total_listens 
      object.plays.length

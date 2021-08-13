@@ -10,6 +10,7 @@ const initialState = {
    total_listens: "",
    meditations: [],
    type: "teacher",
+   chats: [],
 }
 
 export const teacherSlice = createSlice({

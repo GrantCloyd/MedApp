@@ -5,6 +5,7 @@ import CreatePage from "./components/CreatePage"
 import SearchMeditations from "./components/SearchMeditations"
 import LogInPage from "./components/LogInPage"
 import SignUpPage from "./components/SignUpPage"
+import InteractPage from "./components/InteractPage"
 import Navbar from "./components/Navbar"
 import ViewTeacher from "./components/ViewTeacher"
 import PlayMeditation from "./components/PlayMeditation"
@@ -40,6 +41,8 @@ function App() {
          <Route exact path="/playingnow/:id" component={PlayMeditation} />
          <hr />
          <Route exact path="/teachers/:id" component={ViewTeacher} />
+         <hr />
+         <Route exact path="/interact" component={InteractPage} />
       </div>
    )
 }

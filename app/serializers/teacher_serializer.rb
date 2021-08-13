@@ -4,6 +4,7 @@ class TeacherSerializer < ActiveModel::Serializer
 
   has_many :meditations
   has_many :follows
+  has_many :chats, include: :messages
 
   def total_listens 
     object.meditations.map {|m| m.plays.length}.reduce(:+)

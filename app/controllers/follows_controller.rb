@@ -10,7 +10,7 @@ class FollowsController < ApplicationController
     def destroy
     follow = Follow.find(params[:id])
     follow.destroy
-    render json: follow.id
+    render json: {id: follow.id}
     rescue ActiveRecord::RecordNotFound => e 
         render json: { error: e.message}, status: 404
     end

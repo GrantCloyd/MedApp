@@ -28,8 +28,8 @@ export default function Navbar() {
             <NavLink to="/profile">Profile</NavLink> ||
             {user.type === "teacher" ? (
                <>
-                  <NavLink to="/create">Create</NavLink>
-                  <li>Interact</li>
+                  <NavLink to="/create">Create</NavLink> ||
+                  <NavLink to="/interact">Interact</NavLink>
                </>
             ) : (
                <>
