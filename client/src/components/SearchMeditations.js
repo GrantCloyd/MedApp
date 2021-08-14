@@ -23,6 +23,7 @@ export default function SearchMeditations() {
 
          <button onClick={() => setDisplayTeacher(!displayTeacher)}>By Teacher</button>
          <button onClick={() => setDisplayLength(!displayLength)}>By Length or Type</button>
+         <button>Unguided</button>
          {displayTeacher && <SearchTeacher meditations={meditations} />}
 
          {displayLength && <SearchLengthType meditations={meditations} />}

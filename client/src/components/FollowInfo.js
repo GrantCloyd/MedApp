@@ -3,7 +3,14 @@ import { handleChange, createConfig } from "../functions"
 import { addChat } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 
-export default function FollowInfo({ teacherName, teacherId, userId, userName }) {
+export default function FollowInfo({
+   followMessage,
+   optStatus,
+   teacherName,
+   teacherId,
+   userId,
+   userName,
+}) {
    const initialDonation = { amount: 0, message: "", teacher_id: teacherId, student_id: userId }
    const initialQuestion = {
       teacher_id: teacherId,
@@ -46,8 +53,14 @@ export default function FollowInfo({ teacherName, teacherId, userId, userName })
    return (
       <div>
          <hr />
-         <p>Thanks for the follow!</p>
-         <p>Here's a personalized message from me, this teacher</p>
+         {followMessage ? (
+            <p>
+               From {teacherName} : {followMessage}
+            </p>
+         ) : (
+            <p>Thanks for the follow! This teacher has not set up a personalized message yet.</p>
+         )}
+         {!optStatus && <p>This teacher is not taking questions at this time.</p>}
          {response && <p>{response}</p>}
          {toggleDonate && <p>How much would you like to give?</p>}
          {toggleQuestion && (
@@ -78,7 +91,12 @@ export default function FollowInfo({ teacherName, teacherId, userId, userName })
          <p>
             {" "}
             <button onClick={() => setToggleDonate(!toggleDonate)}>Donate</button>{" "}
-            <button onClick={() => setToggleQuestion(!toggleQuestion)}> Ask a Question</button>{" "}
+            {optStatus && (
+               <button onClick={() => setToggleQuestion(!toggleQuestion)}>
+                  {" "}
+                  {toggleQuestion ? "Cancel Question" : "Ask a Question"}
+               </button>
+            )}
          </p>
          <hr />
       </div>

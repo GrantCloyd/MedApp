@@ -9,7 +9,10 @@ const initialState = {
    income: "",
    total_listens: "",
    meditations: [],
+   follows: [],
    type: "teacher",
+   opt_in: "",
+   follow_message: "",
    chats: [],
 }
 

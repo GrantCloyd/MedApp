@@ -26,7 +26,7 @@ export default function InteractPage() {
       getData()
    }, [addMessage, deleteMessage])
 
-   const chatDisplayRedux = fetchChats.map(c => (
+   const chatDisplay = fetchChats.map(c => (
       <ChatContainer
          handleAdd={handleAdd}
          handleDelete={handleDelete}
@@ -39,8 +39,15 @@ export default function InteractPage() {
 
    return (
       <>
-         <div>Interacting now!</div>
-         {chatDisplayRedux}
+         <h2>Message Page</h2>
+         {user.opt_in === false && (
+            <p>
+               You are not signed up to receive messages. Please opt-in on your profile page to do
+               so.
+            </p>
+         )}
+         {chatDisplay}
+         {chatDisplay.length === 0 && <p>You have no messages!</p>}
       </>
    )
 }

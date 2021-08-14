@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import { addFollow, removeFollow } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 import FollowInfo from "./FollowInfo"
+import { Switch } from "@material-ui/core"
 
 export default function ViewTeacher() {
    const teacherId = useParams().id
@@ -61,6 +62,33 @@ export default function ViewTeacher() {
       }
    }
 
+   async function handleFollowOrUnfollow(e) {
+      setErrors(false)
+      const bool = e.target.checked
+      if (bool) {
+         const configObj = createConfig("POST", {
+            student_id: userId,
+            teacher_id: teacherId,
+         })
+         const res = await fetch(`/follows`, configObj)
+         const data = await res.json()
+         if (data.id) {
+            dispatch(addFollow(data))
+         } else {
+            setErrors(data.error)
+         }
+      } else {
+         const res = await fetch(`/follows/${follow.id}`, createConfig("DELETE"))
+         const data = await res.json()
+
+         if (data.id) {
+            dispatch(removeFollow(data.id))
+         } else {
+            setErrors(data.error)
+         }
+      }
+   }
+
    const meditationsDisplay = teacher.meditations.map(m => (
       <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />
    ))
@@ -74,17 +102,21 @@ export default function ViewTeacher() {
          </p>
          <p>{teacher.background}</p>
          {errors && <p>{errors}</p>}
-         {followerStatus ? (
-            <button onClick={handleUnfollow}>Unfollow</button>
-         ) : (
-            <button onClick={handleFollow}> Follow</button>
-         )}
+         <label htmlFor="followSwitch">Follow Teacher: </label>
+         <Switch
+            color="primary"
+            name="followSwitch"
+            checked={followerStatus}
+            onChange={handleFollowOrUnfollow}
+         />
          {followerStatus ? (
             <FollowInfo
                teacherName={teacher.name}
                teacherId={teacherId}
                userId={user.id}
                userName={user.name}
+               optStatus={teacher.opt_in}
+               followMessage={teacher.follow_message}
             />
          ) : null}
          <ul>{meditationsDisplay}</ul>

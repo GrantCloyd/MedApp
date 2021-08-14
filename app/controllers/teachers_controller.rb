@@ -22,7 +22,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
     private 
 
     def update_params
-      params.permit(:name, :email, :image_url, :background, :income )
+      params.permit(:name, :email, :image_url, :background, :income, :follow_message, :opt_in )
     end
  
     def not_found err

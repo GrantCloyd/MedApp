@@ -5,12 +5,21 @@ import { createConfig, handleChange } from "../functions"
 import { loginT } from "./store/teacherReducer"
 import { loginS } from "./store/studentReducer"
 import { useSelector, useDispatch } from "react-redux"
+import { Switch } from "@material-ui/core"
 
 export default function ProfilePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
-   const { name, email, image_url, background, id, chats } = user
-   const [profileEdit, setProfileEdit] = useState({ name, email, image_url, background, id })
+   const { name, email, image_url, background, id, chats, follow_message } = user
+   const [profileEdit, setProfileEdit] = useState({
+      name,
+      email,
+      image_url,
+      background,
+      id,
+      follow_message,
+   })
    const [toggleEdit, setToggleEdit] = useState(false)
+
    const dispatch = useDispatch()
 
    const handleProfileChange = e => handleChange(e, setProfileEdit, profileEdit)
@@ -21,6 +30,16 @@ export default function ProfilePage() {
       const data = await res.json()
       user.type === "teacher" ? dispatch(loginT(data)) : dispatch(loginS(data))
       setToggleEdit(false)
+   }
+
+   async function handleOptStatus(e) {
+      const res = await fetch(
+         `/teachers/${user.id}`,
+         createConfig("PATCH", { opt_in: e.target.checked })
+      )
+      const data = await res.json()
+      console.log(data)
+      dispatch(loginT(data))
    }
 
    return (
@@ -47,9 +66,16 @@ export default function ProfilePage() {
                      <label htmlFor="background"> Background: </label>
                      <input
                         onChange={handleProfileChange}
-                        type="text"
+                        type="textarea"
                         value={profileEdit.background}
                         name="background"
+                     />
+                     <label htmlFor="follow_message"> Follow Message: </label>
+                     <input
+                        onChange={handleProfileChange}
+                        type="textarea"
+                        value={profileEdit.follow_message}
+                        name="follow_message"
                      />
                      <label htmlFor="image_url"> Profile Picture: </label>
                      <input
@@ -69,8 +95,26 @@ export default function ProfilePage() {
                <h3>Email: {user.email}</h3>
             </>
          )}
-         {user.type === "teacher" && <p>{user.background} </p>}
-         <button onClick={() => setToggleEdit(!toggleEdit)}>Edit</button>
+         {user.type === "teacher" && (
+            <>
+               <p>Public Bio: {user.background} </p>
+               <p>Follow Message: {user.follow_message}</p>
+               <label htmlFor="optStatus"> Opt in for questions</label>
+               <Switch
+                  color="primary"
+                  name="optStatus"
+                  checked={user.opt_in}
+                  onChange={handleOptStatus}
+               />
+               {/* {user.opt_in ? (
+                  <button value={false}>Opt Out of Questions</button>
+               ) : (
+                  <button value={true}>Opt In For Questions</button>
+               )} */}
+               <br />
+            </>
+         )}
+         <button onClick={() => setToggleEdit(!toggleEdit)}>Edit Info</button>
          {user.type === "teacher" ? <TeacherProfile {...user} /> : <StudentProfile {...user} />}
       </div>
    )
