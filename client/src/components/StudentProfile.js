@@ -23,7 +23,7 @@ export default function StudentProfile() {
    async function handleDeleteFav(id) {
       const res = await fetch(`/favorites/${id}`, createConfig("DELETE"))
       const data = await res.json()
-      console.log(data)
+
       dispatch(removeFav(data))
    }
 
