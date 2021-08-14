@@ -17,9 +17,7 @@ export default function ViewTeacher() {
    const [errors, setErrors] = useState(false)
    const history = useHistory()
    const user = useSelector(state => state.student)
-   const userId = useSelector(state => state.student.id)
-   const follows = useSelector(state => state.student.follows)
-   const follow = follows.find(f => f.teacher_id === +teacherId)
+   const follow = user.follows.find(f => f.teacher_id === +teacherId)
    const followsTecherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
    const followerStatus = followsTecherId.includes(+teacherId)
    const dispatch = useDispatch()
@@ -40,7 +38,7 @@ export default function ViewTeacher() {
       const bool = e.target.checked
       if (bool) {
          const configObj = createConfig("POST", {
-            student_id: userId,
+            student_id: user.id,
             teacher_id: teacherId,
          })
          const res = await fetch(`/follows`, configObj)
