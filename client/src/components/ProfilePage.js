@@ -5,7 +5,7 @@ import { createConfig, handleChange } from "../functions"
 import { loginT } from "./store/teacherReducer"
 import { loginS } from "./store/studentReducer"
 import { useSelector, useDispatch } from "react-redux"
-import { Switch } from "@material-ui/core"
+import { Switch, FormControlLabel } from "@material-ui/core"
 
 export default function ProfilePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
@@ -99,13 +99,19 @@ export default function ProfilePage() {
             <>
                <p>Public Bio: {user.background} </p>
                <p>Follow Message: {user.follow_message}</p>
-               <label htmlFor="optStatus"> Opt in for questions</label>
-               <Switch
-                  color="primary"
-                  name="optStatus"
-                  checked={user.opt_in}
-                  onChange={handleOptStatus}
+               <label htmlFor="optStatus"> Question Status: </label>
+               <FormControlLabel
+                  control={
+                     <Switch
+                        color="primary"
+                        name="optStatus"
+                        checked={user.opt_in}
+                        onChange={handleOptStatus}
+                     />
+                  }
+                  label={user.opt_in ? "Open" : "Closed"}
                />
+
                {/* {user.opt_in ? (
                   <button value={false}>Opt Out of Questions</button>
                ) : (

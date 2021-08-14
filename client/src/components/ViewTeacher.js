@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { addFollow, removeFollow } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 import FollowInfo from "./FollowInfo"
-import { Switch } from "@material-ui/core"
+import { Switch, FormControlLabel } from "@material-ui/core"
 
 export default function ViewTeacher() {
    const teacherId = useParams().id
@@ -34,33 +34,6 @@ export default function ViewTeacher() {
       }
       getTeacher()
    }, [])
-
-   async function handleFollow() {
-      setErrors(false)
-      const configObj = createConfig("POST", {
-         student_id: userId,
-         teacher_id: teacherId,
-      })
-      const res = await fetch(`/follows`, configObj)
-      const data = await res.json()
-      if (data.id) {
-         dispatch(addFollow(data))
-      } else {
-         setErrors(data.error)
-      }
-   }
-
-   async function handleUnfollow() {
-      setErrors(false)
-      const res = await fetch(`/follows/${follow.id}`, createConfig("DELETE"))
-      const data = await res.json()
-
-      if (data.id) {
-         dispatch(removeFollow(data.id))
-      } else {
-         setErrors(data.error)
-      }
-   }
 
    async function handleFollowOrUnfollow(e) {
       setErrors(false)
@@ -103,11 +76,16 @@ export default function ViewTeacher() {
          <p>{teacher.background}</p>
          {errors && <p>{errors}</p>}
          <label htmlFor="followSwitch">Follow Teacher: </label>
-         <Switch
-            color="primary"
-            name="followSwitch"
-            checked={followerStatus}
-            onChange={handleFollowOrUnfollow}
+         <FormControlLabel
+            control={
+               <Switch
+                  color="primary"
+                  name="followSwitch"
+                  checked={followerStatus}
+                  onChange={handleFollowOrUnfollow}
+               />
+            }
+            label={followerStatus ? "Following" : "Not Following"}
          />
          {followerStatus ? (
             <FollowInfo
