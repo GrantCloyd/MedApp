@@ -40,7 +40,7 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
       <>
          {" "}
          <hr />
-         <div key={c.id}> Question: {c.title}</div>
+         <div> Question: {c.title}</div>
          <ul>
             {" "}
             {c.messages.map(m => (

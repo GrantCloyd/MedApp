@@ -14,7 +14,7 @@ class StudentSerializer < ActiveModel::Serializer
   end
 
    def recent_plays
-     plays = object.plays.order(created_at: :desc).limit(6)
+     plays = object.plays.order(created_at: :desc).limit(5)
     
      recent_plays = plays.collect {|p| PlaySerializer.new(p)} 
  

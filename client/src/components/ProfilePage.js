@@ -9,7 +9,7 @@ import { Switch, FormControlLabel } from "@material-ui/core"
 
 export default function ProfilePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
-   const { name, email, image_url, background, id, chats, follow_message } = user
+   const { name, email, image_url, background, id, follow_message } = user
    const [profileEdit, setProfileEdit] = useState({
       name,
       email,
@@ -44,7 +44,7 @@ export default function ProfilePage() {
 
    return (
       <div>
-         {user.type === "teacher" && <img src={user.image_url} />}
+         {user.type === "teacher" && <img alt={user.image_name} src={user.image_url} />}
          {toggleEdit ? (
             <form onSubmit={handleSubmit}>
                <label htmlFor="name">Name: </label>

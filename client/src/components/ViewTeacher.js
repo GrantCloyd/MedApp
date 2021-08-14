@@ -31,7 +31,7 @@ export default function ViewTeacher() {
          setTeacher(data)
       }
       getTeacher()
-   }, [])
+   }, [teacherId])
 
    async function handleFollowOrUnfollow(e) {
       setErrors(false)
@@ -69,7 +69,7 @@ export default function ViewTeacher() {
          <h2>{teacher.name}</h2>
          <p>
             {" "}
-            <img src={teacher.image_url} />
+            <img alt={teacher.name} src={teacher.image_url} />
          </p>
          <p>{teacher.background}</p>
          {errors && <p>{errors}</p>}

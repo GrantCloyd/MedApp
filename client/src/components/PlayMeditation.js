@@ -27,7 +27,7 @@ export default function PlayMeditation() {
          console.log(data)
       }
       getMed()
-   }, [])
+   }, [id])
 
    async function handleListen() {
       const res = await fetch(
@@ -47,7 +47,7 @@ export default function PlayMeditation() {
 
    return (
       <div>
-         <img alt="teacher-image" src={medData.teacher.image_url} />
+         <img alt={medData.teacher.name} src={medData.teacher.image_url} />
          <p>{medData.teacher.name}</p>
          <h2>{medData.title}</h2>
          <p>{medData.description}</p>

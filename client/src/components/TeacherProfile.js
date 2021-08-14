@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import MeditationLi from "./MeditationLi"
 
 export default function TeacherProfile({ total_listens, income, meditations, chats, follows }) {

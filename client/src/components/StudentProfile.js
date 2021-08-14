@@ -8,13 +8,15 @@ import { FormControlLabel, Switch } from "@material-ui/core"
 
 export default function StudentProfile() {
    const user = useSelector(state => state.student)
-   const recentPlays = user.recent_plays.slice(0, user.recent_plays.length - 1)
+   const recentPlay = [user.recent_plays[0]]
+   const recentPlays = user.recent_plays.slice(1, 5)
    const history = useHistory()
    const dispatch = useDispatch()
    const favorites = user.favorites
    const follows = user.follows
    const followsTecherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
    const followerStatus = id => followsTecherId.includes(id)
+   const [showRecent, setShowRecent] = useState(false)
 
    async function handleUnfollow(id) {
       const res = await fetch(`/follows/${id}`, createConfig("DELETE"))
@@ -38,7 +40,7 @@ export default function StudentProfile() {
             <button>Donate</button>
             <button onClick={() => history.push(`/teachers/${f.teacher.id}`)}>View Teacher</button>
          </p>
-         <label htmlFor="followSwitch">Follow Teacher: </label>
+
          <FormControlLabel
             control={
                <Switch
@@ -62,6 +64,14 @@ export default function StudentProfile() {
       </li>
    ))
 
+   const mostRecent = recentPlay.map(m => (
+      <p>
+         Listened on: {new Date(m.created_at).toLocaleString()} || Title: {m.meditation.title} ||
+         From: {m.teacher_name} ||
+         <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
+      </p>
+   ))
+
    const recentMeds = recentPlays.map(m => (
       <li key={m.id}>
          {" "}
@@ -76,12 +86,15 @@ export default function StudentProfile() {
          <h2>You're a student!</h2>
          <h3>Following:</h3>
          {followsDisplay}
-         <h3>Favorites</h3>
+         <h3>Favorites:</h3>
          <ul>{favoriteDisplay}</ul>
          <p>Student stats</p>
          <p> Total Sessions: {user.total_listens}</p>
          <p>Total Time Meditated: {user.total_time} minutes </p>
-         <ul>{recentMeds}</ul>
+         <h3>Recent Sessions:</h3>
+         {mostRecent}
+         <button onClick={() => setShowRecent(!showRecent)}>Show More Recent</button>
+         {showRecent && <ul>{recentMeds}</ul>}
       </div>
    )
 }
