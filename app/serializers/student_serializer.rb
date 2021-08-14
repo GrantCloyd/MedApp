@@ -1,6 +1,6 @@
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :total_listens, :total_time
-  has_many :plays
+  attributes :id, :name, :email, :total_listens, :total_time, :recent_plays
+  
   has_many :follows
   has_many :chats
   has_many :favorites
@@ -13,14 +13,11 @@ class StudentSerializer < ActiveModel::Serializer
      object.plays.sum(:length)
   end
 
-  # def recent_plays
-  #   plays = object.plays.limit(5)
+   def recent_plays
+     plays = object.plays.order(created_at: :desc).limit(5)
     
-  #    meditations = plays.map {|p| p.meditation}
-  #    teachers_names = meditations.map {|m| m.teacher.name}
-     
-  #    return plays, teachers_names, meditations
-   
-  # end
+     recent_plays = plays.collect {|p| PlaySerializer.new(p)} 
+ 
+   end
 
 end

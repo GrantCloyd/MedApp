@@ -9,8 +9,8 @@ export default function Navbar() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
    const dispatch = useDispatch()
    const history = useHistory()
-   let lastId = ""
-   if (user.type !== "teacher") lastId = user.plays[user.plays.length - 1].id
+   // let lastId = ""
+   // if (user.type !== "teacher") lastId = user.plays[user.plays.length - 1].id
 
    async function handleLogOut() {
       const res = await fetch("/log_in", createConfig("DELETE"))

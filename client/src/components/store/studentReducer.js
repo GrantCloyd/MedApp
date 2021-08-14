@@ -6,7 +6,7 @@ const initialState = {
    id: "",
    total_listens: 0,
    total_time: 0,
-   plays: [],
+   recent_plays: [],
    follows: [],
    chats: [],
    type: "student",
@@ -19,7 +19,7 @@ export const studentSlice = createSlice({
    reducers: {
       loginS: (state, action) => (state = { ...action.payload, type: "student" }),
       addPlay: (state, action) => {
-         state.plays = state.plays.push(action.payload)
+         state.recent_plays.unshift(action.payload)
          state.total_listens += 1
          state.total_time += action.payload.length
       },

@@ -7,7 +7,10 @@ import { addFavorite, removeFav } from "./store/studentReducer"
 export default function StudentProfile() {
    const user = useSelector(state => state.student)
    const history = useHistory()
-   const recentPlays = user.plays.slice(user.plays.length - 5, user.plays.length)
+   const recentPlays = user.recent_plays.slice(
+      user.recent_plays.length - 5,
+      user.recent_plays.length
+   )
    const dispatch = useDispatch()
    const favMedsIds = user.favorites.map(f => f.meditation_id)
 

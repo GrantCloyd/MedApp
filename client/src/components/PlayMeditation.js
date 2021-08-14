@@ -39,6 +39,7 @@ export default function PlayMeditation() {
          })
       )
       const data = await res.json()
+      console.log(data)
       dispatch(addPlay(data))
       setSucess(true)
       setTimeout(() => history.push("/profile"), 2500)
