@@ -10,6 +10,7 @@ const initialState = {
    follows: [],
    chats: [],
    type: "student",
+   favorites: [],
 }
 
 export const studentSlice = createSlice({
@@ -41,10 +42,25 @@ export const studentSlice = createSlice({
       setChatsS: (state, action) => {
          return { ...state, chats: [action.payload] }
       },
+      addFavorite: (state, action) => {
+         return { ...state, favorites: [...state.favorites, action.payload] }
+      },
+      removeFav: (state, action) => {
+         return { ...state, favorites: state.favorites.filter(f => f.id !== action.payload.id) }
+      },
    },
 })
 
-export const { addChat, loginS, setChatsS, addPlay, addFollow, removeFollow, logoutS } =
-   studentSlice.actions
+export const {
+   addChat,
+   addFavorite,
+   loginS,
+   setChatsS,
+   addPlay,
+   addFollow,
+   removeFav,
+   removeFollow,
+   logoutS,
+} = studentSlice.actions
 
 export default studentSlice.reducer

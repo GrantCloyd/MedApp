@@ -8,6 +8,7 @@ const initialState = {
    background: "",
    income: "",
    total_listens: "",
+   total_favorites: "",
    meditations: [],
    follows: [],
    type: "teacher",

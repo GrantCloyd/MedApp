@@ -7,4 +7,5 @@ class Student < ApplicationRecord
     has_many :plays
     has_many :follows
     has_many :chats
+    has_many :favorites
 end

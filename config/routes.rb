@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :favorites
   get '/chats/teachers/:id', to: 'chats#find_by_teacher'
   get '/chats/students/:id', to: 'chats#find_by_student'
   resources :chats

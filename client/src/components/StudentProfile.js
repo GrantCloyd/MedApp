@@ -1,12 +1,31 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { createConfig } from "../functions"
 import { useHistory } from "react-router-dom"
+import { addFavorite, removeFav } from "./store/studentReducer"
 
 export default function StudentProfile() {
    const user = useSelector(state => state.student)
    const history = useHistory()
    const recentPlays = user.plays.slice(user.plays.length - 5, user.plays.length)
-   console.log(recentPlays)
+   const dispatch = useDispatch()
+   const favMedsIds = user.favorites.map(f => f.meditation_id)
+
+   async function handleFavorite(id) {
+      const res = await fetch(
+         "/favorites",
+         createConfig("POST", { student_id: user.id, meditation_id: id })
+      )
+      const data = await res.json()
+      dispatch(addFavorite(data))
+   }
+
+   async function handleDeleteFav(id) {
+      const res = await fetch(`/favorites/${id}`, createConfig("DELETE"))
+      const data = await res.json()
+      console.log(data)
+      dispatch(removeFav(data))
+   }
 
    const recentMeds = recentPlays.map(m => (
       <li key={m.id}>
@@ -17,7 +36,16 @@ export default function StudentProfile() {
          <button onClick={() => history.push(`/teachers/${m.meditation.teacher_id}`)}>
             View Teacher
          </button>
-         <button>Favorite</button>
+         {favMedsIds.includes(m.meditation.id) ? (
+            <button
+               onClick={() =>
+                  handleDeleteFav(user.favorites.find(f => f.meditation_id === m.meditation.id).id)
+               }>
+               Unfavorite
+            </button>
+         ) : (
+            <button onClick={() => handleFavorite(m.meditation.id)}>Favorite</button>
+         )}
       </li>
    ))
 

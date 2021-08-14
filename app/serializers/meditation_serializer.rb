@@ -3,6 +3,7 @@ class MeditationSerializer < ActiveModel::Serializer
  
   attributes :id, :title, :med_type, :audio_file, :description, :est_length, :plays, :listens
   belongs_to :teacher
+  has_many :favorites
   
   def listens
     object.plays.size
