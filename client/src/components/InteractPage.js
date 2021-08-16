@@ -69,12 +69,6 @@ export default function InteractPage() {
                <p>No donations yet</p>
             )
          ) : null}
-
-         {/* {user.type !== "student" && user.donation.length > 0 ? (
-            donationsDisplay
-         ) : (
-            <p>No donations yet</p>
-         )} */}
       </>
    )
 }

@@ -112,7 +112,7 @@ export default function StudentProfile() {
                <p> Total: ${Number(user.total_donations).toFixed(2)}</p>
                <p> Number of Donations:{user.donations.length}</p>
                <p>Most Donated by Amount to Teacher: {user.most_donated_by_amount.teacher_name}</p>
-               <p> Amount ${Number(user.most_donated_by_amount.amount).toFixed(2)} </p>
+               <p> Amount: ${Number(user.most_donated_by_amount.amount).toFixed(2)} </p>
                <p> Most Donatations to a Teacher: {user.most_donated_teacher.teacher_name}</p>
                <p>Donations: {user.most_donated_teacher.amount}</p>{" "}
             </>
