@@ -62,7 +62,6 @@ export default function FollowInfo({
       const data = await res.json()
       if (data.id) {
          dispatch(addDonation(data))
-
          setResponse("Donation sent!")
          setDonation(initialDonation)
          setTimeout(() => {
@@ -88,13 +87,14 @@ export default function FollowInfo({
          {response && <p>{response}</p>}
          {toggleDonate && (
             <>
-               <p>How much would you like to give?</p>
+               <p>How much would you like to give? One dollar minimum required</p>
                <form onSubmit={createDonation}>
                   <label htmlFor="amount">Amount: $</label>
                   <input
                      value={donation.amount}
                      onChange={handleDonation}
                      type="number"
+                     min={1}
                      name="amount"
                   />
                   <label htmlFor="message">Message:</label>

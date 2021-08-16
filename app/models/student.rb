@@ -9,4 +9,6 @@ class Student < ApplicationRecord
     has_many :chats
     has_many :favorites
     has_many :donations
+
+  
 end

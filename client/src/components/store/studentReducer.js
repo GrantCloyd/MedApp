@@ -51,8 +51,10 @@ export const studentSlice = createSlice({
          return { ...state, favorites: state.favorites.filter(f => f.id !== action.payload.id) }
       },
       addDonation: (state, action) => {
-         state.donations.push(action.payload)
-         state.total_donations = Number(state.total_donations) + Number(action.payload.amount) //Number(action.payload.amount).toFixed(2) * 10000
+         state.donations.push(action.payload.donation)
+         state.total_donations =
+            Number(state.total_donations) + Number(action.payload.donation.amount)
+         state.most_donated_teacher = action.payload.most_donated_teacher
       },
    },
 })
