@@ -84,17 +84,18 @@ export default function StudentProfile() {
    return (
       <div>
          <h2>You're a student!</h2>
-         <h3>Following:</h3>
-         {followsDisplay}
-         <h3>Favorites:</h3>
-         <ul>{favoriteDisplay}</ul>
-         <p>Student stats</p>
+
+         <p>Student stats:</p>
          <p> Total Sessions: {user.total_listens}</p>
          <p>Total Time Meditated: {user.total_time} minutes </p>
+         <h3>Favorites:</h3>
+         <ul>{favoriteDisplay}</ul>
          <h3>Recent Sessions:</h3>
          {mostRecent}
          <button onClick={() => setShowRecent(!showRecent)}>Show More Recent</button>
          {showRecent && <ul>{recentMeds}</ul>}
+         <h3>Following:</h3>
+         {followsDisplay}
       </div>
    )
 }

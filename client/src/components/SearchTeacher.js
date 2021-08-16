@@ -10,7 +10,7 @@ export default function SearchTeacher({ meditations }) {
 
    useEffect(() => {
       setSortedTeachers(teachers)
-   }, [teachers])
+   }, [])
 
    const handleAlphSort = () =>
       setSortedTeachers(teachers.sort((a, b) => a.name.localeCompare(b.name)))

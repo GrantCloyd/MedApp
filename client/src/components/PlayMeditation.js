@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import ReactPlayer from "react-player"
 import { makeLinkForBlob, createConfig } from "../functions"
 import { useSelector, useDispatch } from "react-redux"
@@ -12,6 +12,7 @@ export default function PlayMeditation() {
    const [medData, setMedData] = useState(initialState)
    const [playTime, setPlayTime] = useState(0)
    const [success, setSucess] = useState(false)
+   const [pause, setPause] = useState(false)
    const userId = useSelector(state => state.student.id)
    const dispatch = useDispatch()
    const history = useHistory()
@@ -24,12 +25,11 @@ export default function PlayMeditation() {
          const res = await fetch(`/meditations/${id}`)
          const data = await res.json()
          setMedData(data)
-         console.log(data)
       }
       getMed()
    }, [id])
 
-   async function handleListen() {
+   async function handleListen(successStatement) {
       const res = await fetch(
          "/plays",
          createConfig("POST", {
@@ -39,11 +39,13 @@ export default function PlayMeditation() {
          })
       )
       const data = await res.json()
-      console.log(data)
+
       dispatch(addPlay(data))
-      setSucess(true)
+      setSucess(successStatement)
       setTimeout(() => history.push("/profile"), 2500)
    }
+
+   const handleContinue = () => setPause(false)
 
    return (
       <div>
@@ -51,19 +53,26 @@ export default function PlayMeditation() {
          <p>{medData.teacher.name}</p>
          <h2>{medData.title}</h2>
          <p>{medData.description}</p>
+         {pause && (
+            <>
+               <p> Would you like to continue meditating or end your session?</p>
+               <button onClick={handleContinue}>Continue</button>
+               <button onClick={() => handleListen("Every minute counts!")}>End</button>
+            </>
+         )}
          <ReactPlayer
-            onPause={() => console.log(playTime)}
+            onPause={() => setPause(true)}
             onProgress={state => {
                setPlayTime(state.playedSeconds)
             }}
-            onSeek={() => console.log("seeking")}
-            onEnded={handleListen}
+            onSeek={() => setPause(false)}
+            onEnded={() => handleListen("Congrats on finishing!")}
             playing={true}
             controls={true}
             height="50px"
             url={makeLinkForBlob(medData.audio_file)}
          />
-         {success && <p>Congrats on finishing!</p>}
+         {success && <p>{success}</p>}
       </div>
    )
 }
