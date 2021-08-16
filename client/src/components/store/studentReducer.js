@@ -11,6 +11,8 @@ const initialState = {
    chats: [],
    type: "student",
    favorites: [],
+   donations: [],
+   total_donations: 0,
 }
 
 export const studentSlice = createSlice({
@@ -48,11 +50,16 @@ export const studentSlice = createSlice({
       removeFav: (state, action) => {
          return { ...state, favorites: state.favorites.filter(f => f.id !== action.payload.id) }
       },
+      addDonation: (state, action) => {
+         state.donations.push(action.payload)
+         state.total_donations = Number(state.total_donations) + Number(action.payload.amount) //Number(action.payload.amount).toFixed(2) * 10000
+      },
    },
 })
 
 export const {
    addChat,
+   addDonation,
    addFavorite,
    loginS,
    setChatsS,

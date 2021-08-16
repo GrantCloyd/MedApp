@@ -81,6 +81,8 @@ export default function StudentProfile() {
       </li>
    ))
 
+   console.log(Number(user.total_donations).toFixed(2))
+
    return (
       <div>
          <h2>You're a student!</h2>
@@ -96,6 +98,10 @@ export default function StudentProfile() {
          {showRecent && <ul>{recentMeds}</ul>}
          <h3>Following:</h3>
          {followsDisplay}
+         <h3>Donations</h3>
+         <p> Total: ${Number(user.total_donations).toFixed(2)}</p>
+         <p> Number of Donations:{user.donations.length}</p>
+         <p> Most Donatated Teacher: {user.most_donated_teacher.teacher_name}</p>
       </div>
    )
 }

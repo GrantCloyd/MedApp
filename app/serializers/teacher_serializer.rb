@@ -1,10 +1,11 @@
 class TeacherSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :image_url, :background, :income, :total_listens, :opt_in, :follow_message, :total_favorites 
+  attributes :id, :name, :email, :image_url, :background, :income, :total_listens, :opt_in, :follow_message, :total_favorites, :total_income 
 
 
   has_many :meditations
   has_many :follows
   has_many :chats, include: :messages
+  has_many :donations
 
   def total_listens 
     object.meditations.map {|m| m.plays.length}.reduce(:+)
@@ -13,5 +14,9 @@ class TeacherSerializer < ActiveModel::Serializer
   def total_favorites 
     object.meditations.map {|m| m.favorites.length}.reduce(:+)
   end
+
+  def total_income
+    object.donations.sum(:amount)
+ end
 
 end

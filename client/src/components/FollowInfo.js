@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { handleChange, createConfig } from "../functions"
-import { addChat } from "./store/studentReducer"
+import { addChat, addDonation } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 
 export default function FollowInfo({
@@ -11,7 +11,13 @@ export default function FollowInfo({
    userId,
    userName,
 }) {
-   const initialDonation = { amount: 0, message: "", teacher_id: teacherId, student_id: userId }
+   const initialDonation = {
+      amount: 0,
+      message: "",
+      teacher_id: teacherId,
+      student_id: userId,
+      username: userName,
+   }
    const initialQuestion = {
       teacher_id: teacherId,
       student_id: userId,
@@ -32,18 +38,36 @@ export default function FollowInfo({
 
    async function handleSubmitQuestion(e) {
       e.preventDefault()
-      console.log(question)
       const res = await fetch("/messages", createConfig("POST", question))
       const data = await res.json()
-      console.log(data)
 
       if (data.message) {
          dispatch(addChat({ ...data.chat, messages: [data.message] }))
-         setResponse("Message sent!")
+         setResponse("Question sent!")
          setQuestion(initialQuestion)
          setTimeout(() => {
             setResponse(false)
             setToggleQuestion(false)
+         }, 1500)
+      } else {
+         setResponse(`Something went wrong, ${data.error}`)
+      }
+   }
+
+   async function createDonation(e) {
+      e.preventDefault()
+
+      console.log(donation)
+      const res = await fetch(`/donations`, createConfig("POST", donation))
+      const data = await res.json()
+      if (data.id) {
+         dispatch(addDonation(data))
+
+         setResponse("Donation sent!")
+         setDonation(initialDonation)
+         setTimeout(() => {
+            setResponse(false)
+            setToggleDonate(false)
          }, 1500)
       } else {
          setResponse(`Something went wrong, ${data.error}`)
@@ -62,7 +86,30 @@ export default function FollowInfo({
          )}
          {!optStatus && <p>This teacher is not taking questions at this time.</p>}
          {response && <p>{response}</p>}
-         {toggleDonate && <p>How much would you like to give?</p>}
+         {toggleDonate && (
+            <>
+               <p>How much would you like to give?</p>
+               <form onSubmit={createDonation}>
+                  <label htmlFor="amount">Amount: $</label>
+                  <input
+                     value={donation.amount}
+                     onChange={handleDonation}
+                     type="number"
+                     name="amount"
+                  />
+                  <label htmlFor="message">Message:</label>
+                  <input
+                     value={donation.message}
+                     onChange={handleDonation}
+                     type="textarea"
+                     name="message"
+                     placeholder="Send a message .."
+                  />
+                  <p>from: {userName}</p>
+                  <button>Send</button>
+               </form>
+            </>
+         )}
          {toggleQuestion && (
             <>
                <p>To: {teacherName}</p>
@@ -90,7 +137,9 @@ export default function FollowInfo({
          )}
          <p>
             {" "}
-            <button onClick={() => setToggleDonate(!toggleDonate)}>Donate</button>{" "}
+            <button onClick={() => setToggleDonate(!toggleDonate)}>
+               {toggleDonate ? "Close Donation" : "Donate"}
+            </button>{" "}
             {optStatus && (
                <button onClick={() => setToggleQuestion(!toggleQuestion)}>
                   {" "}

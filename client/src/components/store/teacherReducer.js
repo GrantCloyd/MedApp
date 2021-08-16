@@ -15,6 +15,8 @@ const initialState = {
    opt_in: "",
    follow_message: "",
    chats: [],
+   donations: [],
+   total_donations: 0,
 }
 
 export const teacherSlice = createSlice({

@@ -7,4 +7,5 @@ class Teacher < ApplicationRecord
     has_many :meditations, dependent: :destroy
     has_many :follows
     has_many :chats
+    has_many :donations
 end
