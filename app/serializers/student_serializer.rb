@@ -1,5 +1,5 @@
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :total_listens, :total_time, :recent_plays, :total_donations, :most_donated_teacher
+  attributes :id, :name, :email, :total_listens, :total_time, :recent_plays, :total_donations, :most_donated_teacher, :most_donated_by_amount
   
   has_many :follows
   has_many :chats
@@ -26,9 +26,24 @@ class StudentSerializer < ActiveModel::Serializer
    end
 
    def most_donated_teacher
+      if object.donations.length == 0
+         return ""
+      else
      teacher = Teacher.find(object.donations.group_by {|d| d.teacher_id}.transform_values {|v| v.count}.max_by {|k,v| v}[0])  
-     tea_donation_total = object.donations.select {|d| d.teacher_id == teacher.id}.map {|d| d.amount}.reduce(:+)
+     tea_donation_total = object.donations.select {|d| d.teacher_id == teacher.id}.length
      return {teacher_name: teacher.name, amount: tea_donation_total, teacher_id: teacher.id, image_url: teacher.image_url}
+      end
    end
+
+   def most_donated_by_amount
+      if object.donations.length == 0
+         return ""
+      else
+      most_dona = object.donations.group_by {|d| d.teacher_id}.map {|dg, v| {id:dg, amt: v.map {|d| d.amount}}}.max_by {|d| d[:amt].reduce(:+)}
+      teacher = Teacher.find(most_dona[:id])
+      return {teacher_name: teacher.name, amount: most_dona[:amt].reduce(:+), teacher_id: teacher.id, image_url: teacher.image_url}     
+      end
+   end
+
 
 end

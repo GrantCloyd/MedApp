@@ -26,6 +26,17 @@ export default function InteractPage() {
       getData()
    }, [addMessage, deleteMessage])
 
+   const donationsDisplay = user.donations.map(d => (
+      <div key={d.id}>
+         <hr />
+         <p>
+            Name: {d.username} || Amount: {d.amount}
+         </p>
+         <p>Message: {d.message}</p>
+         <hr />
+      </div>
+   ))
+
    const chatDisplay = fetchChats.map(c => (
       <ChatContainer
          handleAdd={handleAdd}
@@ -39,15 +50,31 @@ export default function InteractPage() {
 
    return (
       <>
-         <h2>Message Page</h2>
-         {user.opt_in === false && (
+         <h2>Message{user.type === "teacher" && " & Donations"} Page</h2>
+         {user.opt_in === false ? (
             <p>
                You are not signed up to receive messages. Please opt-in on your profile page to do
                so.
             </p>
+         ) : (
+            <h3>Messages</h3>
          )}
          {chatDisplay}
          {chatDisplay.length === 0 && <p>You have no messages!</p>}
+         {user.type === "teacher" && <h3>Donations</h3>}
+         {user.type !== "student" ? (
+            user.donations.length > 0 ? (
+               donationsDisplay
+            ) : (
+               <p>No donations yet</p>
+            )
+         ) : null}
+
+         {/* {user.type !== "student" && user.donation.length > 0 ? (
+            donationsDisplay
+         ) : (
+            <p>No donations yet</p>
+         )} */}
       </>
    )
 }

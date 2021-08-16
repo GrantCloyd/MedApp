@@ -37,7 +37,6 @@ export default function StudentProfile() {
          <img alt={f.teacher.name} src={f.teacher.image_url} />
          <p>
             {" "}
-            <button>Donate</button>
             <button onClick={() => history.push(`/teachers/${f.teacher.id}`)}>View Teacher</button>
          </p>
 
@@ -64,34 +63,42 @@ export default function StudentProfile() {
       </li>
    ))
 
-   const mostRecent = recentPlay.map(m => (
-      <p>
-         Listened on: {new Date(m.created_at).toLocaleString()} || Title: {m.meditation.title} ||
-         From: {m.teacher_name} ||
-         <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
-      </p>
-   ))
+   let mostRecent, recentMeds
 
-   const recentMeds = recentPlays.map(m => (
-      <li key={m.id}>
-         {" "}
-         Listened on: {new Date(m.created_at).toLocaleString()} || Title: {m.meditation.title} ||
-         From: {m.teacher_name} ||
-         <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
-      </li>
-   ))
+   console.log(recentPlay)
 
-   console.log(Number(user.total_donations).toFixed(2))
+   if (recentPlay[0] !== undefined) {
+      mostRecent = recentPlay.map(m => (
+         <p>
+            Listened on: {new Date(m.created_at).toLocaleString()} || Title: {m.meditation.title} ||
+            From: {m.teacher_name} ||
+            <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
+         </p>
+      ))
+
+      recentMeds = recentPlays.map(m => (
+         <li key={m.id}>
+            {" "}
+            Listened on: {new Date(m.created_at).toLocaleString()} || Title: {m.meditation.title} ||
+            From: {m.teacher_name} ||
+            <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
+         </li>
+      ))
+   }
 
    return (
       <div>
          <h2>You're a student!</h2>
 
          <p>Student stats:</p>
-         <p> Total Sessions: {user.total_listens}</p>
+         {user.total_listens > 0 ? (
+            <p> Total Sessions: {user.total_listens}</p>
+         ) : (
+            <p>No meditations yet</p>
+         )}
          <p>Total Time Meditated: {user.total_time} minutes </p>
          <h3>Favorites:</h3>
-         <ul>{favoriteDisplay}</ul>
+         {favoriteDisplay.length === 0 ? <p>No Favorites Yet</p> : <ul>{favoriteDisplay}</ul>}
          <h3>Recent Sessions:</h3>
          {mostRecent}
          <button onClick={() => setShowRecent(!showRecent)}>Show More Recent</button>
@@ -99,9 +106,19 @@ export default function StudentProfile() {
          <h3>Following:</h3>
          {followsDisplay}
          <h3>Donations</h3>
-         <p> Total: ${Number(user.total_donations).toFixed(2)}</p>
-         <p> Number of Donations:{user.donations.length}</p>
-         <p> Most Donatated Teacher: {user.most_donated_teacher.teacher_name}</p>
+         {user.donations.length > 0 ? (
+            <>
+               {" "}
+               <p> Total: ${Number(user.total_donations).toFixed(2)}</p>
+               <p> Number of Donations:{user.donations.length}</p>
+               <p>Most Donated by Amount to Teacher: {user.most_donated_by_amount.teacher_name}</p>
+               <p> Amount ${Number(user.most_donated_by_amount.amount).toFixed(2)} </p>
+               <p> Most Donatations to a Teacher: {user.most_donated_teacher.teacher_name}</p>
+               <p>Donations: {user.most_donated_teacher.amount}</p>{" "}
+            </>
+         ) : (
+            <p>You've made no donations yet</p>
+         )}
       </div>
    )
 }

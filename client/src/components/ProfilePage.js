@@ -111,17 +111,11 @@ export default function ProfilePage() {
                   }
                   label={user.opt_in ? "Open" : "Closed"}
                />
-
-               {/* {user.opt_in ? (
-                  <button value={false}>Opt Out of Questions</button>
-               ) : (
-                  <button value={true}>Opt In For Questions</button>
-               )} */}
                <br />
             </>
          )}
          <button onClick={() => setToggleEdit(!toggleEdit)}>Edit Info</button>
-         {user.type === "teacher" ? <TeacherProfile {...user} /> : <StudentProfile {...user} />}
+         {user.type === "teacher" ? <TeacherProfile /> : <StudentProfile />}
       </div>
    )
 }

@@ -6,7 +6,7 @@ class DonationsController < ApplicationController
         teacher.income += params[:amount].to_i
         teacher.save
         most_teacher = student_most_donate_teacher(params[:student_id])
-        render json: {id: donation.id, donation: donation, most_donated_teacher: most_teacher}
+        render json: {id: donation.id, donation: donation, most_donated_teacher: most_teacher[0], most_donated_by_amount: most_teacher[1] }
     rescue ActiveRecord::RecordInvalid => error
         render json: {error: error.message}, status:422
     rescue ActiveRecord::RecordNotFound => error
@@ -23,7 +23,7 @@ class DonationsController < ApplicationController
     def student_most_donate_teacher(id)
         student = Student.find(id)
         obj = StudentSerializer.new(student)
-        obj.most_donated_teacher
+        [obj.most_donated_teacher, obj.most_donated_by_amount]
       end
 
 end

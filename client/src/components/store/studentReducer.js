@@ -55,6 +55,7 @@ export const studentSlice = createSlice({
          state.total_donations =
             Number(state.total_donations) + Number(action.payload.donation.amount)
          state.most_donated_teacher = action.payload.most_donated_teacher
+         state.most_donated_by_amount = action.payload.most_donated_by_amount
       },
    },
 })
