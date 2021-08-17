@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { medTypes } from "../constants"
 import { handleChange } from "../functions"
 import { addMed } from "./store/teacherReducer"
@@ -11,6 +11,9 @@ export default function CreatePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
    const dispatch = useDispatch()
    const history = useHistory()
+   const [recordingState, setRecordingState] = useState(false)
+   const [mediaRecorder, setMediaRecorder] = useState(false)
+   const [mediaChunks, setMediaChunks] = useState([])
 
    const initialState = {
       title: "",
@@ -21,9 +24,36 @@ export default function CreatePage() {
       teacher_id: user.id,
    }
 
+   async function handleRecording() {
+      switch (recordingState) {
+         case false:
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+            setMediaRecorder(new MediaRecorder(stream, { mimeType: "audio/webm" }))
+            setRecordingState(true)
+            break
+         case true:
+            mediaRecorder.start()
+            setRecordingState("Recording")
+
+            break
+         case "Recording":
+            console.log(mediaRecorder)
+            mediaRecorder.stop()
+            mediaRecorder.ondataavailable = e => setMediaChunks(e.data)
+            setRecordingState("Recorded")
+            break
+         case "Recorded":
+            setNewMed({ ...newMed, audio_file: mediaChunks })
+            setRecordingState("Uploaded")
+            break
+      }
+   }
+
    const [newMed, setNewMed] = useState(initialState)
    const [success, setSuccess] = useState(false)
    const [errors, setErrors] = useState(false)
+
+   console.log(newMed)
 
    const handleNewMed = e => handleChange(e, setNewMed, newMed)
    const handleFile = e => {
@@ -85,10 +115,32 @@ export default function CreatePage() {
                name="est_length"
                placeholder="length"
             />
-            <label htmlFor="audio_file">Attach File</label>
-            <input onChange={handleFile} type="file" name="audio_file" />
+            {recordingState !== "Uploaded" ? (
+               <>
+                  {" "}
+                  <label htmlFor="audio_file">Attach File</label>
+                  <input onChange={handleFile} type="file" name="audio_file" />
+               </>
+            ) : (
+               <p>File Attached</p>
+            )}
             <button>Submit</button>
          </form>
+
+         <button>Record File</button>
+         <br />
+
+         <button onClick={handleRecording}>
+            {recordingState === false
+               ? "Start Recording? ⭕️"
+               : recordingState === true
+               ? "Ready ⚪️"
+               : recordingState === "Recording"
+               ? "Recording 🔴"
+               : recordingState === "Recorded"
+               ? "Upload"
+               : null}
+         </button>
       </div>
    )
 }

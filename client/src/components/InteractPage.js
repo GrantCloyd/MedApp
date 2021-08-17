@@ -30,7 +30,7 @@ export default function InteractPage() {
       <div key={d.id}>
          <hr />
          <p>
-            Name: {d.username} || Amount: {d.amount}
+            Name: {d.username} || Amount: ${Number(d.amount).toFixed(2)}
          </p>
          <p>Message: {d.message}</p>
          <hr />

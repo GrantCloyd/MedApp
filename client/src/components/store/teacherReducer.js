@@ -58,10 +58,22 @@ export const teacherSlice = createSlice({
       setChatsT: (state, action) => {
          return { ...state, chats: [action.payload] }
       },
+      updateIncome: (state, action) => {
+         state.income = action.payload.income
+      },
    },
 })
 
-export const { loginT, setChatsT, updateMed, deleteChat, addMessage, addMed, deleteMed, logoutT } =
-   teacherSlice.actions
+export const {
+   loginT,
+   updateIncome,
+   setChatsT,
+   updateMed,
+   deleteChat,
+   addMessage,
+   addMed,
+   deleteMed,
+   logoutT,
+} = teacherSlice.actions
 
 export default teacherSlice.reducer

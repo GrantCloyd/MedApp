@@ -4,7 +4,7 @@ export default function MedLineItem({ m, clickHandler = null }) {
    return (
       <li>
          {" "}
-         Title: {m.title} || Description: {m.description} || Type: {m.med_type} || Length:
+         Title: {m.title} || Description: {m.description} || Type: {m.med_type} || Length:{" "}
          {m.est_length} minutes ||{" "}
          {clickHandler === null && m.listens !== undefined && `Listens: ${m.listens}`}
          {clickHandler && (
