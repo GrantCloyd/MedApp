@@ -56,8 +56,6 @@ export default function CreatePage() {
    const [success, setSuccess] = useState(false)
    const [errors, setErrors] = useState(false)
 
-   console.log(newMed)
-
    const handleNewMed = e => handleChange(e, setNewMed, newMed)
    const handleFile = e => {
       setNewMed({ ...newMed, audio_file: e.target.files[0] })

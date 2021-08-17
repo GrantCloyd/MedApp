@@ -4,6 +4,16 @@ import { makeLinkForBlob, createConfig } from "../functions"
 import { useSelector, useDispatch } from "react-redux"
 import { addPlay } from "./store/studentReducer"
 import { useHistory, useParams } from "react-router-dom"
+import { styled } from "@material-ui/core/styles"
+import { CircularProgress, Box, Typography } from "@material-ui/core"
+
+const StyledProgress1 = styled(CircularProgress)({
+   color: "black",
+})
+
+const StyledProgress2 = styled(CircularProgress)({
+   color: "blue",
+})
 
 export default function PlayMeditation() {
    const initialState = {
@@ -13,12 +23,11 @@ export default function PlayMeditation() {
    const [playTime, setPlayTime] = useState(0)
    const [success, setSucess] = useState(false)
    const [pause, setPause] = useState(false)
+   const [percent, setPercent] = useState(0)
    const userId = useSelector(state => state.student.id)
    const dispatch = useDispatch()
    const history = useHistory()
    const id = useParams().id
-
-   //onPause create a pop-up that asks if you would like to conclude?
 
    useEffect(() => {
       async function getMed() {
@@ -49,7 +58,32 @@ export default function PlayMeditation() {
 
    return (
       <div>
-         <img alt={medData.teacher.name} src={medData.teacher.image_url} />
+         <p>
+            <Box position="relative" display="inline-flex">
+               <StyledProgress2 thickness={4} size={200} value={percent} variant="determinate" />
+               <Box
+                  top={0}
+                  left={0}
+                  bottom={0}
+                  right={0}
+                  position="absolute"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center">
+                  <div dir="rtl">
+                     <StyledProgress1
+                        flip={false}
+                        thickness={4}
+                        size={100}
+                        value={100 - percent}
+                        variant="determinate"
+                     />
+                  </div>
+                  {/* <Typography component="div" color="textSecondary">{`${percent}%`}</Typography> */}
+               </Box>{" "}
+            </Box>
+         </p>
+         {/* <img alt={medData.teacher.name} src={medData.teacher.image_url} /> */}
          <p>{medData.teacher.name}</p>
          <h2>{medData.title}</h2>
          <p>{medData.description}</p>
@@ -63,6 +97,7 @@ export default function PlayMeditation() {
          <ReactPlayer
             onPause={() => setPause(true)}
             onProgress={state => {
+               setPercent(Math.round(state.played * 100))
                setPlayTime(state.playedSeconds)
             }}
             onSeek={() => setPause(false)}

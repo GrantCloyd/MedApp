@@ -12,7 +12,8 @@ export default function SearchMeditations() {
       async function getData() {
          const res = await fetch("/meditations")
          const data = await res.json()
-         if (data.id) {
+         console.log(data)
+         if (data[0].id) {
             setMeditations(data)
          } else {
             setErrors(`Something went wrong : ${data.error}. Please try again`)
