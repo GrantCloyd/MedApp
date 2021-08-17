@@ -22,12 +22,12 @@ export default function SearchTeacher({ meditations }) {
       <li onClick={() => history.push(`/teachers/${t.id}`)} key={t.id}>
          <img alt={t.name} src={t.image_url} />{" "}
          <p>
-            Name: {t.name} || Listens: {t.total_listens}
+            Name: {t.name} || Listens: {t.total_listens} || Meditations: {t.med_number}
          </p>
       </li>
    ))
 
-   console.log(sortedTeachers)
+   console.log(teachers)
 
    return (
       <div>

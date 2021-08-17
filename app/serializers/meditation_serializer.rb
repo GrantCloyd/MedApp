@@ -1,8 +1,8 @@
 class MeditationSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
  
-  attributes :id, :title, :med_type, :audio_file, :description, :est_length, :plays, :listens
-  belongs_to :teacher
+  attributes :id, :title, :med_type, :audio_file, :description, :est_length, :plays, :listens, :teacher
+  #belongs_to :teacher
   has_many :favorites
   
   def listens
@@ -13,6 +13,10 @@ class MeditationSerializer < ActiveModel::Serializer
  
   def audio_file
     rails_blob_path(object.audio_file, only_path: true) if object.audio_file.attached?
+  end
+
+  def teacher 
+   TeacherIndexSerializer.new(object.teacher)
   end
 
 

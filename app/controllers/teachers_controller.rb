@@ -2,7 +2,8 @@ class TeachersController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     def index
-     render json: Teacher.all
+      teachers = Teacher.all
+     render json: TeacherIndexSerializer.new(teachers)
     end
 
     def show 

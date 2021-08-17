@@ -34,7 +34,6 @@ export default function CreatePage() {
          case true:
             mediaRecorder.start()
             setRecordingState("Recording")
-
             break
          case "Recording":
             console.log(mediaRecorder)
@@ -45,6 +44,10 @@ export default function CreatePage() {
          case "Recorded":
             setNewMed({ ...newMed, audio_file: mediaChunks })
             setRecordingState("Uploaded")
+            break
+         case "Uploaded":
+            setRecordingState(false)
+            handleRecording()
             break
       }
    }
@@ -139,7 +142,7 @@ export default function CreatePage() {
                ? "Recording 🔴"
                : recordingState === "Recorded"
                ? "Upload"
-               : null}
+               : "Start Again?"}
          </button>
       </div>
    )
