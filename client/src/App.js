@@ -26,7 +26,7 @@ function App() {
 
    return (
       <div className="App">
-         <h1>Med App</h1>
+         <h1>Here|Now</h1>
          <hr />
          <Navbar />
 

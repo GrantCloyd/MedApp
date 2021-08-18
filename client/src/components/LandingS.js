@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom"
 import { FormControlLabel, Switch } from "@material-ui/core"
 import StudentMedButtons from "./StudentMedButtons"
 
-export default function LandingS({ favorites, follows }) {
+export default function LandingS({ favorites, follows, most_pop_med }) {
    const followsTecherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
    const followerStatus = id => followsTecherId.includes(id)
    const dispatch = useDispatch()
@@ -54,6 +54,14 @@ export default function LandingS({ favorites, follows }) {
       </li>
    ))
 
+   const popularDisplay = [most_pop_med].map(m => (
+      <p>
+         {" "}
+         Title: {m.title} || From: {m.teacher_name} || Length: {m.est_length} ||{" "}
+         <StudentMedButtons medId={m.id} teaId={m.teacher_id} />{" "}
+      </p>
+   ))
+
    return (
       <div>
          {favoriteDisplay.length === 0 && followsDisplay.length === 0 && (
@@ -63,6 +71,8 @@ export default function LandingS({ favorites, follows }) {
          {favoriteDisplay.length === 0 ? <p>No Favorites Yet </p> : <ul>{favoriteDisplay}</ul>}
          <h3>Following:</h3>
          {followsDisplay.length === 0 ? <p>No follows yet</p> : followsDisplay}
+         <h3>Most Popular:</h3>
+         {popularDisplay}
       </div>
    )
 }

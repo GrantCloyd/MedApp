@@ -1,5 +1,5 @@
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :total_listens, :total_time, :recent_plays, :total_donations, :most_donated_teacher, :most_donated_by_amount
+  attributes :plays_id, :most_pop_med, :id, :name, :email, :total_listens, :total_time, :recent_plays, :total_donations, :most_donated_teacher, :most_donated_by_amount
   
   has_many :follows
   has_many :chats
@@ -44,6 +44,16 @@ class StudentSerializer < ActiveModel::Serializer
       teacher = Teacher.find(most_dona[:id])
       return {teacher_name: teacher.name, amount: most_dona[:amt].reduce(:+), teacher_id: teacher.id, image_url: teacher.image_url}     
       end
+   end
+
+  def most_pop_med 
+    med = Meditation.all.max_by {|m| m.plays.length}
+   PopSerializer.new(med)
+   end 
+
+   def plays_id 
+    plays = object.plays
+    plays.collect {|p| IdSerializer.new(p)}
    end
 
 

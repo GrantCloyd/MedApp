@@ -29,7 +29,11 @@ export default function StudentMedButtons({ medId, teaId }) {
    return (
       <>
          {" "}
-         <button onClick={() => history.push(`/playingnow/${medId}`)}>Play Again</button>
+         <button onClick={() => history.push(`/playingnow/${medId}`)}>
+            {user.plays_id.map(p => p.meditation_id).find(id => id === medId) === undefined
+               ? "Play"
+               : "Play Again"}
+         </button>
          <button onClick={() => history.push(`/teachers/${teaId}`)}>View Teacher</button>
          {favMedsIds.includes(medId) ? (
             <button
