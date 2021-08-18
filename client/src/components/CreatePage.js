@@ -26,6 +26,8 @@ export default function CreatePage() {
    const [newMed, setNewMed] = useState(initialState)
    const [success, setSuccess] = useState(false)
    const [errors, setErrors] = useState(false)
+   const [minutes, setMinutes] = useState(0)
+   const [seconds, setSeconds] = useState(0)
 
    async function prepForRecording() {
       setPrepRecord(!prepRecord)
@@ -39,6 +41,7 @@ export default function CreatePage() {
          case true:
             mediaRecorder.start()
             setRecordingState("Recording")
+            setTimeout(() => setSeconds(1), 1000)
             break
          case "Recording":
             console.log(mediaRecorder)
@@ -61,11 +64,33 @@ export default function CreatePage() {
       if (mediaRecorder.state === "paused") {
          mediaRecorder.resume()
          console.log(mediaRecorder.state)
+         if (mediaRecorder.state === "inactive") {
+            setErrors("Recorder is inactive")
+         }
       } else {
          mediaRecorder.pause()
          console.log(mediaRecorder.state)
       }
    }
+
+   useEffect(() => {
+      let interval = setInterval(() => {
+         if (mediaRecorder.state === "recording") {
+            if (seconds >= 0) {
+               setSeconds(seconds + 1)
+            }
+            if (seconds === 59) {
+               setMinutes(minutes + 1)
+               setSeconds(0)
+            }
+         }
+         if (mediaRecorder.state === "paused" || mediaChunks.length > 0) {
+            setSeconds(seconds)
+            setMinutes(minutes)
+         }
+      }, 1000)
+      return () => clearInterval(interval)
+   }, [seconds])
 
    const handleNewMed = e => handleChange(e, setNewMed, newMed)
    const handleFile = e => setNewMed({ ...newMed, audio_file: e.target.files[0] })
@@ -140,6 +165,9 @@ export default function CreatePage() {
          <br />
          {prepRecord && (
             <>
+               <p>
+                  {minutes} : {seconds >= 10 ? seconds : `0${seconds}`}
+               </p>
                <button onClick={handleRecording}>
                   {recordingState === false
                      ? "Enable to Record ⭕️"
