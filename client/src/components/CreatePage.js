@@ -9,12 +9,6 @@ import { useHistory } from "react-router-dom"
 
 export default function CreatePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
-   const dispatch = useDispatch()
-   const history = useHistory()
-   const [recordingState, setRecordingState] = useState(false)
-   const [mediaRecorder, setMediaRecorder] = useState(false)
-   const [mediaChunks, setMediaChunks] = useState([])
-
    const initialState = {
       title: "",
       description: "",
@@ -23,14 +17,25 @@ export default function CreatePage() {
       audio_file: "",
       teacher_id: user.id,
    }
+   const dispatch = useDispatch()
+   const history = useHistory()
+   const [prepRecord, setPrepRecord] = useState(false)
+   const [recordingState, setRecordingState] = useState(false)
+   const [mediaRecorder, setMediaRecorder] = useState(false)
+   const [mediaChunks, setMediaChunks] = useState([])
+   const [newMed, setNewMed] = useState(initialState)
+   const [success, setSuccess] = useState(false)
+   const [errors, setErrors] = useState(false)
 
-   async function handleRecording() {
+   async function prepForRecording() {
+      setPrepRecord(!prepRecord)
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      setMediaRecorder(new MediaRecorder(stream, { mimeType: "audio/webm" }))
+      setRecordingState(true)
+   }
+
+   function handleRecording() {
       switch (recordingState) {
-         case false:
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-            setMediaRecorder(new MediaRecorder(stream, { mimeType: "audio/webm" }))
-            setRecordingState(true)
-            break
          case true:
             mediaRecorder.start()
             setRecordingState("Recording")
@@ -52,17 +57,21 @@ export default function CreatePage() {
       }
    }
 
-   const [newMed, setNewMed] = useState(initialState)
-   const [success, setSuccess] = useState(false)
-   const [errors, setErrors] = useState(false)
+   const handlePauseResume = () => {
+      if (mediaRecorder.state === "paused") {
+         mediaRecorder.resume()
+         console.log(mediaRecorder.state)
+      } else {
+         mediaRecorder.pause()
+         console.log(mediaRecorder.state)
+      }
+   }
 
    const handleNewMed = e => handleChange(e, setNewMed, newMed)
-   const handleFile = e => {
-      setNewMed({ ...newMed, audio_file: e.target.files[0] })
-   }
+   const handleFile = e => setNewMed({ ...newMed, audio_file: e.target.files[0] })
+
    async function handleSubmit(e) {
       e.preventDefault()
-
       const formData = new FormData()
       for (let key in newMed) {
          formData.append(key, newMed[key])
@@ -79,7 +88,6 @@ export default function CreatePage() {
             setNewMed(initialState)
             setTimeout(() => history.push("/profile"), 2500)
          })
-      //.then(data => console.log(data))
    }
 
    return (
@@ -128,20 +136,24 @@ export default function CreatePage() {
             <button>Submit</button>
          </form>
 
-         <button>Record File</button>
+         <button onClick={prepForRecording}>Record File</button>
          <br />
-
-         <button onClick={handleRecording}>
-            {recordingState === false
-               ? "Start Recording? ⭕️"
-               : recordingState === true
-               ? "Ready ⚪️"
-               : recordingState === "Recording"
-               ? "Recording 🔴"
-               : recordingState === "Recorded"
-               ? "Upload"
-               : "Start Again?"}
-         </button>
+         {prepRecord && (
+            <>
+               <button onClick={handleRecording}>
+                  {recordingState === false
+                     ? "Enable to Record ⭕️"
+                     : recordingState === true
+                     ? "Ready ⚪️"
+                     : recordingState === "Recording"
+                     ? "Recording 🔴"
+                     : recordingState === "Recorded"
+                     ? "Attach 📎"
+                     : "Start Again?"}
+               </button>
+               <button onClick={handlePauseResume}>Pause/Resume ⏯</button>
+            </>
+         )}
       </div>
    )
 }
