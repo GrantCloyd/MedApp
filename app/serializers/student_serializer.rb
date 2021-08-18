@@ -5,6 +5,7 @@ class StudentSerializer < ActiveModel::Serializer
   has_many :chats
   has_many :favorites
   has_many :donations
+ 
 
   def total_listens 
      object.plays.length
