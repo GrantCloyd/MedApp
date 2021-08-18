@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import { medTypes } from "../constants"
 import { handleChange } from "../functions"
 import { addMed } from "./store/teacherReducer"
@@ -28,15 +28,16 @@ export default function CreatePage() {
    const [errors, setErrors] = useState(false)
    const [minutes, setMinutes] = useState(0)
    const [seconds, setSeconds] = useState(0)
+   const [previewUrl, setPreviewUrl] = useState("")
 
    async function prepForRecording() {
-      setPrepRecord(!prepRecord)
+      setPrepRecord(true)
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
       setMediaRecorder(new MediaRecorder(stream, { mimeType: "audio/webm" }))
       setRecordingState(true)
    }
 
-   function handleRecording() {
+   async function handleRecording() {
       switch (recordingState) {
          case true:
             mediaRecorder.start()
@@ -44,18 +45,25 @@ export default function CreatePage() {
             setTimeout(() => setSeconds(1), 1000)
             break
          case "Recording":
-            console.log(mediaRecorder)
             mediaRecorder.stop()
             mediaRecorder.ondataavailable = e => setMediaChunks(e.data)
+
             setRecordingState("Recorded")
             break
          case "Recorded":
             setNewMed({ ...newMed, audio_file: mediaChunks })
+
+            const objectURL = URL.createObjectURL(mediaChunks)
+            setPreviewUrl(objectURL)
             setRecordingState("Uploaded")
             break
          case "Uploaded":
+            setPrepRecord(false)
             setRecordingState(false)
-            handleRecording()
+            setSeconds(0)
+            setMinutes(0)
+            setMediaChunks([])
+            prepForRecording()
             break
       }
    }
@@ -63,13 +71,12 @@ export default function CreatePage() {
    const handlePauseResume = () => {
       if (mediaRecorder.state === "paused") {
          mediaRecorder.resume()
-         console.log(mediaRecorder.state)
+
          if (mediaRecorder.state === "inactive") {
             setErrors("Recorder is inactive")
          }
       } else {
          mediaRecorder.pause()
-         console.log(mediaRecorder.state)
       }
    }
 
@@ -160,7 +167,13 @@ export default function CreatePage() {
             )}
             <button>Submit</button>
          </form>
-
+         {recordingState === "Uploaded" && (
+            <>
+               <br />
+               <audio width="50%" controls src={previewUrl} />
+               <br />
+            </>
+         )}
          <button onClick={prepForRecording}>Record File</button>
          <br />
          {prepRecord && (
@@ -177,9 +190,11 @@ export default function CreatePage() {
                      ? "Recording 🔴"
                      : recordingState === "Recorded"
                      ? "Attach 📎"
-                     : "Start Again?"}
+                     : "Start Again? 🔁"}
                </button>
-               <button onClick={handlePauseResume}>Pause/Resume ⏯</button>
+               {mediaRecorder.state !== "inactive" && (
+                  <button onClick={handlePauseResume}>Pause/Resume ⏯</button>
+               )}
             </>
          )}
       </div>
