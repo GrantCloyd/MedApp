@@ -5,7 +5,17 @@ import { useSelector, useDispatch } from "react-redux"
 import { addPlay } from "./store/studentReducer"
 import { useHistory, useParams } from "react-router-dom"
 import { styled } from "@material-ui/core/styles"
-import { CircularProgress, Box, Typography } from "@material-ui/core"
+import {
+   CircularProgress,
+   DialogActions,
+   Dialog,
+   Slide,
+   DialogTitle,
+   DialogContent,
+   DialogContentText,
+   Box,
+   Typography,
+} from "@material-ui/core"
 
 const StyledProgress1 = styled(CircularProgress)({
    color: "black",
@@ -50,11 +60,16 @@ export default function PlayMeditation() {
       const data = await res.json()
 
       dispatch(addPlay(data))
+      setPause(false)
       setSucess(successStatement)
       setTimeout(() => history.push("/profile"), 2500)
    }
 
    const handleContinue = () => setPause(false)
+
+   const Transition = React.forwardRef(function Transition(ref) {
+      return <Slide direction="down" ref={ref} />
+   })
 
    return (
       <div>
@@ -79,19 +94,39 @@ export default function PlayMeditation() {
                         variant="determinate"
                      />
                   </div>
-                  {/* <Typography component="div" color="textSecondary">{`${percent}%`}</Typography> */}
                </Box>{" "}
             </Box>
          </p>
-         {/* <img alt={medData.teacher.name} src={medData.teacher.image_url} /> */}
+         {success && (
+            <p>
+               <Dialog TransitionComponent={Transition} open={success}>
+                  {" "}
+                  <DialogTitle>{"Congrats!"}</DialogTitle>
+                  <DialogContent>
+                     <DialogContentText>{success}</DialogContentText>
+                  </DialogContent>
+                  <DialogActions></DialogActions>
+               </Dialog>
+            </p>
+         )}
+
          <p>{medData.teacher.name}</p>
          <h2>{medData.title}</h2>
          <p>{medData.description}</p>
          {pause && (
             <>
-               <p> Would you like to continue meditating or end your session?</p>
-               <button onClick={handleContinue}>Continue</button>
-               <button onClick={() => handleListen("Every minute counts!")}>End</button>
+               <Dialog open={pause}>
+                  {" "}
+                  <DialogTitle>Paused</DialogTitle>
+                  <DialogContent>
+                     <DialogContentText>Would you like to continue your session?</DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                     <button onClick={handleContinue}>Continue</button>
+                     <button onClick={() => handleListen("Every minute counts!")}>End</button>
+                     <button onClick={() => history.push("/profile")}>Discard</button>
+                  </DialogActions>
+               </Dialog>
             </>
          )}
          <ReactPlayer
@@ -107,7 +142,6 @@ export default function PlayMeditation() {
             height="50px"
             url={makeLinkForBlob(medData.audio_file)}
          />
-         {success && <p>{success}</p>}
       </div>
    )
 }

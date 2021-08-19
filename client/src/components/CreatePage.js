@@ -6,6 +6,20 @@ import { useDispatch } from "react-redux"
 import axios from "axios"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
+import {
+   LinearProgress,
+   DialogActions,
+   Dialog,
+   DialogTitle,
+   DialogContent,
+   DialogContentText,
+} from "@material-ui/core"
+import { styled } from "@material-ui/core/styles"
+
+const StyledProg = styled(LinearProgress)({
+   width: "50%",
+   margin: "0 auto",
+})
 
 export default function CreatePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
@@ -29,6 +43,7 @@ export default function CreatePage() {
    const [minutes, setMinutes] = useState(0)
    const [seconds, setSeconds] = useState(0)
    const [previewUrl, setPreviewUrl] = useState("")
+   const [loading, setLoading] = useState(false)
 
    async function prepForRecording() {
       setPrepRecord(true)
@@ -104,6 +119,7 @@ export default function CreatePage() {
 
    async function handleSubmit(e) {
       e.preventDefault()
+      setLoading(true)
       const formData = new FormData()
       for (let key in newMed) {
          formData.append(key, newMed[key])
@@ -119,16 +135,43 @@ export default function CreatePage() {
             )
          })
          .then(() => {
+            setLoading(false)
             setSuccess(true)
             setNewMed(initialState)
-            setTimeout(() => history.push("/profile"), 2500)
          })
+   }
+
+   const handleStayOnPage = () => {
+      setSuccess(false)
+      setPrepRecord(false)
+      setRecordingState(false)
+      setSeconds(0)
    }
 
    return (
       <div>
          <h2>Create and Upload </h2>
-         {success && <p>File Uploaded!</p>}
+         {loading && (
+            <p>
+               <StyledProg />{" "}
+            </p>
+         )}
+         {success && (
+            <Dialog open={success}>
+               {" "}
+               <DialogTitle id="dialog-title">{"Sucess!"}</DialogTitle>
+               <DialogContent>
+                  <DialogContentText id="dialog-description">
+                     Your file has been uploaded! Would you like to create more or view your new
+                     content on your profile page?
+                  </DialogContentText>
+               </DialogContent>
+               <DialogActions>
+                  <button onClick={() => history.push("/profile")}>View</button>
+                  <button onClick={handleStayOnPage}>Stay</button>
+               </DialogActions>
+            </Dialog>
+         )}
          {errors && <p>{errors}</p>}
          <form onSubmit={handleSubmit}>
             <label htmlFor="title">Title</label>
