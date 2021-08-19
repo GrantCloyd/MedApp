@@ -7,6 +7,7 @@ export const medTypes = (
    <>
       <option> --select-one--</option>
       <option value="Breath">Breath</option>
+      <option value="Awareness">Awareness</option>
       <option value="Emotions">Emotions</option>
       <option value="Metta">Metta</option>
       <option value="Insight">Insight</option>

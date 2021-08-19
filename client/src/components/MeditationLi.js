@@ -23,7 +23,6 @@ export default function MeditationLi({ m }) {
       e.preventDefault()
       const res = await fetch(`/meditations/${m.id}`, createConfig("PATCH", patchObj))
       const data = await res.json()
-      console.log(data)
       dispatch(updateMed(data))
       setToggleEdit(!toggleEdit)
    }
@@ -31,6 +30,8 @@ export default function MeditationLi({ m }) {
    async function handleDelete() {
       const res = await fetch(`meditations/${m.id}`, createConfig("DELETE"))
       const data = await res.json()
+      console.log(data)
+      debugger
       dispatch(deleteMed(data))
    }
 

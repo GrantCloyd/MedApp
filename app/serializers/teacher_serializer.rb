@@ -1,5 +1,5 @@
 class TeacherSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :image_url, :background, :income, :total_listens, :opt_in, :follow_message, :total_favorites, :total_income, :most_donated_student, :most_donated_by_amount
+  attributes :id, :last_med, :name, :email, :image_url, :background, :income, :total_listens, :opt_in, :follow_message, :total_favorites, :total_income, :most_donated_student, :most_donated_by_amount
 
 
   has_many :meditations
@@ -37,6 +37,14 @@ def most_donated_by_amount
   student = Student.find(most_dona[:id])
   return {student_name: student.name, amount: most_dona[:amt].reduce(:+), student_id: student.id} 
   end   
+end
+
+def last_med 
+  if object.meditations.length > 0
+     object.meditations.limit(1).order(created_at: :desc)
+  else 
+    return ""
+  end
 end
 
 end

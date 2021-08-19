@@ -112,8 +112,11 @@ export default function CreatePage() {
       axios
          .post("http://localhost:3000/meditations", formData)
          .then(res => {
-            const { id, title, med_type, audio_file, description, est_length } = res.data
-            dispatch(addMed({ id, title, med_type, audio_file, description, est_length }))
+            const { id, title, med_type, audio_file, description, est_length, created_at } =
+               res.data
+            dispatch(
+               addMed({ id, title, med_type, audio_file, description, est_length, created_at })
+            )
          })
          .then(() => {
             setSuccess(true)

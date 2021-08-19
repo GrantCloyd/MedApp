@@ -1,7 +1,7 @@
 class MeditationSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
  
-  attributes :id, :title, :med_type, :audio_file, :description, :est_length, :plays, :listens, :teacher
+  attributes :id, :title, :med_type, :audio_file, :description, :est_length, :plays, :listens, :teacher, :created_at
   #belongs_to :teacher
   has_many :favorites
   

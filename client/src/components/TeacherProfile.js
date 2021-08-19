@@ -51,7 +51,6 @@ export default function TeacherProfile() {
          ) : (
             <p> You've had no donations yet</p>
          )}
-         <p>Open Questions: {user.chats.length}</p>
          <p>Followers: {user.follows.length}</p>
          <p>Meditations:</p>
          <ul>{medDisplay}</ul>

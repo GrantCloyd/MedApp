@@ -39,14 +39,16 @@ export const teacherSlice = createSlice({
       deleteMed: (state, action) => {
          return {
             ...state,
-            meditations: state.meditations.filter(m => m.id !== action.payload),
+            meditations: state.meditations.filter(m => m.id !== action.payload.id),
+            last_med: [[...state.last_med.slice(1), action.payload.last_med][0]],
          }
       },
       logoutT: (state, action) => (state = initialState),
       addMed: (state, action) => {
          return {
             ...state,
-            meditations: [...state.meditations, action.payload],
+            meditations: [action.payload, ...state.meditations],
+            last_med: [...state.last_med.slice(1), action.payload],
          }
       },
       addMessage: (state, action) => {
