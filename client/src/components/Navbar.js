@@ -49,7 +49,7 @@ export default function Navbar() {
             <IconButton onClick={handleClick} color="inherit">
                <MenuIcon />
             </IconButton>
-            <Typography variant="h4">Here|Now</Typography>
+            <Typography variant="h3">Here|Now</Typography>
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
                <MenuItem onClick={handleClose}>
                   <NavLink to="/landing">
