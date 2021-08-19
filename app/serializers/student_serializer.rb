@@ -53,7 +53,11 @@ class StudentSerializer < ActiveModel::Serializer
 
    def plays_id 
     plays = object.plays
-    plays.collect {|p| IdSerializer.new(p)}
+    if plays.length == 0 
+      return []
+    else 
+    plays.collect {|p| IdSerializer.new(p)} 
+    end
    end
 
 
