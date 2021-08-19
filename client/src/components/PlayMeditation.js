@@ -99,7 +99,7 @@ export default function PlayMeditation() {
          </p>
          {success && (
             <p>
-               <Dialog TransitionComponent={Transition} open={success}>
+               <Dialog open={success}>
                   {" "}
                   <DialogTitle>{"Congrats!"}</DialogTitle>
                   <DialogContent>
