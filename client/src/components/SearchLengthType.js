@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import MedLineItem from "./MedLineItem"
 import { medTypes } from "../constants"
 import { useHistory } from "react-router-dom"
+import { TightButton, StyledDropDown } from "./styles"
+import { InputLabel, MenuItem, Grid, FormControl } from "@material-ui/core"
 
 export default function SearchLengthType({ meditations }) {
    const [toggleOpen, setToggleOpen] = useState(false)
@@ -51,23 +53,46 @@ export default function SearchLengthType({ meditations }) {
 
    return (
       <div>
-         <hr />
-         You're looking for Length!
-         <select onChange={handleLengthFilter}>
-            <option value={0}>--select-one--</option>
-            <option value={5}>5 Minutes</option>
-            <option value={10}>10 Minutes</option>
-            <option value={15}>15 Minutes</option>
-            <option value={20}>20 Minutes</option>
-            <option value={30}>30 Minutes</option>
-            <option value={45}>45 Minutes</option>
-            <option value={60}>60 Minutes</option>
-         </select>
-         You're looking for types!
-         <select onChange={handleTypeFilter}>{medTypes}</select>
-         <button onClick={() => handleFilter(time, type)}> Search!</button>
-         <ul>{toggleOpen && filter}</ul>
-         <hr />
+         <FormControl>
+            <InputLabel id="length">Length </InputLabel>
+            <StyledDropDown labelId="length" onChange={handleLengthFilter}>
+               <MenuItem value={0}>--select-one--</MenuItem>
+               <MenuItem value={5}>5 Minutes</MenuItem>
+               <MenuItem value={10}>10 Minutes</MenuItem>
+               <MenuItem value={15}>15 Minutes</MenuItem>
+               <MenuItem value={20}>20 Minutes</MenuItem>
+               <MenuItem value={30}>30 Minutes</MenuItem>
+               <MenuItem value={45}>45 Minutes</MenuItem>
+               <MenuItem value={60}>60 Minutes</MenuItem>
+            </StyledDropDown>
+         </FormControl>{" "}
+         {""}
+         <FormControl>
+            <InputLabel labelId="type">Type</InputLabel>
+            <StyledDropDown id="type" onChange={handleTypeFilter}>
+               <MenuItem value="--select-one--"> --select-one--</MenuItem>
+               <MenuItem value="Breath">Breath</MenuItem>
+               <MenuItem value="Awareness">Awareness</MenuItem>
+               <MenuItem value="Emotions">Emotions</MenuItem>
+               <MenuItem value="Metta">Metta</MenuItem>
+               <MenuItem value="Insight">Insight</MenuItem>
+               <MenuItem value="Bodyscan">Body Scan</MenuItem>
+               <MenuItem value="Listening">Listening</MenuItem>
+               <MenuItem value="Seeing">Seeing</MenuItem>
+               <MenuItem value="Walking">Walking</MenuItem>
+               <MenuItem value="Concentration">Concentration</MenuItem>
+               <MenuItem value="Nondual">Non-Dual</MenuItem>
+               <MenuItem value="Sleep">Sleep</MenuItem>
+            </StyledDropDown>
+         </FormControl>
+         <br />
+         <br />
+         <TightButton onClick={() => handleFilter(time, type)}> Search!</TightButton>
+         <br />
+         <br />
+         <Grid container direction="row" justifyContent="center" alignItems="center">
+            {toggleOpen && filter}
+         </Grid>
       </div>
    )
 }

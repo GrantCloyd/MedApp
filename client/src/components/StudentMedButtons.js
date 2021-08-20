@@ -5,14 +5,9 @@ import { addFavorite, removeFav } from "./store/studentReducer"
 import { useHistory } from "react-router"
 import { CardActions, IconButton, Avatar } from "@material-ui/core"
 import { styled } from "@material-ui/core/styles"
-import { primaryColor, StyledFaceIcon } from "./styles"
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled"
+import { primaryColor, secondaryColor, StyledFaceIcon, StyledArrow } from "./styles"
 import FavoriteIcon from "@material-ui/icons/Favorite"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
-
-const StyledArrow = styled(PlayCircleFilledIcon)({
-   color: `${primaryColor}`,
-})
 
 const StyledFavIcon = styled(FavoriteIcon)({
    color: `#BA1B1D`,

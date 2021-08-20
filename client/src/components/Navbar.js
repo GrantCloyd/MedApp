@@ -4,7 +4,7 @@ import { createConfig } from "../functions"
 import { useSelector, useDispatch } from "react-redux"
 import { logoutT } from "./store/teacherReducer"
 import { logoutS } from "./store/studentReducer"
-import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from "@material-ui/core"
+import { Toolbar, Typography, IconButton, Menu, MenuItem } from "@material-ui/core"
 import HomeIcon from "@material-ui/icons/Home"
 import ContactMailIcon from "@material-ui/icons/ContactMail"
 import { styled } from "@material-ui/core/styles"
@@ -13,11 +13,7 @@ import MenuIcon from "@material-ui/icons/Menu"
 import FindInPageIcon from "@material-ui/icons/FindInPage"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import AddCircleIcon from "@material-ui/icons/AddCircle"
-
-const StyledAppBar = styled(AppBar)({
-   backgroundColor: "#56A3A6",
-   padding: "15px",
-})
+import { StyledAppBar } from "./styles"
 
 const StyledMenuBtn = styled(IconButton)({
    marginRight: "38%",
@@ -73,26 +69,21 @@ export default function Navbar() {
                   </IconButton>
                </MenuItem>
                {user.type === "teacher" ? (
-                  <>
-                     <MenuItem onClick={handleClose}>
-                        <NavLink to="/create"> Create</NavLink>
-                        <IconButton>
-                           {" "}
-                           <AddCircleIcon />
-                        </IconButton>
-                     </MenuItem>
-                     {/* <NavLink to="/create">Create</NavLink> || */}
-                  </>
+                  <MenuItem onClick={handleClose}>
+                     <NavLink to="/create"> Create</NavLink>
+                     <IconButton>
+                        {" "}
+                        <AddCircleIcon />
+                     </IconButton>
+                  </MenuItem>
                ) : (
-                  <>
-                     <MenuItem onClick={handleClose}>
-                        <NavLink to="/search"> Search </NavLink>
-                        <IconButton>
-                           {" "}
-                           <FindInPageIcon />
-                        </IconButton>
-                     </MenuItem>
-                  </>
+                  <MenuItem onClick={handleClose}>
+                     <NavLink to="/search"> Search </NavLink>
+                     <IconButton>
+                        {" "}
+                        <FindInPageIcon />
+                     </IconButton>
+                  </MenuItem>
                )}
                <MenuItem onClick={handleClose}>
                   <NavLink to="/interact"> Interact</NavLink>

@@ -7,6 +7,8 @@ import { useHistory, useParams } from "react-router-dom"
 import { styled } from "@material-ui/core/styles"
 import {
    CircularProgress,
+   Card,
+   CardHeader,
    DialogActions,
    Dialog,
    Slide,
@@ -16,13 +18,14 @@ import {
    Box,
    Typography,
 } from "@material-ui/core"
+import { primaryColor, TightCard, TightButton, ReverseTightButton } from "./styles"
 
 const StyledProgress1 = styled(CircularProgress)({
-   color: "black",
+   color: `${primaryColor}`,
 })
 
 const StyledProgress2 = styled(CircularProgress)({
-   color: "blue",
+   color: "#21CBF3",
 })
 
 export default function PlayMeditation() {
@@ -67,12 +70,9 @@ export default function PlayMeditation() {
 
    const handleContinue = () => setPause(false)
 
-   const Transition = React.forwardRef(function Transition(ref) {
-      return <Slide direction="down" ref={ref} />
-   })
-
    return (
-      <div>
+      <TightCard>
+         <CardHeader title={medData.title} />
          <p>
             <Box position="relative" display="inline-flex">
                <StyledProgress2 thickness={4} size={200} value={percent} variant="determinate" />
@@ -111,7 +111,6 @@ export default function PlayMeditation() {
          )}
 
          <p>{medData.teacher.name}</p>
-         <h2>{medData.title}</h2>
          <p>{medData.description}</p>
          {pause && (
             <>
@@ -122,9 +121,11 @@ export default function PlayMeditation() {
                      <DialogContentText>Would you like to continue your session?</DialogContentText>
                   </DialogContent>
                   <DialogActions>
-                     <button onClick={handleContinue}>Continue</button>
-                     <button onClick={() => handleListen("Every minute counts!")}>End</button>
-                     <button onClick={() => history.push("/profile")}>Discard</button>
+                     <TightButton onClick={handleContinue}>Continue</TightButton>
+                     <ReverseTightButton onClick={() => handleListen("Every minute counts!")}>
+                        End{" "}
+                     </ReverseTightButton>
+                     <TightButton onClick={() => history.push("/profile")}>Discard</TightButton>
                   </DialogActions>
                </Dialog>
             </>
@@ -140,8 +141,9 @@ export default function PlayMeditation() {
             playing={true}
             controls={true}
             height="50px"
+            width="100%"
             url={makeLinkForBlob(medData.audio_file)}
          />
-      </div>
+      </TightCard>
    )
 }

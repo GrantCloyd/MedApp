@@ -1,3 +1,5 @@
+import { MenuItem } from "@material-ui/core"
+
 export const HEADERS = {
    "Content-Type": "application/json",
    Accept: "application/json",
@@ -5,18 +7,18 @@ export const HEADERS = {
 
 export const medTypes = (
    <>
-      <option> --select-one--</option>
-      <option value="Breath">Breath</option>
-      <option value="Awareness">Awareness</option>
-      <option value="Emotions">Emotions</option>
-      <option value="Metta">Metta</option>
-      <option value="Insight">Insight</option>
-      <option value="Bodyscan">Body Scan</option>
-      <option value="Listening">Listening</option>
-      <option value="Seeing">Seeing</option>
-      <option value="Walking">Walking</option>
-      <option value="Concentration">Concentration</option>
-      <option value="Nondual">Non-Dual</option>
-      <option value="Sleep">Sleep</option>
+      <MenuItem value="--select-one--"> --select-one--</MenuItem>
+      <MenuItem value="Breath">Breath</MenuItem>
+      <MenuItem value="Awareness">Awareness</MenuItem>
+      <MenuItem value="Emotions">Emotions</MenuItem>
+      <MenuItem value="Metta">Metta</MenuItem>
+      <MenuItem value="Insight">Insight</MenuItem>
+      <MenuItem value="Bodyscan">Body Scan</MenuItem>
+      <MenuItem value="Listening">Listening</MenuItem>
+      <MenuItem value="Seeing">Seeing</MenuItem>
+      <MenuItem value="Walking">Walking</MenuItem>
+      <MenuItem value="Concentration">Concentration</MenuItem>
+      <MenuItem value="Nondual">Non-Dual</MenuItem>
+      <MenuItem value="Sleep">Sleep</MenuItem>
    </>
 )

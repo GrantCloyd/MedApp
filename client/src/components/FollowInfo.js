@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { handleChange, createConfig } from "../functions"
 import { addChat, addDonation } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
+import { TightButton, ReverseTightButton } from "./styles"
 
 export default function FollowInfo({
    followMessage,
@@ -137,14 +138,14 @@ export default function FollowInfo({
          )}
          <p>
             {" "}
-            <button onClick={() => setToggleDonate(!toggleDonate)}>
+            <TightButton onClick={() => setToggleDonate(!toggleDonate)}>
                {toggleDonate ? "Close Donation" : "Donate"}
-            </button>{" "}
+            </TightButton>{" "}
             {optStatus && (
-               <button onClick={() => setToggleQuestion(!toggleQuestion)}>
+               <ReverseTightButton onClick={() => setToggleQuestion(!toggleQuestion)}>
                   {" "}
                   {toggleQuestion ? "Cancel Question" : "Ask a Question"}
-               </button>
+               </ReverseTightButton>
             )}
          </p>
          <hr />

@@ -14,7 +14,7 @@ import {
    CardActions,
    CardMedia,
 } from "@material-ui/core"
-import { TightCard, StyledFaceIcon, StyledButton } from "./styles"
+import { TightCard, StyledSwitch, StyledButton } from "./styles"
 
 export default function LandingS({ favorites, follows, most_pop_med }) {
    const followsTecherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
@@ -33,23 +33,20 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
    }
 
    const followsDisplay = follows.map(f => (
-      <TightCard onClick={() => history.push(`/teachers/${f.teacher.id}`)}>
-         <CardHeader title={f.teacher.name} />
-         <CardMedia
-            style={{ height: "300px" }}
-            alt={f.teacher.name}
-            image={f.teacher.image_url.toString()}
-         />
-         <CardContent></CardContent>
+      <TightCard>
+         <div onClick={() => history.push(`/teachers/${f.teacher.id}`)}>
+            <CardHeader title={f.teacher.name} />
+            <CardMedia
+               style={{ height: "300px" }}
+               alt={f.teacher.name}
+               image={f.teacher.image_url.toString()}
+            />
+         </div>
          <CardActions>
             {" "}
-            {/* <IconButton onClick={() => history.push(`/teachers/${f.teacher.id}`)}>
-               {" "}
-               <StyledFaceIcon />{" "}
-            </IconButton> */}
             <FormControlLabel
                control={
-                  <Switch
+                  <StyledSwitch
                      color="primary"
                      name="followSwitch"
                      checked={id => followerStatus(id)}
@@ -68,7 +65,7 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
             <CardContent>
                {" "}
                <CardHeader title={m.meditation.title} />
-               From: {m.teacher_name} Length: {m.meditation.est_length}
+               {m.teacher_name} <br /> {m.meditation.est_length} minutes
             </CardContent>
             <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
          </TightCard>
@@ -80,7 +77,7 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
          <CardContent>
             {" "}
             <CardHeader title={m.title} />
-            From: {m.teacher_name} Length: {m.est_length}{" "}
+            From: {m.teacher_name} <br /> {m.est_length} minutes
          </CardContent>
          <StudentMedButtons medId={m.id} teaId={m.teacher_id} />{" "}
       </TightCard>

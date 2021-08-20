@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 
+import { CardHeader, CardMedia, CardContent, Grid } from "@material-ui/core"
+import { TightButton, ReverseTightButton, TightCard } from "./styles"
+
 export default function SearchTeacher({ meditations }) {
    const teachers = meditations
       .map(m => m.teacher)
@@ -19,26 +22,28 @@ export default function SearchTeacher({ meditations }) {
       setSortedTeachers(teachers.sort((a, b) => a.total_listens > b.total_listens))
 
    const teachersDisplay = sortedTeachers.map(t => (
-      <li onClick={() => history.push(`/teachers/${t.id}`)} key={t.id}>
-         <img alt={t.name} src={t.image_url} />{" "}
-         <p>
-            Name: {t.name} || Listens: {t.total_listens} || Meditations: {t.med_number}
-         </p>
-      </li>
+      <TightCard onClick={() => history.push(`/teachers/${t.id}`)} key={t.id}>
+         <CardHeader title={t.name} />
+         <CardMedia style={{ height: "200px" }} alt={t.name} image={t.image_url} />
+
+         <CardContent>
+            Listens: {t.total_listens} <br /> Meditations: {t.med_number}
+         </CardContent>
+      </TightCard>
    ))
 
    console.log(teachers)
 
    return (
       <div>
-         <hr />
          <h2>Discover New Teachers</h2>
          <p>
-            <button onClick={handleAlphSort}>Sort by Name</button>
-            <button onClick={handleListenSort}>Sort by Popularity</button>
+            <TightButton onClick={handleAlphSort}>By Name</TightButton>{" "}
+            <ReverseTightButton onClick={handleListenSort}>By Popularity</ReverseTightButton>
          </p>
-         <ul>{teachersDisplay}</ul>
-         <hr />
+         <Grid container direction="column" justifyContent="center" alignItems="center">
+            {teachersDisplay}
+         </Grid>
       </div>
    )
 }

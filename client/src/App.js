@@ -34,17 +34,17 @@ function App() {
          </nav>
          <main>
             <Route path="/create" component={CreatePage} />
-            <hr />
+
             <Route path="/landing" component={Landing} />
-            <hr />
+
             <Route path="/profile" component={ProfilePage} />
-            <hr />
+
             <Route path="/search" component={SearchMeditations} />
-            <hr />
+
             <Route exact path="/playingnow/:id" component={PlayMeditation} />
-            <hr />
+
             <Route exact path="/teachers/:id" component={ViewTeacher} />
-            <hr />
+
             <Route exact path="/interact" component={InteractPage} />
          </main>
       </div>

@@ -92,7 +92,7 @@ export default function ProfilePage() {
          ) : (
             <>
                <h2>Profile</h2>
-               <h3>Hello: {user.name}</h3>
+               <h3>{user.name}</h3>
                <h3>Email: {user.email}</h3>
             </>
          )}

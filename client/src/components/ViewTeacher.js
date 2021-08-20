@@ -6,7 +6,14 @@ import { useSelector } from "react-redux"
 import { addFollow, removeFollow } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 import FollowInfo from "./FollowInfo"
-import { Switch, FormControlLabel } from "@material-ui/core"
+import { FormControlLabel, Grid, Paper } from "@material-ui/core"
+import { StyledSwitch } from "./styles"
+import { styled } from "@material-ui/core/styles"
+
+const StyledPaper = styled(Paper)({
+   padding: "15px",
+   margin: "5px 5px",
+})
 
 export default function ViewTeacher() {
    const teacherId = useParams().id
@@ -66,36 +73,45 @@ export default function ViewTeacher() {
 
    return (
       <div>
-         <h2>{teacher.name}</h2>
-         <p>
-            {" "}
-            <img alt={teacher.name} src={teacher.image_url} />
-         </p>
-         <p>{teacher.background}</p>
-         {errors && <p>{errors}</p>}
-         <label htmlFor="followSwitch">Follow Teacher: </label>
-         <FormControlLabel
-            control={
-               <Switch
-                  color="primary"
-                  name="followSwitch"
-                  checked={followerStatus}
-                  onChange={handleFollowOrUnfollow}
-               />
-            }
-            label={followerStatus ? "Following" : "Not Following"}
-         />
-         {followerStatus ? (
-            <FollowInfo
-               teacherName={teacher.name}
-               teacherId={teacherId}
-               userId={user.id}
-               userName={user.name}
-               optStatus={teacher.opt_in}
-               followMessage={teacher.follow_message}
+         <div
+            className="teacherPhoto"
+            style={{
+               backgroundColor: "transparent",
+            }}>
+            <h2>{teacher.name}</h2>
+            <img
+               src={teacher.image_url}
+               style={{ height: "500px", width: "100%", objectFit: "cover" }}
             />
-         ) : null}
-         <ul>{meditationsDisplay}</ul>
+            <StyledPaper>
+               <p>{teacher.background}</p>
+            </StyledPaper>
+            {errors && <p>{errors}</p>}
+
+            <FormControlLabel
+               control={
+                  <StyledSwitch
+                     name="followSwitch"
+                     checked={followerStatus}
+                     onChange={handleFollowOrUnfollow}
+                  />
+               }
+               label={followerStatus ? "Following" : "Not Following"}
+            />
+            {followerStatus ? (
+               <FollowInfo
+                  teacherName={teacher.name}
+                  teacherId={teacherId}
+                  userId={user.id}
+                  userName={user.name}
+                  optStatus={teacher.opt_in}
+                  followMessage={teacher.follow_message}
+               />
+            ) : null}
+         </div>
+         <Grid container direction="row" justifyContent="center" alignItems="center">
+            {meditationsDisplay}
+         </Grid>
       </div>
    )
 }

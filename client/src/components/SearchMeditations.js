@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import SearchTeacher from "./SearchTeacher"
 import SearchLengthType from "./SearchLengthType"
+import { TightButton, ReverseTightButton } from "./styles"
 
 export default function SearchMeditations() {
    const [displayTeacher, setDisplayTeacher] = useState(false)
@@ -26,11 +27,13 @@ export default function SearchMeditations() {
       <div>
          <h2>Search Meditations</h2>
          {errors && <p>{errors}</p>}
-         <button onClick={() => setDisplayTeacher(!displayTeacher)}>By Teacher</button>
-         <button onClick={() => setDisplayLength(!displayLength)}>By Length or Type</button>
-
+         <TightButton onClick={() => setDisplayTeacher(!displayTeacher)}>
+            By Teacher
+         </TightButton>{" "}
+         <ReverseTightButton onClick={() => setDisplayLength(!displayLength)}>
+            By Length or Type
+         </ReverseTightButton>
          {displayTeacher && <SearchTeacher meditations={meditations} />}
-
          {displayLength && <SearchLengthType meditations={meditations} />}
       </div>
    )
