@@ -6,14 +6,9 @@ import { useSelector } from "react-redux"
 import { addFollow, removeFollow } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 import FollowInfo from "./FollowInfo"
-import { FormControlLabel, Grid, Paper, IconButton } from "@material-ui/core"
-import { StyledSwitch, secondaryColor } from "./styles"
+import { FormControlLabel, Grid } from "@material-ui/core"
+import { StyledSwitch, secondaryColor, StyledPaper } from "./styles"
 import { styled } from "@material-ui/core/styles"
-
-const StyledPaper = styled(Paper)({
-   padding: "15px",
-   margin: "5px 5px",
-})
 
 export default function ViewTeacher() {
    const teacherId = useParams().id

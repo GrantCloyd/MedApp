@@ -16,7 +16,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle"
 import { StyledAppBar } from "./styles"
 
 const StyledMenuBtn = styled(IconButton)({
-   marginRight: "38%",
+   marginRight: "33%",
 })
 
 export default function Navbar() {

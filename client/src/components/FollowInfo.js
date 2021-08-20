@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { handleChange, createConfig } from "../functions"
 import { addChat, addDonation } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
-import { TightButton, ReverseTightButton, secondaryColor } from "./styles"
+import { TightButton, StyledCancel, StyledSend, ReverseTightButton, secondaryColor } from "./styles"
 import { styled } from "@material-ui/core/styles"
 import {
    IconButton,
@@ -12,23 +12,8 @@ import {
    DialogContent,
    Snackbar,
 } from "@material-ui/core"
-import SendIcon from "@material-ui/icons/Send"
-import BlockIcon from "@material-ui/icons/Block"
-import MuiAlert from "@material-ui/lab/Alert"
 
-const StyledSend = styled(SendIcon)({
-   color: `${secondaryColor}`,
-   border: `1px solid ${secondaryColor}`,
-   borderRadius: "50%",
-   padding: "10px",
-})
-
-const StyledCancel = styled(BlockIcon)({
-   color: `#BA1B1D`,
-   border: `1px solid #BA1B1D`,
-   borderRadius: "50%",
-   padding: "10px",
-})
+import Alert from "@material-ui/lab/Alert"
 
 export default function FollowInfo({
    followMessage,
@@ -75,7 +60,7 @@ export default function FollowInfo({
          setTimeout(() => {
             setResponse(false)
             setToggleQuestion(false)
-         }, 1500)
+         }, 2000)
       } else {
          setResponse(`Something went wrong, ${data.error}`)
       }
@@ -89,12 +74,12 @@ export default function FollowInfo({
       const data = await res.json()
       if (data.id) {
          dispatch(addDonation(data))
-         setResponse("Donation sent!")
+         setResponse("Donation sent! Thank You! ")
          setDonation(initialDonation)
          setTimeout(() => {
             setResponse(false)
             setToggleDonate(false)
-         }, 1500)
+         }, 2000)
       } else {
          setResponse(`Something went wrong, ${data.error}`)
       }
@@ -113,7 +98,9 @@ export default function FollowInfo({
          {!optStatus && <p>This teacher is not taking questions at this time.</p>}
          {response && (
             <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }} open={response}>
-               <Alert severity="success">{response}</Alert>
+               <Alert variant="filled" severity="success">
+                  {response}
+               </Alert>
             </Snackbar>
          )}
          {toggleDonate && (
@@ -154,27 +141,37 @@ export default function FollowInfo({
          )}
          {toggleQuestion && (
             <Dialog open={toggleQuestion}>
-               <p>To: {teacherName}</p>
-               <form onSubmit={handleSubmitQuestion}>
-                  <label htmlFor="title">Question:</label>
-                  <input
-                     value={question.title}
-                     onChange={handleQuestion}
-                     type="textarea"
-                     name="title"
-                     placeholder="Title .."
-                  />
-                  <label htmlFor="content">Question:</label>
-                  <input
-                     value={question.content}
-                     onChange={handleQuestion}
-                     type="textarea"
-                     name="content"
-                     placeholder="Ask a question .."
-                  />
+               <DialogContent>
+                  <p>To: {teacherName}</p>
+                  <form onSubmit={handleSubmitQuestion}>
+                     <label htmlFor="title">Question:</label>
+                     <input
+                        value={question.title}
+                        onChange={handleQuestion}
+                        type="textarea"
+                        name="title"
+                        placeholder="Title .."
+                     />
+                     <label htmlFor="content">Question:</label>
+                     <input
+                        value={question.content}
+                        onChange={handleQuestion}
+                        type="textarea"
+                        name="content"
+                        placeholder="Ask a question .."
+                     />
+                  </form>
                   <p>from: {userName}</p>
-                  <button>Send</button>
-               </form>
+               </DialogContent>
+               <DialogActions>
+                  <IconButton onClick={handleSubmitQuestion}>
+                     {" "}
+                     <StyledSend />{" "}
+                  </IconButton>
+                  <IconButton onClick={() => setToggleQuestion(!toggleQuestion)}>
+                     <StyledCancel />{" "}
+                  </IconButton>
+               </DialogActions>
             </Dialog>
          )}
          <p>

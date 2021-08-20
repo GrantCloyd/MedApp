@@ -18,14 +18,18 @@ import {
    Box,
    Typography,
 } from "@material-ui/core"
-import { primaryColor, TightCard, TightButton, ReverseTightButton } from "./styles"
+import { primaryColor, secondaryColor, TightCard, TightButton, ReverseTightButton } from "./styles"
 
 const StyledProgress1 = styled(CircularProgress)({
    color: `${primaryColor}`,
 })
 
 const StyledProgress2 = styled(CircularProgress)({
-   color: "#21CBF3",
+   color: `${secondaryColor}`,
+})
+
+const StyledRP = styled(ReactPlayer)({
+   background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
 })
 
 export default function PlayMeditation() {
@@ -129,7 +133,7 @@ export default function PlayMeditation() {
                </Dialog>
             </>
          )}
-         <ReactPlayer
+         <StyledRP
             onPause={() => setPause(true)}
             onProgress={state => {
                setPercent(Math.round(state.played * 100))

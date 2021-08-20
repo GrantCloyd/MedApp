@@ -6,7 +6,7 @@ export const HEADERS = {
 }
 
 export const medTypes = (
-   <>
+   <div>
       <MenuItem value="--select-one--"> --select-one--</MenuItem>
       <MenuItem value="Breath">Breath</MenuItem>
       <MenuItem value="Awareness">Awareness</MenuItem>
@@ -20,5 +20,5 @@ export const medTypes = (
       <MenuItem value="Concentration">Concentration</MenuItem>
       <MenuItem value="Nondual">Non-Dual</MenuItem>
       <MenuItem value="Sleep">Sleep</MenuItem>
-   </>
+   </div>
 )

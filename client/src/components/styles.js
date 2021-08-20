@@ -9,9 +9,12 @@ import {
    AppBar,
    Switch,
    Select,
+   Paper,
 } from "@material-ui/core/"
 import FaceIcon from "@material-ui/icons/Face"
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled"
+import SendIcon from "@material-ui/icons/Send"
+import BlockIcon from "@material-ui/icons/Block"
 
 export const primaryColor = "#56A3A6"
 export const secondaryColor = "#21CBF3"
@@ -92,4 +95,29 @@ export const StyledDropDown = styled(Select)({
 
 export const StyledArrow = styled(PlayCircleFilledIcon)({
    color: `${secondaryColor}`,
+})
+
+export const StyledSend = styled(SendIcon)({
+   color: `${secondaryColor}`,
+   border: `1px solid ${secondaryColor}`,
+   borderRadius: "50%",
+   padding: "10px",
+})
+
+export const StyledCancel = styled(BlockIcon)({
+   color: `#BA1B1D`,
+   border: `1px solid #BA1B1D`,
+   borderRadius: "50%",
+   padding: "10px",
+})
+
+export const StyledPaper = styled(Paper)({
+   padding: "15px",
+   margin: "5px 5px",
+})
+
+export const TightPaper = styled(Paper)({
+   padding: "15px",
+   margin: "2.5px auto",
+   width: "50%",
 })

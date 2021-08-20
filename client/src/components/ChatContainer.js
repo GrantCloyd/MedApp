@@ -2,6 +2,14 @@ import React, { useState } from "react"
 import { handleChange, createConfig } from "../functions"
 import { useDispatch } from "react-redux"
 import { addMessage, deleteChat } from "./store/teacherReducer"
+import { IconButton, Avatar } from "@material-ui/core"
+import { StyledSend, StyledCancel, TightCard, TightPaper, primaryColor } from "./styles"
+import LiveHelpIcon from "@material-ui/icons/LiveHelp"
+import { styled } from "@material-ui/core/styles"
+
+const StyledHelp = styled(LiveHelpIcon)({
+   color: `${primaryColor}`,
+})
 
 export default function ChatContainer({ handleDelete, handleAdd, userType, userName, c }) {
    const initialMessage = {
@@ -14,6 +22,8 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
    const [message, setMessage] = useState(initialMessage)
    const [errors, setErrors] = useState(false)
    const dispatch = useDispatch()
+
+   console.log(c)
 
    const handleContent = e => handleChange(e, setMessage, message)
    async function handleMessageSubmit(e) {
@@ -39,15 +49,25 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
    return (
       <>
          {" "}
-         <hr />
-         <div> Question: {c.title}</div>
+         <TightPaper>
+            {" "}
+            <IconButton>
+               {" "}
+               <StyledHelp />
+            </IconButton>{" "}
+            {c.messages[0].username} asked: " {c.title} "
+         </TightPaper>
          <ul>
             {" "}
             {c.messages.map(m => (
                <>
                   <li key={m.id}>
-                     {m.username === userName ? "You wrote:" : `From: ${m.username}`} <br />
-                     {m.username === userName ? m.content : `Message: ${m.content}`}
+                     <TightCard>
+                        <Avatar variant="square">{m.username.slice(0, 1)}</Avatar>
+                        {m.username === userName ? "You wrote:" : `From: ${m.username}`} <br />{" "}
+                        <br />
+                        {m.username === userName ? m.content : `Message: ${m.content}`}
+                     </TightCard>
                   </li>
                   <br />
                </>
@@ -63,11 +83,16 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
                type="textarea"
                placeholder="Respond"
             />
-            <button> Reply </button>
+            <IconButton type="submit">
+               {" "}
+               <StyledSend />{" "}
+            </IconButton>
          </form>
          <br />
-         <button onClick={() => handleCloseChat(c.id)}>Close Question</button>
-         <hr />
+         <IconButton onClick={() => handleCloseChat(c.id)}>
+            {" "}
+            <StyledCancel />
+         </IconButton>
       </>
    )
 }
