@@ -1,8 +1,16 @@
 import React, { useState } from "react"
-
 import { createConfig } from "../functions"
 import { handleChange } from "../functions"
 import { useHistory } from "react-router-dom"
+import {
+   TextField,
+   Container,
+   Card,
+   RadioGroup,
+   FormLabel,
+   FormControlLabel,
+} from "@material-ui/core"
+import { StyledButton, StyledRad, StyledText, CenterCon } from "./styles"
 
 export default function SignUpPage() {
    const initialState = {
@@ -36,56 +44,73 @@ export default function SignUpPage() {
    }
 
    return (
-      <div>
-         <h2>Sign Up Here!</h2>
-         {errors && <p>{errors}</p>}
-         <form onSubmit={handleSignUp}>
-            <label htmlFor="name">Name</label>
-            <input
-               onChange={handleSignUpChange}
-               value={signUp.name}
-               type="text"
-               name="name"
-               placeholder="Enter your name"
-            />
-            <label htmlFor="email">Email</label>
+      <Card>
+         <CenterCon>
+            <h2>Sign Up Here!</h2>
+            {errors && <p>{errors}</p>}
+            <form onSubmit={handleSignUp}>
+               <TextField
+                  onChange={handleSignUpChange}
+                  value={signUp.name}
+                  label="Name"
+                  name="name"
+                  placeholder="Enter your name"
+               />
+               <br />
+               <TextField
+                  onChange={handleSignUpChange}
+                  value={signUp.email}
+                  label="Email"
+                  name="email"
+                  placeholder="Enter your email"
+               />
+               <br />
 
-            <input
-               onChange={handleSignUpChange}
-               value={signUp.email}
-               type="text"
-               name="email"
-               placeholder="Enter your email"
-            />
-            <label htmlFor="password">Password</label>
-            <input
-               onChange={handleSignUpChange}
-               value={signUp.password}
-               type="password"
-               autoComplete="new-password"
-               name="password"
-               placeholder="Enter your password"
-            />
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-               onChange={handleSignUpChange}
-               value={signUp.confirmPassword}
-               type="password"
-               autoComplete="new-password"
-               name="confirmPassword"
-               placeholder="Confirm your password"
-            />
-            <label htmlFor="teacher">Teacher</label>
-            <input
-               onChange={handleSignUpChange}
-               type="radio"
-               id="teacher"
-               value="teacher"
-               name="type"></input>
-            <label htmlFor="student">Student</label>
-            <input onChange={handleSignUpChange} type="radio" value="student" name="type" />
-            <button>Submit</button>
-         </form>
-      </div>
+               <TextField
+                  onChange={handleSignUpChange}
+                  value={signUp.password}
+                  label="Password"
+                  type="password"
+                  autoComplete="new-password"
+                  name="password"
+                  placeholder="Enter your password"
+               />
+               <br />
+               <TextField
+                  onChange={handleSignUpChange}
+                  value={signUp.confirmPassword}
+                  type="password"
+                  label="Confirm Password"
+                  autoComplete="new-password"
+                  name="confirmPassword"
+                  placeholder="Confirm your password"
+               />
+               <br />
+               <br></br>
+               <Container size="med">
+                  <FormLabel component="legend">User Type</FormLabel>
+                  <RadioGroup>
+                     <FormControlLabel
+                        onChange={handleSignUpChange}
+                        control={<StyledRad color="default" />}
+                        label="Teacher"
+                        id="teacher"
+                        value="teacher"
+                        name="type"
+                     />
+
+                     <FormControlLabel
+                        control={<StyledRad color="default" />}
+                        onChange={handleSignUpChange}
+                        label="Student"
+                        value="student"
+                        name="type"
+                     />
+                  </RadioGroup>
+               </Container>
+               <StyledButton type="submit">Submit</StyledButton>
+            </form>
+         </CenterCon>
+      </Card>
    )
 }

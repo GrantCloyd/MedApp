@@ -6,6 +6,7 @@ import { loginT } from "./store/teacherReducer"
 import { loginS } from "./store/studentReducer"
 import { useSelector, useDispatch } from "react-redux"
 import { Switch, FormControlLabel } from "@material-ui/core"
+import { TightButton } from "./styles"
 
 export default function ProfilePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
@@ -86,7 +87,7 @@ export default function ProfilePage() {
                      />
                   </>
                )}
-               <button>Submit</button>
+               <TightButton>Submit</TightButton>
             </form>
          ) : (
             <>
@@ -114,7 +115,7 @@ export default function ProfilePage() {
                <br />
             </>
          )}
-         <button onClick={() => setToggleEdit(!toggleEdit)}>Edit Info</button>
+         <TightButton onClick={() => setToggleEdit(!toggleEdit)}>Edit Info</TightButton>
          {user.type === "teacher" ? <TeacherProfile /> : <StudentProfile />}
       </div>
    )

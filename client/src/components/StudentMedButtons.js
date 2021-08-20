@@ -3,6 +3,24 @@ import { useSelector, useDispatch } from "react-redux"
 import { createConfig } from "../functions"
 import { addFavorite, removeFav } from "./store/studentReducer"
 import { useHistory } from "react-router"
+import { CardActions, IconButton, Avatar } from "@material-ui/core"
+import { styled } from "@material-ui/core/styles"
+import { primaryColor, StyledFaceIcon } from "./styles"
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled"
+import FavoriteIcon from "@material-ui/icons/Favorite"
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
+
+const StyledArrow = styled(PlayCircleFilledIcon)({
+   color: `${primaryColor}`,
+})
+
+const StyledFavIcon = styled(FavoriteIcon)({
+   color: `#BA1B1D`,
+})
+
+const StyledNotFavIcon = styled(FavoriteBorderIcon)({
+   color: `#BA1B1D`,
+})
 
 export default function StudentMedButtons({ medId, teaId }) {
    const user = useSelector(state => state.student)
@@ -27,24 +45,28 @@ export default function StudentMedButtons({ medId, teaId }) {
    }
 
    return (
-      <>
+      <CardActions>
          {" "}
-         <button onClick={() => history.push(`/playingnow/${medId}`)}>
-            {user.plays_id.map(p => p.meditation_id).find(id => id === medId) === undefined
-               ? "Play"
-               : "Play Again"}
-         </button>
-         <button onClick={() => history.push(`/teachers/${teaId}`)}>View Teacher</button>
+         <IconButton onClick={() => history.push(`/playingnow/${medId}`)}>
+            <StyledArrow />
+         </IconButton>
+         <IconButton onClick={() => history.push(`/teachers/${teaId}`)}>
+            {" "}
+            <StyledFaceIcon />{" "}
+         </IconButton>
          {favMedsIds.includes(medId) ? (
-            <button
+            <IconButton
                onClick={() =>
                   handleDeleteFav(user.favorites.find(f => f.meditation_id === medId).id)
                }>
-               Unfavorite
-            </button>
+               <StyledFavIcon />
+            </IconButton>
          ) : (
-            <button onClick={() => handleFavorite(medId)}>Favorite</button>
+            <IconButton onClick={() => handleFavorite(medId)}>
+               {" "}
+               <StyledNotFavIcon />
+            </IconButton>
          )}
-      </>
+      </CardActions>
    )
 }

@@ -3,8 +3,17 @@ import { useHistory, Link } from "react-router-dom"
 import { handleChange, createConfig } from "../functions"
 import { loginT } from "./store/teacherReducer"
 import { loginS } from "./store/studentReducer"
-
+import {
+   TextField,
+   Container,
+   Card,
+   RadioGroup,
+   FormLabel,
+   FormControlLabel,
+} from "@material-ui/core"
 import { useDispatch } from "react-redux"
+import { StyledButton, StyledRad, StyledText, CenterCon } from "./styles"
+import { styled } from "@material-ui/core/styles"
 
 export default function LogInPage() {
    const initialState = {
@@ -37,42 +46,59 @@ export default function LogInPage() {
    }
 
    return (
-      <div>
-         <h2>Log-In Here!</h2>
-         {errors && <p>{errors}</p>}
-         <form onSubmit={handleLogIn}>
-            <label htmlFor="email">Email</label>
-            <input
-               onChange={handleLogInChange}
-               value={logIn.email}
-               type="text"
-               name="email"
-               placeholder="Enter your email"
-            />
-            <label htmlFor="password">Password</label>
-            <input
-               onChange={handleLogInChange}
-               value={logIn.password}
-               type="password"
-               autoComplete="new-password"
-               name="password"
-               placeholder="Enter your password"
-            />
-            <label htmlFor="teacher">Teacher</label>
-            <input
-               onChange={handleLogInChange}
-               type="radio"
-               id="teacher"
-               value="teacher"
-               name="type"></input>
-            <label htmlFor="student">Student</label>
-            <input onChange={handleLogInChange} type="radio" value="student" name="type" />
-            <button>Submit</button>
-         </form>
-         <p>
-            {" "}
-            Don't have a login? <Link to="/signup">Sign up here! </Link>{" "}
-         </p>
-      </div>
+      <Card>
+         <CenterCon>
+            <h2>Log-In to Here|Now!</h2>
+            {errors && <p>{errors}</p>}
+
+            <form onSubmit={handleLogIn}>
+               <StyledText
+                  onChange={handleLogInChange}
+                  value={logIn.email}
+                  label="Email Address"
+                  name="email"
+                  placeholder="Enter your email"
+               />
+               <br />
+
+               <TextField
+                  onChange={handleLogInChange}
+                  value={logIn.password}
+                  label="Password"
+                  type="password"
+                  autoComplete="new-password"
+                  name="password"
+                  placeholder="Enter your password"
+               />
+               <br />
+               <br />
+               <Container size="med">
+                  <FormLabel component="legend">User Type</FormLabel>
+
+                  <RadioGroup name="userType">
+                     <FormControlLabel
+                        onChange={handleLogInChange}
+                        control={<StyledRad color="default" />}
+                        id="teacher"
+                        value="teacher"
+                        label="Teacher"
+                        name="type"
+                     />
+                     <FormControlLabel
+                        onChange={handleLogInChange}
+                        control={<StyledRad color="default" />}
+                        label="Student"
+                        value="student"
+                     />
+                  </RadioGroup>
+               </Container>
+               <StyledButton type="submit">Submit</StyledButton>
+            </form>
+            <p>
+               {" "}
+               Don't have a login? <Link to="/signup">Sign up here! </Link>{" "}
+            </p>
+         </CenterCon>
+      </Card>
    )
 }

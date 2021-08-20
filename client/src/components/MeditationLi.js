@@ -3,6 +3,8 @@ import { medTypes } from "../constants"
 import { updateMed, deleteMed } from "./store/teacherReducer"
 import { useDispatch } from "react-redux"
 import MedLineItem from "./MedLineItem"
+import { Card, Typography, CardActions, CardContent } from "@material-ui/core"
+import { TightCard } from "./styles"
 
 import { handleChange, createConfig, makeLinkForBlob } from "../functions"
 import ReactPlayer from "react-player"
@@ -36,7 +38,7 @@ export default function MeditationLi({ m }) {
    }
 
    return (
-      <>
+      <TightCard square>
          {toggleEdit && (
             <div>
                <form onSubmit={handleSubmitPatch}>
@@ -78,6 +80,6 @@ export default function MeditationLi({ m }) {
             <button onClick={handleEdit}>Edit</button>{" "}
             <button onClick={handleDelete}>Delete</button>{" "}
          </>
-      </>
+      </TightCard>
    )
 }

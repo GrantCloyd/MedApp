@@ -5,6 +5,16 @@ import { removeFollow } from "./store/studentReducer"
 import { useHistory } from "react-router-dom"
 import { FormControlLabel, Switch } from "@material-ui/core"
 import StudentMedButtons from "./StudentMedButtons"
+import {
+   Card,
+   IconButton,
+   CardHeader,
+   CardContent,
+   Grid,
+   CardActions,
+   CardMedia,
+} from "@material-ui/core"
+import { TightCard, StyledFaceIcon, StyledButton } from "./styles"
 
 export default function LandingS({ favorites, follows, most_pop_med }) {
    const followsTecherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
@@ -23,43 +33,57 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
    }
 
    const followsDisplay = follows.map(f => (
-      <>
-         <p> {f.teacher.name} </p>
-         <img alt={f.teacher.name} src={f.teacher.image_url} />
-         <p>
-            {" "}
-            <button onClick={() => history.push(`/teachers/${f.teacher.id}`)}>View Teacher</button>
-         </p>
-
-         <FormControlLabel
-            control={
-               <Switch
-                  color="primary"
-                  name="followSwitch"
-                  checked={id => followerStatus(id)}
-                  onChange={() => handleUnfollow(f.id)}
-               />
-            }
-            label={followerStatus ? "Following" : "Not Following"}
+      <TightCard onClick={() => history.push(`/teachers/${f.teacher.id}`)}>
+         <CardHeader title={f.teacher.name} />
+         <CardMedia
+            style={{ height: "300px" }}
+            alt={f.teacher.name}
+            image={f.teacher.image_url.toString()}
          />
-      </>
+         <CardContent></CardContent>
+         <CardActions>
+            {" "}
+            {/* <IconButton onClick={() => history.push(`/teachers/${f.teacher.id}`)}>
+               {" "}
+               <StyledFaceIcon />{" "}
+            </IconButton> */}
+            <FormControlLabel
+               control={
+                  <Switch
+                     color="primary"
+                     name="followSwitch"
+                     checked={id => followerStatus(id)}
+                     onChange={() => handleUnfollow(f.id)}
+                  />
+               }
+               label={followerStatus ? "Following" : "Not Following"}
+            />
+         </CardActions>
+      </TightCard>
    ))
 
    const favoriteDisplay = favorites.map(m => (
       <li key={m.id}>
-         {" "}
-         Title: {m.meditation.title} || From: {m.teacher_name} || Length: {m.meditation.est_length}{" "}
-         ||
-         <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
+         <TightCard>
+            <CardContent>
+               {" "}
+               <CardHeader title={m.meditation.title} />
+               From: {m.teacher_name} Length: {m.meditation.est_length}
+            </CardContent>
+            <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
+         </TightCard>
       </li>
    ))
 
    const popularDisplay = [most_pop_med].map(m => (
-      <p>
-         {" "}
-         Title: {m.title} || From: {m.teacher_name} || Length: {m.est_length} ||{" "}
+      <TightCard>
+         <CardContent>
+            {" "}
+            <CardHeader title={m.title} />
+            From: {m.teacher_name} Length: {m.est_length}{" "}
+         </CardContent>
          <StudentMedButtons medId={m.id} teaId={m.teacher_id} />{" "}
-      </p>
+      </TightCard>
    ))
 
    return (
@@ -70,8 +94,15 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
          <h3>Favorites:</h3>
          {favoriteDisplay.length === 0 ? <p>No Favorites Yet </p> : <ul>{favoriteDisplay}</ul>}
          <h3>Following:</h3>
-         {followsDisplay.length === 0 ? <p>No follows yet</p> : followsDisplay}
-         <h3>Most Popular:</h3>
+         {followsDisplay.length === 0 ? (
+            <p>No follows yet</p>
+         ) : (
+            <Grid container direction="row" justifyContent="center" alignItems="center">
+               {followsDisplay}
+            </Grid>
+         )}
+
+         <h3>Most Popular Meditation:</h3>
          {popularDisplay}
       </div>
    )

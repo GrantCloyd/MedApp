@@ -9,6 +9,7 @@ import InteractPage from "./components/InteractPage"
 import Navbar from "./components/Navbar"
 import ViewTeacher from "./components/ViewTeacher"
 import PlayMeditation from "./components/PlayMeditation"
+import { Container } from "@material-ui/core"
 import { Route, Switch } from "react-router-dom"
 import { useSelector } from "react-redux"
 
@@ -18,8 +19,10 @@ function App() {
    if (user.name === "") {
       return (
          <Switch>
-            <Route path="/" exact component={LogInPage} />
-            <Route path="/signup" exact component={SignUpPage} />
+            <Container maxWidth="sm">
+               <Route path="/" exact component={LogInPage} />
+               <Route path="/signup" exact component={SignUpPage} />
+            </Container>
          </Switch>
       )
    }

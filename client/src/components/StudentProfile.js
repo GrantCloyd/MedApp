@@ -1,36 +1,24 @@
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
-import StudentMedButtons from "./StudentMedButtons"
+import RecentPlays from "./RecentPlays"
+import { TightButton } from "./styles"
 
 export default function StudentProfile() {
    const user = useSelector(state => state.student)
    const recentPlay = user.recent_plays
    const recentPlays = user.recent_plays.slice(1, 5)
-
    const [showRecent, setShowRecent] = useState(false)
-
-   //should refactor below to put into a new component and handle message
-   //for leaving in a timeout fashion and give chance to cancel maybe
 
    let mostRecent, recentMeds
 
    console.log(recentPlay)
 
    if (recentPlay.length > 0) {
-      mostRecent = [recentPlay[0]].map(m => (
-         <p>
-            Listened on: {new Date(m.created_at).toLocaleString()} || Title: {m.meditation.title} ||
-            From: {m.teacher_name} ||
-            <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
-         </p>
-      ))
+      mostRecent = [recentPlay[0]].map(m => <RecentPlays key={m.id} {...m} />)
 
       recentMeds = recentPlays.map(m => (
          <li key={m.id}>
-            {" "}
-            Listened on: {new Date(m.created_at).toLocaleString()} || Title: {m.meditation.title} ||
-            From: {m.teacher_name} ||
-            <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
+            <RecentPlays {...m} />
          </li>
       ))
    }
@@ -47,7 +35,7 @@ export default function StudentProfile() {
          <p>Total Time Meditated: {user.total_time} minutes </p>
          <h3>Recent Sessions:</h3>
          {mostRecent}
-         <button onClick={() => setShowRecent(!showRecent)}>Show More Recent</button>
+         <TightButton onClick={() => setShowRecent(!showRecent)}>Show More Recent</TightButton>
          {showRecent && <ul>{recentMeds}</ul>}
          <h3>Donations</h3>
          {user.donations.length > 0 ? (

@@ -4,7 +4,7 @@ import { createConfig } from "../functions"
 import { useSelector, useDispatch } from "react-redux"
 import { logoutT } from "./store/teacherReducer"
 import { logoutS } from "./store/studentReducer"
-import { AppBar, Toolbar, Avatar, Typography, IconButton, Menu, MenuItem } from "@material-ui/core"
+import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from "@material-ui/core"
 import HomeIcon from "@material-ui/icons/Home"
 import ContactMailIcon from "@material-ui/icons/ContactMail"
 import { styled } from "@material-ui/core/styles"
@@ -16,6 +16,11 @@ import AddCircleIcon from "@material-ui/icons/AddCircle"
 
 const StyledAppBar = styled(AppBar)({
    backgroundColor: "#56A3A6",
+   padding: "15px",
+})
+
+const StyledMenuBtn = styled(IconButton)({
+   marginRight: "38%",
 })
 
 export default function Navbar() {
@@ -46,9 +51,9 @@ export default function Navbar() {
    return (
       <StyledAppBar position="static">
          <Toolbar>
-            <IconButton onClick={handleClick} color="inherit">
+            <StyledMenuBtn edge="start" onClick={handleClick} color="inherit">
                <MenuIcon />
-            </IconButton>
+            </StyledMenuBtn>
             <Typography variant="h3">Here|Now</Typography>
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
                <MenuItem onClick={handleClose}>
