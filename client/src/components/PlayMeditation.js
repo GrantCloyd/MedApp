@@ -61,7 +61,6 @@ export default function PlayMeditation() {
          })
       )
       const data = await res.json()
-
       dispatch(addPlay(data))
       setPause(false)
       setSucess(successStatement)

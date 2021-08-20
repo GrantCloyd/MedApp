@@ -2,7 +2,33 @@ import React, { useState } from "react"
 import { handleChange, createConfig } from "../functions"
 import { addChat, addDonation } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
-import { TightButton, ReverseTightButton } from "./styles"
+import { TightButton, ReverseTightButton, secondaryColor } from "./styles"
+import { styled } from "@material-ui/core/styles"
+import {
+   IconButton,
+   Dialog,
+   DialogActions,
+   DialogTitle,
+   DialogContent,
+   Snackbar,
+} from "@material-ui/core"
+import SendIcon from "@material-ui/icons/Send"
+import BlockIcon from "@material-ui/icons/Block"
+import MuiAlert from "@material-ui/lab/Alert"
+
+const StyledSend = styled(SendIcon)({
+   color: `${secondaryColor}`,
+   border: `1px solid ${secondaryColor}`,
+   borderRadius: "50%",
+   padding: "10px",
+})
+
+const StyledCancel = styled(BlockIcon)({
+   color: `#BA1B1D`,
+   border: `1px solid #BA1B1D`,
+   borderRadius: "50%",
+   padding: "10px",
+})
 
 export default function FollowInfo({
    followMessage,
@@ -85,34 +111,49 @@ export default function FollowInfo({
             <p>Thanks for the follow! This teacher has not set up a personalized message yet.</p>
          )}
          {!optStatus && <p>This teacher is not taking questions at this time.</p>}
-         {response && <p>{response}</p>}
+         {response && (
+            <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }} open={response}>
+               <Alert severity="success">{response}</Alert>
+            </Snackbar>
+         )}
          {toggleDonate && (
-            <>
-               <p>How much would you like to give? One dollar minimum required</p>
-               <form onSubmit={createDonation}>
-                  <label htmlFor="amount">Amount: $</label>
-                  <input
-                     value={donation.amount}
-                     onChange={handleDonation}
-                     type="number"
-                     min={1}
-                     name="amount"
-                  />
-                  <label htmlFor="message">Message:</label>
-                  <input
-                     value={donation.message}
-                     onChange={handleDonation}
-                     type="textarea"
-                     name="message"
-                     placeholder="Send a message .."
-                  />
-                  <p>from: {userName}</p>
-                  <button>Send</button>
-               </form>
-            </>
+            <Dialog open={toggleDonate}>
+               <DialogTitle id="dialog-donate">Donation Form</DialogTitle>
+               <DialogContent>
+                  <p> One dollar minimum required per donation</p>
+                  <form onSubmit={createDonation}>
+                     <label htmlFor="amount">Amount: $</label>
+                     <input
+                        value={donation.amount}
+                        onChange={handleDonation}
+                        type="number"
+                        min={1}
+                        name="amount"
+                     />
+                     <label htmlFor="message">Message:</label>
+                     <input
+                        value={donation.message}
+                        onChange={handleDonation}
+                        type="textarea"
+                        name="message"
+                        placeholder="Send a message .."
+                     />
+                     <p>from: {userName}</p>
+                  </form>
+               </DialogContent>
+               <DialogActions>
+                  <IconButton onClick={createDonation}>
+                     {" "}
+                     <StyledSend />{" "}
+                  </IconButton>
+                  <IconButton onClick={() => setToggleDonate(!toggleDonate)}>
+                     <StyledCancel />{" "}
+                  </IconButton>
+               </DialogActions>
+            </Dialog>
          )}
          {toggleQuestion && (
-            <>
+            <Dialog open={toggleQuestion}>
                <p>To: {teacherName}</p>
                <form onSubmit={handleSubmitQuestion}>
                   <label htmlFor="title">Question:</label>
@@ -134,7 +175,7 @@ export default function FollowInfo({
                   <p>from: {userName}</p>
                   <button>Send</button>
                </form>
-            </>
+            </Dialog>
          )}
          <p>
             {" "}

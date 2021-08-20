@@ -6,8 +6,8 @@ import { useSelector } from "react-redux"
 import { addFollow, removeFollow } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 import FollowInfo from "./FollowInfo"
-import { FormControlLabel, Grid, Paper } from "@material-ui/core"
-import { StyledSwitch } from "./styles"
+import { FormControlLabel, Grid, Paper, IconButton } from "@material-ui/core"
+import { StyledSwitch, secondaryColor } from "./styles"
 import { styled } from "@material-ui/core/styles"
 
 const StyledPaper = styled(Paper)({
