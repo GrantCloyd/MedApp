@@ -1,10 +1,12 @@
 <div align="center">
 
 
-![[Here|Now](https://i.imgur.com/xR7Nb0Tb.png)
+![Here|Now](https://i.imgur.com/xR7Nb0Tb.png)
+# Flatiron Phase 5 Project - Here|Now
+
 </div>
 
-# Flatiron Phase 5 Project - Here|Now
+
 
 ## Description
 
