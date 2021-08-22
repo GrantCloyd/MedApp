@@ -15,9 +15,15 @@ import FaceIcon from "@material-ui/icons/Face"
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled"
 import SendIcon from "@material-ui/icons/Send"
 import BlockIcon from "@material-ui/icons/Block"
+import ReactPlayer from "react-player"
+import SaveIcon from "@material-ui/icons/Save"
 
 export const primaryColor = "#56A3A6"
 export const secondaryColor = "#21CBF3"
+export const gradient = {
+   background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
+   padding: "100px",
+}
 
 export const StyledAppBar = styled(AppBar)({
    background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
@@ -120,4 +126,31 @@ export const TightPaper = styled(Paper)({
    padding: "15px",
    margin: "2.5px auto",
    width: "50%",
+})
+
+export const StyledLogo = styled("img")({
+   width: "50%",
+})
+
+export const Banner = (
+   <img
+      style={{ width: "100%", height: "150px" }}
+      src="https://images.unsplash.com/photo-1471520201477-47a62a269a87?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2250&q=80"
+   />
+)
+
+export const StyledPlayer = styled(ReactPlayer)({
+   background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
+})
+
+export const StyledSave = styled(SaveIcon)({
+   color: `green`,
+   border: `1px solid green`,
+   borderRadius: "50%",
+   padding: "10px",
+})
+
+export const SmallLogo = styled("img")({
+   width: "15%",
+   height: "15%",
 })

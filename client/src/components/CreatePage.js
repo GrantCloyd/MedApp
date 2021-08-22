@@ -13,8 +13,13 @@ import {
    DialogTitle,
    DialogContent,
    DialogContentText,
+   Select,
+   MenuItem,
+   IconButton,
 } from "@material-ui/core"
 import { styled } from "@material-ui/core/styles"
+import { TightButton, ReverseTightButton } from "./styles"
+import CloudUploadIcon from "@material-ui/icons/CloudUpload"
 
 const StyledProg = styled(LinearProgress)({
    width: "50%",
@@ -95,6 +100,8 @@ export default function CreatePage() {
       }
    }
 
+   console.log(newMed.audio_file.name)
+
    useEffect(() => {
       let interval = setInterval(() => {
          if (mediaRecorder.state === "recording") {
@@ -128,11 +135,8 @@ export default function CreatePage() {
       axios
          .post("http://localhost:3000/meditations", formData)
          .then(res => {
-            const { id, title, med_type, audio_file, description, est_length, created_at } =
-               res.data
-            dispatch(
-               addMed({ id, title, med_type, audio_file, description, est_length, created_at })
-            )
+            debugger
+            dispatch(addMed(res.data))
          })
          .then(() => {
             setLoading(false)
@@ -191,9 +195,21 @@ export default function CreatePage() {
                placeholder="description"
             />
             <label htmlFor="med_type">Type</label>
-            <select name="med_type" onChange={handleNewMed}>
-               {medTypes}
-            </select>
+            <Select name="med_type" onChange={handleNewMed}>
+               <MenuItem value="--select-one--"> --select-one--</MenuItem>
+               <MenuItem value="Breath">Breath</MenuItem>
+               <MenuItem value="Awareness">Awareness</MenuItem>
+               <MenuItem value="Emotions">Emotions</MenuItem>
+               <MenuItem value="Metta">Metta</MenuItem>
+               <MenuItem value="Insight">Insight</MenuItem>
+               <MenuItem value="Bodyscan">Body Scan</MenuItem>
+               <MenuItem value="Listening">Listening</MenuItem>
+               <MenuItem value="Seeing">Seeing</MenuItem>
+               <MenuItem value="Walking">Walking</MenuItem>
+               <MenuItem value="Concentration">Concentration</MenuItem>
+               <MenuItem value="Nondual">Non-Dual</MenuItem>
+               <MenuItem value="Sleep">Sleep</MenuItem>
+            </Select>
             <label htmlFor="est_length">Length in Minutes</label>
             <input
                value={newMed.est_length}
@@ -205,13 +221,26 @@ export default function CreatePage() {
             {recordingState !== "Uploaded" ? (
                <>
                   {" "}
-                  <label htmlFor="audio_file">Attach File</label>
-                  <input onChange={handleFile} type="file" name="audio_file" />
+                  <input
+                     accept="audio/*"
+                     style={{ display: "none" }}
+                     onChange={handleFile}
+                     type="file"
+                     name="audio_file"
+                     id="audio_file"
+                  />
+                  <span>{newMed.audio_file.name}</span>
+                  <label htmlFor="audio_file">
+                     <IconButton component="span">
+                        {" "}
+                        <CloudUploadIcon />
+                     </IconButton>
+                  </label>
                </>
             ) : (
                <p>File Attached</p>
             )}
-            <button>Submit</button>
+            <ReverseTightButton onClick={handleSubmit}>Submit</ReverseTightButton>
          </form>
          {recordingState === "Uploaded" && (
             <>
@@ -220,7 +249,7 @@ export default function CreatePage() {
                <br />
             </>
          )}
-         <button onClick={prepForRecording}>Record File</button>
+         <TightButton onClick={prepForRecording}>Record File</TightButton>
          <br />
          {prepRecord && (
             <>

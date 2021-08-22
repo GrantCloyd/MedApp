@@ -5,8 +5,28 @@ import { createConfig, handleChange } from "../functions"
 import { loginT } from "./store/teacherReducer"
 import { loginS } from "./store/studentReducer"
 import { useSelector, useDispatch } from "react-redux"
-import { Switch, FormControlLabel } from "@material-ui/core"
-import { TightButton } from "./styles"
+import {
+   Dialog,
+   FormControlLabel,
+   IconButton,
+   Paper,
+   DialogTitle,
+   CardHeader,
+   CardContent,
+   DialogContent,
+   DialogActions,
+   Card,
+} from "@material-ui/core"
+import {
+   TightButton,
+   StyledCancel,
+   StyledSave,
+   TightCard,
+   StyledSwitch,
+   TightPaper,
+} from "./styles"
+import MailOutlineIcon from "@material-ui/icons/MailOutline"
+import PermIdentityIcon from "@material-ui/icons/PermIdentity"
 
 export default function ProfilePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
@@ -45,77 +65,110 @@ export default function ProfilePage() {
 
    return (
       <div>
-         {user.type === "teacher" && <img alt={user.image_name} src={user.image_url} />}
-         {toggleEdit ? (
-            <form onSubmit={handleSubmit}>
-               <label htmlFor="name">Name: </label>
-               <input
-                  onChange={handleProfileChange}
-                  type="text"
-                  value={profileEdit.name}
-                  name="name"
-               />
-               <label htmlFor="email">Email: </label>
-               <input
-                  onChange={handleProfileChange}
-                  type="text"
-                  value={profileEdit.email}
-                  name="email"
-               />
-               {user.type === "teacher" && (
-                  <>
-                     <label htmlFor="background"> Background: </label>
-                     <input
-                        onChange={handleProfileChange}
-                        type="textarea"
-                        value={profileEdit.background}
-                        name="background"
-                     />
-                     <label htmlFor="follow_message"> Follow Message: </label>
-                     <input
-                        onChange={handleProfileChange}
-                        type="textarea"
-                        value={profileEdit.follow_message}
-                        name="follow_message"
-                     />
-                     <label htmlFor="image_url"> Profile Picture: </label>
-                     <input
-                        onChange={handleProfileChange}
-                        type="text"
-                        value={profileEdit.image_url}
-                        name="image_url"
-                     />
-                  </>
-               )}
-               <TightButton>Submit</TightButton>
-            </form>
-         ) : (
-            <>
-               <h2>Profile</h2>
-               <h3>{user.name}</h3>
-               <h3>Email: {user.email}</h3>
-            </>
-         )}
          {user.type === "teacher" && (
             <>
-               <p>Public Bio: {user.background} </p>
-               <p>Follow Message: {user.follow_message}</p>
-               <label htmlFor="optStatus"> Question Status: </label>
-               <FormControlLabel
-                  control={
-                     <Switch
-                        color="primary"
-                        name="optStatus"
-                        checked={user.opt_in}
-                        onChange={handleOptStatus}
-                     />
-                  }
-                  label={user.opt_in ? "Open" : "Closed"}
-               />
-               <br />
+               {" "}
+               <img alt={user.image_name} src={user.image_url} />{" "}
             </>
          )}
-         <TightButton onClick={() => setToggleEdit(!toggleEdit)}>Edit Info</TightButton>
+         <br />
+
+         {toggleEdit ? (
+            <Dialog open={toggleEdit}>
+               <Card>
+                  <DialogTitle>Edit Details</DialogTitle>
+                  <DialogContent>
+                     <form onSubmit={handleSubmit}>
+                        <label htmlFor="name">Name: </label>
+                        <input
+                           onChange={handleProfileChange}
+                           type="text"
+                           value={profileEdit.name}
+                           name="name"
+                        />
+                        <label htmlFor="email">Email: </label>
+                        <input
+                           onChange={handleProfileChange}
+                           type="text"
+                           value={profileEdit.email}
+                           name="email"
+                        />
+                        {user.type === "teacher" && (
+                           <>
+                              <label htmlFor="background"> Background: </label>
+                              <input
+                                 onChange={handleProfileChange}
+                                 type="textarea"
+                                 value={profileEdit.background}
+                                 name="background"
+                              />
+                              <label htmlFor="follow_message"> Follow Message: </label>
+                              <input
+                                 onChange={handleProfileChange}
+                                 type="textarea"
+                                 value={profileEdit.follow_message}
+                                 name="follow_message"
+                              />
+                              <label htmlFor="image_url"> Profile Picture: </label>
+                              <input
+                                 onChange={handleProfileChange}
+                                 type="text"
+                                 value={profileEdit.image_url}
+                                 name="image_url"
+                              />
+                           </>
+                        )}
+                     </form>
+                  </DialogContent>
+                  <DialogActions>
+                     <IconButton onClick={handleSubmit}>
+                        {" "}
+                        <StyledSave />{" "}
+                     </IconButton>
+
+                     <IconButton onClick={() => setToggleEdit(!toggleEdit)}>
+                        <StyledCancel />{" "}
+                     </IconButton>
+                  </DialogActions>
+               </Card>
+            </Dialog>
+         ) : (
+            <TightCard>
+               <CardHeader title="Profile" />
+               <CardContent>
+                  <IconButton>
+                     {" "}
+                     <PermIdentityIcon />
+                  </IconButton>
+                  Name: {user.name}{" "}
+                  <IconButton>
+                     {" "}
+                     <MailOutlineIcon />
+                  </IconButton>
+                  Email: {user.email}
+                  {user.type === "teacher" && (
+                     <Paper>
+                        <p>Public Bio: {user.background} </p>
+                        <p>Follow Message: {user.follow_message}</p>
+                        <label htmlFor="optStatus"> Question Status: </label>
+                        <FormControlLabel
+                           control={
+                              <StyledSwitch
+                                 color="primary"
+                                 name="optStatus"
+                                 checked={user.opt_in}
+                                 onChange={handleOptStatus}
+                              />
+                           }
+                           label={user.opt_in ? "Open" : "Closed"}
+                        />
+                        <br />
+                     </Paper>
+                  )}
+               </CardContent>
+               <TightButton onClick={() => setToggleEdit(!toggleEdit)}>Edit Info</TightButton>
+            </TightCard>
+         )}
          {user.type === "teacher" ? <TeacherProfile /> : <StudentProfile />}
       </div>
    )

@@ -14,7 +14,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid
 
    def create
       meditation = Meditation.create!(med_params)
-      render json: meditation, only: :id 
+      render json: meditation
    end
 
    def update 

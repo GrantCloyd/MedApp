@@ -10,7 +10,7 @@ import {
    FormLabel,
    FormControlLabel,
 } from "@material-ui/core"
-import { StyledButton, StyledRad, StyledText, CenterCon } from "./styles"
+import { StyledButton, StyledRad, StyledLogo, CenterCon } from "./styles"
 
 export default function SignUpPage() {
    const initialState = {
@@ -46,6 +46,10 @@ export default function SignUpPage() {
    return (
       <Card>
          <CenterCon>
+            <p>
+               {" "}
+               <StyledLogo src="https://i.imgur.com/OS0kSRb.png?1" />
+            </p>
             <h2>Sign Up Here!</h2>
             {errors && <p>{errors}</p>}
             <form onSubmit={handleSignUp}>

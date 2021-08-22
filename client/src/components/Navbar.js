@@ -13,10 +13,10 @@ import MenuIcon from "@material-ui/icons/Menu"
 import FindInPageIcon from "@material-ui/icons/FindInPage"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import AddCircleIcon from "@material-ui/icons/AddCircle"
-import { StyledAppBar } from "./styles"
+import { StyledAppBar, SmallLogo } from "./styles"
 
 const StyledMenuBtn = styled(IconButton)({
-   marginRight: "33%",
+   marginRight: "38%",
 })
 
 export default function Navbar() {
@@ -50,7 +50,8 @@ export default function Navbar() {
             <StyledMenuBtn edge="start" onClick={handleClick} color="inherit">
                <MenuIcon />
             </StyledMenuBtn>
-            <Typography variant="h3">Here|Now</Typography>
+
+            <SmallLogo src="https://i.imgur.com/OS0kSRb.png?1" />
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
                <MenuItem onClick={handleClose}>
                   <NavLink to="/landing">

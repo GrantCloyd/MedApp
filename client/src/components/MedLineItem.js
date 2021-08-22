@@ -20,7 +20,9 @@ const StyledAvatar = styled(Avatar)({
 export default function MedLineItem({ m, clickHandler = null }) {
    return (
       <TightCard>
-         <StyledAvatar alt={m.teacher.name} src={m.teacher.image_url} />
+         <p>
+            <StyledAvatar alt={m.teacher.name} src={m.teacher.image_url} />
+         </p>
          <CardHeader title={m.title}> </CardHeader>
 
          <CardContent>
@@ -32,7 +34,12 @@ export default function MedLineItem({ m, clickHandler = null }) {
                <TimerIcon />
             </IconButton>
             {m.est_length} minutes{" "}
-            {clickHandler === null && m.listens !== undefined && `Listens: ${m.listens}`}
+            {clickHandler === null && m.listens !== undefined && (
+               <>
+                  {" "}
+                  <br /> Listens: {m.listens}
+               </>
+            )}
             {clickHandler && (
                <IconButton onClick={clickHandler !== null ? () => clickHandler(m.id) : null}>
                   <StyledArrow />

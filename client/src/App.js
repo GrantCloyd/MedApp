@@ -12,18 +12,23 @@ import PlayMeditation from "./components/PlayMeditation"
 import { Container } from "@material-ui/core"
 import { Route, Switch } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { gradient, Banner } from "./components/styles"
 
 function App() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
 
    if (user.name === "") {
       return (
-         <Switch>
-            <Container maxWidth="sm">
-               <Route path="/" exact component={LogInPage} />
-               <Route path="/signup" exact component={SignUpPage} />
-            </Container>
-         </Switch>
+         <div style={gradient}>
+            <br />
+            <Switch>
+               <Container maxWidth="sm">
+                  <Route path="/" exact component={LogInPage} />
+                  <Route path="/signup" exact component={SignUpPage} />
+               </Container>
+            </Switch>
+            <br />
+         </div>
       )
    }
 

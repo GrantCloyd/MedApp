@@ -3,11 +3,10 @@ import { medTypes } from "../constants"
 import { updateMed, deleteMed } from "./store/teacherReducer"
 import { useDispatch } from "react-redux"
 import MedLineItem from "./MedLineItem"
-import { Card, Typography, CardActions, CardContent } from "@material-ui/core"
-import { TightCard } from "./styles"
+import { MenuItem, Select, Card, Typography, CardActions, CardContent } from "@material-ui/core"
+import { TightCard, TightButton, StyledPlayer, ReverseTightButton } from "./styles"
 
 import { handleChange, createConfig, makeLinkForBlob } from "../functions"
-import ReactPlayer from "react-player"
 
 export default function MeditationLi({ m }) {
    let initialState = { ...m }
@@ -33,7 +32,7 @@ export default function MeditationLi({ m }) {
       const res = await fetch(`meditations/${m.id}`, createConfig("DELETE"))
       const data = await res.json()
       console.log(data)
-      debugger
+
       dispatch(deleteMed(data))
    }
 
@@ -57,9 +56,21 @@ export default function MeditationLi({ m }) {
                      name="description"
                   />
                   <label htmlFor="med_type">Type</label>
-                  <select name="med_type" onChange={handlePatchChange}>
-                     {medTypes}
-                  </select>
+                  <Select name="med_type" onChange={handlePatchChange}>
+                     <MenuItem value="--select-one--"> --select-one--</MenuItem>
+                     <MenuItem value="Breath">Breath</MenuItem>
+                     <MenuItem value="Awareness">Awareness</MenuItem>
+                     <MenuItem value="Emotions">Emotions</MenuItem>
+                     <MenuItem value="Metta">Metta</MenuItem>
+                     <MenuItem value="Insight">Insight</MenuItem>
+                     <MenuItem value="Bodyscan">Body Scan</MenuItem>
+                     <MenuItem value="Listening">Listening</MenuItem>
+                     <MenuItem value="Seeing">Seeing</MenuItem>
+                     <MenuItem value="Walking">Walking</MenuItem>
+                     <MenuItem value="Concentration">Concentration</MenuItem>
+                     <MenuItem value="Nondual">Non-Dual</MenuItem>
+                     <MenuItem value="Sleep">Sleep</MenuItem>
+                  </Select>
                   <label htmlFor="est_length">Length in Minutes</label>
                   <input
                      value={patchObj.est_length}
@@ -67,18 +78,23 @@ export default function MeditationLi({ m }) {
                      type="number"
                      name="est_length"
                   />
-                  <button>Confirm Change</button>
+                  <TightButton type="submit">Confirm Change</TightButton>
                </form>
             </div>
          )}
          <>
-            {togglePreview && (
-               <ReactPlayer controls={true} height="50px" url={makeLinkForBlob(m.audio_file)} />
-            )}{" "}
             <MedLineItem m={m} />
-            <button onClick={handlePreview}>Preview</button>{" "}
-            <button onClick={handleEdit}>Edit</button>{" "}
-            <button onClick={handleDelete}>Delete</button>{" "}
+            {togglePreview && (
+               <StyledPlayer
+                  controls={true}
+                  width="100%"
+                  height="50px"
+                  url={makeLinkForBlob(m.audio_file)}
+               />
+            )}{" "}
+            <TightButton onClick={handlePreview}>Preview</TightButton>{" "}
+            <ReverseTightButton onClick={handleEdit}>Edit</ReverseTightButton>{" "}
+            <TightButton onClick={handleDelete}>Delete</TightButton>{" "}
          </>
       </TightCard>
    )

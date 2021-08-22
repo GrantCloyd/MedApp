@@ -12,8 +12,7 @@ import {
    FormControlLabel,
 } from "@material-ui/core"
 import { useDispatch } from "react-redux"
-import { StyledButton, StyledRad, StyledText, CenterCon } from "./styles"
-import { styled } from "@material-ui/core/styles"
+import { StyledButton, StyledRad, StyledText, CenterCon, StyledLogo } from "./styles"
 
 export default function LogInPage() {
    const initialState = {
@@ -48,7 +47,12 @@ export default function LogInPage() {
    return (
       <Card>
          <CenterCon>
-            <h2>Log-In to Here|Now!</h2>
+            <p>
+               {" "}
+               <StyledLogo src="https://i.imgur.com/OS0kSRb.png?1" />
+            </p>
+
+            <h2>Log-In </h2>
             {errors && <p>{errors}</p>}
 
             <form onSubmit={handleLogIn}>
