@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import SearchTeacher from "./SearchTeacher"
 import SearchLengthType from "./SearchLengthType"
+import { ButtonGroup } from "@material-ui/core"
 import { TightButton, ReverseTightButton } from "./styles"
 
 export default function SearchMeditations() {
@@ -27,12 +28,12 @@ export default function SearchMeditations() {
       <div>
          <h2>Search Meditations</h2>
          {errors && <p>{errors}</p>}
-         <TightButton onClick={() => setDisplayTeacher(!displayTeacher)}>
-            By Teacher
-         </TightButton>{" "}
-         <ReverseTightButton onClick={() => setDisplayLength(!displayLength)}>
-            By Length or Type
-         </ReverseTightButton>
+         <ButtonGroup>
+            <TightButton onClick={() => setDisplayTeacher(!displayTeacher)}>By Teacher</TightButton>{" "}
+            <ReverseTightButton onClick={() => setDisplayLength(!displayLength)}>
+               By Length or Type
+            </ReverseTightButton>
+         </ButtonGroup>
          {displayTeacher && <SearchTeacher meditations={meditations} />}
          {displayLength && <SearchLengthType meditations={meditations} />}
       </div>

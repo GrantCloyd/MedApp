@@ -3,7 +3,7 @@ import { medTypes } from "../constants"
 import { updateMed, deleteMed } from "./store/teacherReducer"
 import { useDispatch } from "react-redux"
 import MedLineItem from "./MedLineItem"
-import { MenuItem, Select, Card, Typography, CardActions, CardContent } from "@material-ui/core"
+import { MenuItem, Select, ButtonGroup } from "@material-ui/core"
 import { TightCard, TightButton, StyledPlayer, ReverseTightButton } from "./styles"
 
 import { handleChange, createConfig, makeLinkForBlob } from "../functions"
@@ -92,9 +92,11 @@ export default function MeditationLi({ m }) {
                   url={makeLinkForBlob(m.audio_file)}
                />
             )}{" "}
-            <TightButton onClick={handlePreview}>Preview</TightButton>{" "}
-            <ReverseTightButton onClick={handleEdit}>Edit</ReverseTightButton>{" "}
-            <TightButton onClick={handleDelete}>Delete</TightButton>{" "}
+            <ButtonGroup>
+               <TightButton onClick={handlePreview}>Preview</TightButton>{" "}
+               <ReverseTightButton onClick={handleEdit}>Edit</ReverseTightButton>{" "}
+               <TightButton onClick={handleDelete}>Delete</TightButton>{" "}
+            </ButtonGroup>
          </>
       </TightCard>
    )

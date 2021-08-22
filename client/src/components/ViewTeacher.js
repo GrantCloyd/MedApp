@@ -7,7 +7,7 @@ import { addFollow, removeFollow } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 import FollowInfo from "./FollowInfo"
 import { FormControlLabel, Grid } from "@material-ui/core"
-import { StyledSwitch, secondaryColor, StyledPaper } from "./styles"
+import { StyledSwitch, StyledTextField, secondaryColor, StyledPaper } from "./styles"
 import { styled } from "@material-ui/core/styles"
 
 export default function ViewTeacher() {

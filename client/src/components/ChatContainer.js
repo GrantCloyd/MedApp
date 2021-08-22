@@ -3,7 +3,14 @@ import { handleChange, createConfig } from "../functions"
 import { useDispatch } from "react-redux"
 import { addMessage, deleteChat } from "./store/teacherReducer"
 import { IconButton, Avatar } from "@material-ui/core"
-import { StyledSend, StyledCancel, TightCard, TightPaper, primaryColor } from "./styles"
+import {
+   StyledSend,
+   StyledCancel,
+   TightCard,
+   TightPaper,
+   primaryColor,
+   StyledTextField,
+} from "./styles"
 import LiveHelpIcon from "@material-ui/icons/LiveHelp"
 import { styled } from "@material-ui/core/styles"
 
@@ -31,9 +38,10 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
 
       const res = await fetch(`/messages`, createConfig("POST", message))
       const data = await res.json()
+      setMessage(initialMessage)
+      console.log(data)
       if (data.id) {
          //dispatch(addMessage(data))
-         setMessage({ ...initialMessage, content: "" })
          handleAdd()
       } else {
          setErrors(`Something went wrong: ${data.error}`)
@@ -75,9 +83,11 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
          </ul>
          {errors && <p>{errors}</p>}
          <form onSubmit={handleMessageSubmit}>
-            <label htmlFor="content"> Reply:</label>
-            <input
+            <StyledTextField
                onChange={handleContent}
+               multiline
+               margin="normal"
+               label="Reply"
                value={c.content}
                name="content"
                type="textarea"

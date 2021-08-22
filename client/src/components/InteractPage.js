@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { setChatsS } from "./store/studentReducer"
 import { setChatsT } from "./store/teacherReducer"
 import ChatContainer from "./ChatContainer"
+import { StyledTextField } from "./styles"
 
 export default function InteractPage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))

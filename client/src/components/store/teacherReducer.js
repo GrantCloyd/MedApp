@@ -58,7 +58,7 @@ export const teacherSlice = createSlice({
          return { ...state, chats: state.chats.filter(c => c.id !== action.payload.id) }
       },
       setChatsT: (state, action) => {
-         return { ...state, chats: [action.payload] }
+         return { ...state, chats: action.payload }
       },
       updateIncome: (state, action) => {
          state.income = action.payload.income

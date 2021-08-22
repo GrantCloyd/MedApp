@@ -10,7 +10,7 @@ import {
    FormLabel,
    FormControlLabel,
 } from "@material-ui/core"
-import { StyledButton, StyledRad, StyledLogo, CenterCon } from "./styles"
+import { StyledButton, StyledTextField, StyledRad, StyledLogo, CenterCon } from "./styles"
 
 export default function SignUpPage() {
    const initialState = {
@@ -53,7 +53,7 @@ export default function SignUpPage() {
             <h2>Sign Up Here!</h2>
             {errors && <p>{errors}</p>}
             <form onSubmit={handleSignUp}>
-               <TextField
+               <StyledTextField
                   onChange={handleSignUpChange}
                   value={signUp.name}
                   label="Name"
@@ -61,7 +61,7 @@ export default function SignUpPage() {
                   placeholder="Enter your name"
                />
                <br />
-               <TextField
+               <StyledTextField
                   onChange={handleSignUpChange}
                   value={signUp.email}
                   label="Email"
@@ -70,7 +70,7 @@ export default function SignUpPage() {
                />
                <br />
 
-               <TextField
+               <StyledTextField
                   onChange={handleSignUpChange}
                   value={signUp.password}
                   label="Password"
@@ -80,7 +80,7 @@ export default function SignUpPage() {
                   placeholder="Enter your password"
                />
                <br />
-               <TextField
+               <StyledTextField
                   onChange={handleSignUpChange}
                   value={signUp.confirmPassword}
                   type="password"

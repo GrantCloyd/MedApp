@@ -12,7 +12,14 @@ import {
    FormControlLabel,
 } from "@material-ui/core"
 import { useDispatch } from "react-redux"
-import { StyledButton, StyledRad, StyledText, CenterCon, StyledLogo } from "./styles"
+import {
+   StyledButton,
+   StyledTextField,
+   StyledRad,
+   StyledText,
+   CenterCon,
+   StyledLogo,
+} from "./styles"
 
 export default function LogInPage() {
    const initialState = {
@@ -56,7 +63,7 @@ export default function LogInPage() {
             {errors && <p>{errors}</p>}
 
             <form onSubmit={handleLogIn}>
-               <StyledText
+               <StyledTextField
                   onChange={handleLogInChange}
                   value={logIn.email}
                   label="Email Address"
@@ -65,7 +72,7 @@ export default function LogInPage() {
                />
                <br />
 
-               <TextField
+               <StyledTextField
                   onChange={handleLogInChange}
                   value={logIn.password}
                   label="Password"

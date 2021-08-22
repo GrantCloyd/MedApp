@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 
-import { CardHeader, CardMedia, CardContent, Grid } from "@material-ui/core"
+import { CardHeader, CardMedia, ButtonGroup, CardContent, Grid } from "@material-ui/core"
 import { TightButton, ReverseTightButton, TightCard } from "./styles"
 
 export default function SearchTeacher({ meditations }) {
@@ -38,8 +38,10 @@ export default function SearchTeacher({ meditations }) {
       <div>
          <h2>Discover New Teachers</h2>
          <p>
-            <TightButton onClick={handleAlphSort}>By Name</TightButton>{" "}
-            <ReverseTightButton onClick={handleListenSort}>By Popularity</ReverseTightButton>
+            <ButtonGroup>
+               <TightButton onClick={handleAlphSort}>By Name</TightButton>{" "}
+               <ReverseTightButton onClick={handleListenSort}>By Popularity</ReverseTightButton>
+            </ButtonGroup>
          </p>
          <Grid container direction="column" justifyContent="center" alignItems="center">
             {teachersDisplay}

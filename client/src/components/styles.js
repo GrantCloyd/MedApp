@@ -10,6 +10,7 @@ import {
    Switch,
    Select,
    Paper,
+   DialogContent,
 } from "@material-ui/core/"
 import FaceIcon from "@material-ui/icons/Face"
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled"
@@ -95,6 +96,31 @@ export const StyledSwitch = withStyles({
    track: {},
 })(Switch)
 
+export const StyledTextField = withStyles({
+   root: {
+      "& label.Mui-focused": {
+         color: `${primaryColor}`,
+      },
+      "& .MuiInput-underline:after": {
+         borderBottomColor: `${primaryColor}`,
+      },
+      "&.Mui-focused fieldset": {
+         borderColor: `${primaryColor}`,
+      },
+   },
+})(TextField)
+
+export const StyledSelect = withStyles({
+   select: {
+      "&:before": {
+         borderColor: `${primaryColor}`,
+      },
+      "&:after": {
+         borderColor: `${primaryColor}`,
+      },
+   },
+})(Select)
+
 export const StyledDropDown = styled(Select)({
    marginLeft: "40px",
 })
@@ -153,4 +179,10 @@ export const StyledSave = styled(SaveIcon)({
 export const SmallLogo = styled("img")({
    width: "15%",
    height: "15%",
+})
+
+export const PaddedDialogContent = styled(DialogContent)({
+   padding: "30px 90px",
+
+   width: "65%",
 })

@@ -2,10 +2,17 @@ import React, { useState } from "react"
 import { handleChange, createConfig } from "../functions"
 import { addChat, addDonation } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
-import { TightButton, StyledCancel, StyledSend, ReverseTightButton, secondaryColor } from "./styles"
-import { styled } from "@material-ui/core/styles"
+import {
+   TightButton,
+   StyledCancel,
+   StyledTextField,
+   StyledSend,
+   ReverseTightButton,
+   secondaryColor,
+} from "./styles"
 import {
    IconButton,
+   ButtonGroup,
    Dialog,
    DialogActions,
    DialogTitle,
@@ -109,18 +116,21 @@ export default function FollowInfo({
                <DialogContent>
                   <p> One dollar minimum required per donation</p>
                   <form onSubmit={createDonation}>
-                     <label htmlFor="amount">Amount: $</label>
-                     <input
+                     <StyledTextField
                         value={donation.amount}
                         onChange={handleDonation}
+                        label="Amount"
                         type="number"
                         min={1}
                         name="amount"
                      />
-                     <label htmlFor="message">Message:</label>
-                     <input
+                     <br />
+                     <StyledTextField
                         value={donation.message}
+                        multiline
                         onChange={handleDonation}
+                        fullWidth
+                        label="Message"
                         type="textarea"
                         name="message"
                         placeholder="Send a message .."
@@ -144,17 +154,21 @@ export default function FollowInfo({
                <DialogContent>
                   <p>To: {teacherName}</p>
                   <form onSubmit={handleSubmitQuestion}>
-                     <label htmlFor="title">Question:</label>
-                     <input
+                     <StyledTextField
                         value={question.title}
                         onChange={handleQuestion}
+                        multiline
                         type="textarea"
                         name="title"
+                        label="Title"
                         placeholder="Title .."
                      />
-                     <label htmlFor="content">Question:</label>
-                     <input
+
+                     <StyledTextField
                         value={question.content}
+                        label="Question"
+                        fullWidth
+                        multiline
                         onChange={handleQuestion}
                         type="textarea"
                         name="content"
@@ -176,15 +190,19 @@ export default function FollowInfo({
          )}
          <p>
             {" "}
-            <TightButton onClick={() => setToggleDonate(!toggleDonate)}>
-               {toggleDonate ? "Close Donation" : "Donate"}
-            </TightButton>{" "}
-            {optStatus && (
-               <ReverseTightButton onClick={() => setToggleQuestion(!toggleQuestion)}>
-                  {" "}
-                  {toggleQuestion ? "Cancel Question" : "Ask a Question"}
-               </ReverseTightButton>
-            )}
+            <>
+               <ButtonGroup>
+                  <TightButton onClick={() => setToggleDonate(!toggleDonate)}>
+                     {toggleDonate ? "Close Donation" : "Donate"}
+                  </TightButton>{" "}
+                  {optStatus && (
+                     <ReverseTightButton onClick={() => setToggleQuestion(!toggleQuestion)}>
+                        {" "}
+                        {toggleQuestion ? "Cancel Question" : "Ask a Question"}
+                     </ReverseTightButton>
+                  )}
+               </ButtonGroup>
+            </>
          </p>
          <hr />
       </div>

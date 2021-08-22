@@ -37,7 +37,7 @@ export default function LandingT({ chats, last_med }) {
       <div>
          <h3>Updates:</h3>
          <p>
-            {chats.length > 0
+            {chats.length > 0 && chats[0].title.length > 0
                ? `Open Questions: ${chats.length}`
                : "You have no questions currently"}
          </p>

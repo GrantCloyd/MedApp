@@ -16,10 +16,36 @@ import {
    Select,
    MenuItem,
    IconButton,
+   CardHeader,
+   InputLabel,
 } from "@material-ui/core"
 import { styled } from "@material-ui/core/styles"
-import { TightButton, ReverseTightButton } from "./styles"
+import {
+   TightButton,
+   StyledSelect,
+   StyledTextField,
+   TightCard,
+   ReverseTightButton,
+   StyledArrow,
+   primaryColor,
+} from "./styles"
 import CloudUploadIcon from "@material-ui/icons/CloudUpload"
+import PauseIcon from "@material-ui/icons/Pause"
+import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver"
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord"
+import AttachFileIcon from "@material-ui/icons/AttachFile"
+import RedoIcon from "@material-ui/icons/Redo"
+import CheckIcon from "@material-ui/icons/Check"
+import PageviewIcon from "@material-ui/icons/Pageview"
+import AddCircleIcon from "@material-ui/icons/AddCircle"
+
+const StyledPause = styled(PauseIcon)({
+   color: `${primaryColor}`,
+})
+
+const StyledRecordingIcon = styled(FiberManualRecordIcon)({
+   color: `#BA1B1D`,
+})
 
 const StyledProg = styled(LinearProgress)({
    width: "50%",
@@ -100,8 +126,6 @@ export default function CreatePage() {
       }
    }
 
-   console.log(newMed.audio_file.name)
-
    useEffect(() => {
       let interval = setInterval(() => {
          if (mediaRecorder.state === "recording") {
@@ -153,8 +177,9 @@ export default function CreatePage() {
    }
 
    return (
-      <div>
-         <h2>Create and Upload </h2>
+      <TightCard>
+         <CardHeader title="Create and Upload" />
+
          {loading && (
             <p>
                <StyledProg />{" "}
@@ -171,31 +196,56 @@ export default function CreatePage() {
                   </DialogContentText>
                </DialogContent>
                <DialogActions>
-                  <button onClick={() => history.push("/profile")}>View</button>
-                  <button onClick={handleStayOnPage}>Stay</button>
+                  <IconButton onClick={() => history.push("/profile")}>
+                     {" "}
+                     <PageviewIcon />
+                  </IconButton>
+                  <IconButton onClick={handleStayOnPage}>
+                     {" "}
+                     <AddCircleIcon />
+                  </IconButton>
                </DialogActions>
             </Dialog>
          )}
          {errors && <p>{errors}</p>}
          <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Title</label>
-            <input
+            <StyledTextField
                value={newMed.title}
                onChange={handleNewMed}
+               label="Title"
                type="text"
                name="title"
-               placeholder="title"
             />
-            <label htmlFor="description">Description</label>
-            <input
+
+            <br />
+
+            <StyledTextField
                onChange={handleNewMed}
                value={newMed.description}
+               fullWidth
+               multiline
+               label="Description"
                type="text"
                name="description"
-               placeholder="description"
             />
-            <label htmlFor="med_type">Type</label>
-            <Select name="med_type" onChange={handleNewMed}>
+
+            <StyledTextField
+               margin="normal"
+               label="Length in Minutes"
+               value={newMed.est_length}
+               onChange={handleNewMed}
+               type="number"
+               name="est_length"
+            />
+            <InputLabel id="type-label" htmlFor="med_type">
+               Type
+            </InputLabel>
+            <StyledSelect
+               idLabel="Type"
+               id="med_type"
+               name="med_type"
+               label="Type"
+               onChange={handleNewMed}>
                <MenuItem value="--select-one--"> --select-one--</MenuItem>
                <MenuItem value="Breath">Breath</MenuItem>
                <MenuItem value="Awareness">Awareness</MenuItem>
@@ -209,18 +259,10 @@ export default function CreatePage() {
                <MenuItem value="Concentration">Concentration</MenuItem>
                <MenuItem value="Nondual">Non-Dual</MenuItem>
                <MenuItem value="Sleep">Sleep</MenuItem>
-            </Select>
-            <label htmlFor="est_length">Length in Minutes</label>
-            <input
-               value={newMed.est_length}
-               onChange={handleNewMed}
-               type="number"
-               name="est_length"
-               placeholder="length"
-            />
+            </StyledSelect>
+            <br />
             {recordingState !== "Uploaded" ? (
                <>
-                  {" "}
                   <input
                      accept="audio/*"
                      style={{ display: "none" }}
@@ -231,6 +273,7 @@ export default function CreatePage() {
                   />
                   <span>{newMed.audio_file.name}</span>
                   <label htmlFor="audio_file">
+                     {" "}
                      <IconButton component="span">
                         {" "}
                         <CloudUploadIcon />
@@ -238,40 +281,57 @@ export default function CreatePage() {
                   </label>
                </>
             ) : (
-               <p>File Attached</p>
+               <p> Recorded File Attached </p>
             )}
+            <br />
             <ReverseTightButton onClick={handleSubmit}>Submit</ReverseTightButton>
          </form>
-         {recordingState === "Uploaded" && (
-            <>
-               <br />
-               <audio width="50%" controls src={previewUrl} />
-               <br />
-            </>
-         )}
+         <br />
          <TightButton onClick={prepForRecording}>Record File</TightButton>
          <br />
          {prepRecord && (
-            <>
-               <p>
-                  {minutes} : {seconds >= 10 ? seconds : `0${seconds}`}
-               </p>
-               <button onClick={handleRecording}>
-                  {recordingState === false
-                     ? "Enable to Record ⭕️"
-                     : recordingState === true
-                     ? "Ready ⚪️"
-                     : recordingState === "Recording"
-                     ? "Recording 🔴"
-                     : recordingState === "Recorded"
-                     ? "Attach 📎"
-                     : "Start Again? 🔁"}
-               </button>
-               {mediaRecorder.state !== "inactive" && (
-                  <button onClick={handlePauseResume}>Pause/Resume ⏯</button>
-               )}
-            </>
+            <Dialog open={prepRecord}>
+               <DialogTitle>Recording Interface</DialogTitle>
+               <DialogContent>
+                  <p>
+                     {minutes} : {seconds >= 10 ? seconds : `0${seconds}`}{" "}
+                     {mediaRecorder.state === "paused" && "Paused"}
+                  </p>
+                  {recordingState === "Uploaded" && (
+                     <>
+                        <br />
+                        <audio width="50%" controls src={previewUrl} />
+                        <br />
+                     </>
+                  )}
+               </DialogContent>
+               <DialogActions>
+                  <IconButton onClick={handleRecording}>
+                     {recordingState === false ? (
+                        <RecordVoiceOverIcon />
+                     ) : recordingState === true ? (
+                        <FiberManualRecordIcon />
+                     ) : recordingState === "Recording" ? (
+                        <StyledRecordingIcon />
+                     ) : recordingState === "Recorded" ? (
+                        <AttachFileIcon />
+                     ) : (
+                        <RedoIcon />
+                     )}
+                  </IconButton>
+                  {recordingState === "Uploaded" && (
+                     <IconButton onClick={() => setPrepRecord(false)}>
+                        <CheckIcon />
+                     </IconButton>
+                  )}
+                  {mediaRecorder.state !== "inactive" && (
+                     <IconButton onClick={handlePauseResume}>
+                        <StyledArrow /> <StyledPause />
+                     </IconButton>
+                  )}
+               </DialogActions>
+            </Dialog>
          )}
-      </div>
+      </TightCard>
    )
 }

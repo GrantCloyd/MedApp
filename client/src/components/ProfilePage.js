@@ -23,7 +23,8 @@ import {
    StyledSave,
    TightCard,
    StyledSwitch,
-   TightPaper,
+   StyledTextField,
+   PaddedDialogContent,
 } from "./styles"
 import MailOutlineIcon from "@material-ui/icons/MailOutline"
 import PermIdentityIcon from "@material-ui/icons/PermIdentity"
@@ -75,51 +76,63 @@ export default function ProfilePage() {
 
          {toggleEdit ? (
             <Dialog open={toggleEdit}>
-               <Card>
+               <div align="center">
                   <DialogTitle>Edit Details</DialogTitle>
-                  <DialogContent>
+                  <PaddedDialogContent>
                      <form onSubmit={handleSubmit}>
-                        <label htmlFor="name">Name: </label>
-                        <input
+                        <StyledTextField
+                           fullWidth
                            onChange={handleProfileChange}
                            type="text"
+                           label="Name"
                            value={profileEdit.name}
                            name="name"
-                        />
-                        <label htmlFor="email">Email: </label>
-                        <input
+                        />{" "}
+                        <br />
+                        <StyledTextField
+                           fullWidth
                            onChange={handleProfileChange}
                            type="text"
+                           label="Email"
                            value={profileEdit.email}
                            name="email"
                         />
                         {user.type === "teacher" && (
                            <>
-                              <label htmlFor="background"> Background: </label>
-                              <input
+                              <StyledTextField
+                                 fullWidth
+                                 onChange={handleProfileChange}
+                                 type="text"
+                                 label="Image Url"
+                                 value={profileEdit.image_url}
+                                 name="image_url"
+                              />
+                              <br />
+                              <StyledTextField
+                                 fullWidth
+                                 margin="normal"
+                                 multiline
+                                 label="Background"
                                  onChange={handleProfileChange}
                                  type="textarea"
                                  value={profileEdit.background}
                                  name="background"
                               />
-                              <label htmlFor="follow_message"> Follow Message: </label>
-                              <input
+                              <br />
+                              <StyledTextField
+                                 multiline
+                                 fullWidth
+                                 margin="normal"
+                                 label="Follow Message"
                                  onChange={handleProfileChange}
                                  type="textarea"
                                  value={profileEdit.follow_message}
                                  name="follow_message"
                               />
-                              <label htmlFor="image_url"> Profile Picture: </label>
-                              <input
-                                 onChange={handleProfileChange}
-                                 type="text"
-                                 value={profileEdit.image_url}
-                                 name="image_url"
-                              />
                            </>
                         )}
                      </form>
-                  </DialogContent>
+                  </PaddedDialogContent>
                   <DialogActions>
                      <IconButton onClick={handleSubmit}>
                         {" "}
@@ -130,7 +143,7 @@ export default function ProfilePage() {
                         <StyledCancel />{" "}
                      </IconButton>
                   </DialogActions>
-               </Card>
+               </div>
             </Dialog>
          ) : (
             <TightCard>
@@ -140,12 +153,12 @@ export default function ProfilePage() {
                      {" "}
                      <PermIdentityIcon />
                   </IconButton>
-                  Name: {user.name}{" "}
+                  {user.name}{" "}
                   <IconButton>
                      {" "}
                      <MailOutlineIcon />
                   </IconButton>
-                  Email: {user.email}
+                  {user.email}
                   {user.type === "teacher" && (
                      <Paper>
                         <p>Public Bio: {user.background} </p>
