@@ -13,9 +13,25 @@ import { Container } from "@material-ui/core"
 import { Route, Switch } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { gradient } from "./components/styles"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { loginT } from "./components/store/teacherReducer"
+import { loginS } from "./components/store/studentReducer"
 
 function App() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
+   const dispatch = useDispatch()
+
+   useEffect(() => {
+      async function handleRefresh() {
+         const res = await fetch("/me")
+         const data = await res.json()
+         if (data !== null) {
+            data.image_url ? dispatch(loginT(data)) : dispatch(loginS(data))
+         }
+      }
+      handleRefresh()
+   }, [])
 
    if (user.name === "") {
       return (

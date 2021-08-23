@@ -54,7 +54,7 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
    return (
       <>
          {" "}
-         <TightPaper>
+         <TightPaper key={c.id}>
             {" "}
             {makeIconBtn(StyledHelp, null)}
             {c.messages[0].username} asked: " {c.title} "

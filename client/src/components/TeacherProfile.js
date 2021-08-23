@@ -38,19 +38,18 @@ export default function TeacherProfile() {
                   <p>
                      Highest Donation Amount from a Student:{" "}
                      {user.most_donated_by_amount.student_name} ($
-                     {Number(user.most_donated_by_amount.amount).toFixed(2)} )
+                     {Number(user.most_donated_by_amount.amount).toFixed(2)})
                   </p>
                   <p>
                      {" "}
-                     Most Donatations from a Student: {
-                        user.most_donated_student.student_name
-                     } ( {user.most_donated_student.amount} )
+                     Most Donatations from a Student: {user.most_donated_student.student_name} (
+                     {user.most_donated_student.amount})
                   </p>{" "}
                   <p>Lifetime Income: ${Number(user.total_income).toFixed(2)}</p>
-                  <p>Current Income: ${Number(user.income).toFixed(2)}</p>
                   {errors && <p>{errors}</p>}
                   {Number(user.income).toFixed(2) > 0 && (
                      <>
+                        <p>Current Income: ${Number(user.income).toFixed(2)}</p>
                         <TightButton onClick={handleWithdraw}>Withdraw</TightButton>
                         <p>Withdrawls are split 80/20 with Here|Now</p>
                      </>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy]
   get '/chats/teachers/:id', to: 'chats#find_by_teacher'
   get '/chats/students/:id', to: 'chats#find_by_student'
+  get '/me', to: 'log_in#me'
   resources :chats, only: :destroy
   resources :messages, only: :create
   resources :follows, only: [:create, :destroy]

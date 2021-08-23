@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
+import { TightButton, TightPaper } from "./styles"
 
 export default function LandingT({ chats, last_med }) {
    const [lastTime, setLastTime] = useState("")
+   const history = useHistory()
 
    useEffect(() => {
       const currTime = new Date()
@@ -35,26 +37,33 @@ export default function LandingT({ chats, last_med }) {
    return (
       <div>
          <h3>Updates:</h3>
-         <p>
-            {chats.length > 0 && chats[0].title.length > 0
-               ? `Open Questions: ${chats.length}`
-               : "You have no questions currently"}
-         </p>
-
-         {last_med.length > 0 ? (
-            <>
-               <p>{lastTime}</p>
+         <TightPaper>
+            {chats.length > 0 && chats[0].title.length > 0 ? (
                <p>
-                  You recorded "{last_med[0].title}" on{" "}
-                  {new Date(last_med[0].created_at).toLocaleString()}
+                  You have ${chats.length} open question{chats.length > 1 && "s"}
+                  <br /> <br />
+                  <TightButton onClick={() => history.push("/interact")}>
+                     Go to Messages
+                  </TightButton>{" "}
                </p>
-            </>
-         ) : (
-            <p>
-               {" "}
-               You haven't recoreded any meditations. <Link to="/create">Start now!</Link>{" "}
-            </p>
-         )}
+            ) : (
+               <p>You have no questions currently</p>
+            )}
+         </TightPaper>
+         <TightPaper>
+            {last_med.length > 0 ? (
+               <>
+                  <p>{lastTime}</p>
+                  <p>
+                     You recorded "{last_med[0].title}" on{" "}
+                     {new Date(last_med[0].created_at).toLocaleString()} <br /> <br />
+                  </p>
+               </>
+            ) : (
+               <p> You haven't recorded any meditations yet. Start now!</p>
+            )}
+            <TightButton onClick={() => history.push("/create")}>Make Something New</TightButton>{" "}
+         </TightPaper>
       </div>
    )
 }

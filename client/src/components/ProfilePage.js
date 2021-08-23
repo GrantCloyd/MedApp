@@ -57,7 +57,7 @@ export default function ProfilePage() {
          createConfig("PATCH", { opt_in: e.target.checked })
       )
       const data = await res.json()
-      console.log(data)
+
       dispatch(loginT(data))
    }
 

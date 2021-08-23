@@ -19,7 +19,7 @@ export default function SearchTeacher({ meditations }) {
       setSortedTeachers(teachers.sort((a, b) => a.name.localeCompare(b.name)))
 
    const handleListenSort = () =>
-      setSortedTeachers(teachers.sort((a, b) => a.total_listens > b.total_listens))
+      setSortedTeachers(teachers.sort((a, b) => b.total_listens - a.total_listens))
 
    const teachersDisplay = sortedTeachers.map(t => (
       <TightCard onClick={() => history.push(`/teachers/${t.id}`)} key={t.id}>
@@ -30,8 +30,6 @@ export default function SearchTeacher({ meditations }) {
          </CardContent>
       </TightCard>
    ))
-
-   console.log(teachers)
 
    return (
       <div>
