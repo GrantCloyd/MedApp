@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import TeacherProfile from "./TeacherProfile"
 import StudentProfile from "./StudentProfile"
-import { createConfig, handleChange } from "../functions"
+import { createConfig, handleChange, makeIconBtn } from "../functions"
 import { loginT } from "./store/teacherReducer"
 import { loginS } from "./store/studentReducer"
 import { useSelector, useDispatch } from "react-redux"
@@ -132,14 +132,8 @@ export default function ProfilePage() {
                      </form>
                   </PaddedDialogContent>
                   <DialogActions>
-                     <IconButton onClick={handleSubmit}>
-                        {" "}
-                        <StyledSave />{" "}
-                     </IconButton>
-
-                     <IconButton onClick={() => setToggleEdit(!toggleEdit)}>
-                        <StyledCancel />{" "}
-                     </IconButton>
+                     {makeIconBtn(StyledSave, handleSubmit)}
+                     {makeIconBtn(StyledCancel, () => setToggleEdit(!toggleEdit))}
                   </DialogActions>
                </div>
             </Dialog>
@@ -147,15 +141,8 @@ export default function ProfilePage() {
             <TightCard>
                <CardHeader title="Profile" />
                <CardContent>
-                  <IconButton>
-                     {" "}
-                     <PermIdentityIcon />
-                  </IconButton>
-                  {user.name}{" "}
-                  <IconButton>
-                     {" "}
-                     <MailOutlineIcon />
-                  </IconButton>
+                  {makeIconBtn(PermIdentityIcon, null)}
+                  {user.name} {makeIconBtn(MailOutlineIcon, null)}
                   {user.email}
                   {user.type === "teacher" && (
                      <Paper>

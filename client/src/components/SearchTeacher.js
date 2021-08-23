@@ -25,7 +25,6 @@ export default function SearchTeacher({ meditations }) {
       <TightCard onClick={() => history.push(`/teachers/${t.id}`)} key={t.id}>
          <CardHeader title={t.name} />
          <CardMedia style={{ height: "200px" }} alt={t.name} image={t.image_url} />
-
          <CardContent>
             Listens: {t.total_listens} <br /> Meditations: {t.med_number}
          </CardContent>
