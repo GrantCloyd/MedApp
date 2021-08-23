@@ -241,7 +241,7 @@ export default function CreatePage() {
                Type
             </InputLabel>
             <StyledSelect
-               idLabel="Type"
+               idLabel="type-label"
                id="med_type"
                name="med_type"
                label="Type"

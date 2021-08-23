@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import MeditationLi from "./MeditationLi"
 import { createConfig } from "../functions"
 import { Grid, CardHeader } from "@material-ui/core"
-import { TightCard } from "./styles"
+import { TightCard, TightButton } from "./styles"
 
 export default function TeacherProfile() {
    const user = useSelector(state => state.teacher)
@@ -51,7 +51,7 @@ export default function TeacherProfile() {
                   {errors && <p>{errors}</p>}
                   {Number(user.income).toFixed(2) > 0 && (
                      <>
-                        <button onClick={handleWithdraw}>Withdraw</button>
+                        <TightButton onClick={handleWithdraw}>Withdraw</TightButton>
                         <p>Withdrawls are split 80/20 with Here|Now</p>
                      </>
                   )}

@@ -1,5 +1,5 @@
 import React from "react"
-import { CardContent, Paper, CardHeader, Avatar, IconButton } from "@material-ui/core"
+import { CardContent, Paper, CardHeader, Avatar, IconButton, Card } from "@material-ui/core"
 import { TightCard, primaryColor, StyledArrow } from "./styles"
 import TimerIcon from "@material-ui/icons/Timer"
 import InfoIcon from "@material-ui/icons/Info"
@@ -17,9 +17,15 @@ const StyledAvatar = styled(Avatar)({
    marginLeft: "8px",
 })
 
+const ConditionalWrapper = ({ condition, wrapper1, wrapper2, children }) =>
+   condition ? wrapper1(children) : wrapper2(children)
+
 export default function MedLineItem({ m, clickHandler = null }) {
    return (
-      <TightCard>
+      <ConditionalWrapper
+         condition={clickHandler}
+         wrapper1={children => <TightCard>{children}</TightCard>}
+         wrapper2={children => <Card>{children}</Card>}>
          <p>
             <StyledAvatar alt={m.teacher.name} src={m.teacher.image_url} />
          </p>
@@ -46,6 +52,6 @@ export default function MedLineItem({ m, clickHandler = null }) {
                </IconButton>
             )}
          </CardContent>
-      </TightCard>
+      </ConditionalWrapper>
    )
 }

@@ -3,8 +3,15 @@ import { medTypes } from "../constants"
 import { updateMed, deleteMed } from "./store/teacherReducer"
 import { useDispatch } from "react-redux"
 import MedLineItem from "./MedLineItem"
-import { MenuItem, Select, ButtonGroup } from "@material-ui/core"
-import { TightCard, TightButton, StyledPlayer, ReverseTightButton } from "./styles"
+import { MenuItem, IconButton, InputLabel, Select, ButtonGroup, Paper } from "@material-ui/core"
+import {
+   TightCard,
+   TightButton,
+   StyledSave,
+   StyledPlayer,
+   ReverseTightButton,
+   StyledTextField,
+} from "./styles"
 
 import { handleChange, createConfig, makeLinkForBlob } from "../functions"
 
@@ -37,26 +44,45 @@ export default function MeditationLi({ m }) {
    }
 
    return (
-      <TightCard square>
+      <TightCard>
+         {!toggleEdit && <MedLineItem m={m} />}
          {toggleEdit && (
-            <div>
+            <Paper>
                <form onSubmit={handleSubmitPatch}>
-                  <label htmlFor="title">Title</label>
-                  <input
+                  <StyledTextField
                      onChange={handlePatchChange}
                      type="text"
                      value={patchObj.title}
                      name="title"
+                     label="Title"
                   />
-                  <label htmlFor="description">Description</label>
-                  <input
+
+                  <br />
+                  <StyledTextField
                      onChange={handlePatchChange}
                      type="text"
+                     multiline
+                     fullWidth
                      value={patchObj.description}
                      name="description"
+                     label="Description"
                   />
-                  <label htmlFor="med_type">Type</label>
-                  <Select name="med_type" onChange={handlePatchChange}>
+                  <br />
+
+                  <br />
+
+                  <StyledTextField
+                     value={patchObj.est_length}
+                     onChange={handlePatchChange}
+                     type="number"
+                     name="est_length"
+                     label="Length in Minutes"
+                  />
+                  <br />
+                  <InputLabel id="type-label" htmlFor="med_type">
+                     Type
+                  </InputLabel>
+                  <Select idLabel="type-label" name="med_type" onChange={handlePatchChange}>
                      <MenuItem value="--select-one--"> --select-one--</MenuItem>
                      <MenuItem value="Breath">Breath</MenuItem>
                      <MenuItem value="Awareness">Awareness</MenuItem>
@@ -71,19 +97,17 @@ export default function MeditationLi({ m }) {
                      <MenuItem value="Nondual">Non-Dual</MenuItem>
                      <MenuItem value="Sleep">Sleep</MenuItem>
                   </Select>
-                  <label htmlFor="est_length">Length in Minutes</label>
-                  <input
-                     value={patchObj.est_length}
-                     onChange={handlePatchChange}
-                     type="number"
-                     name="est_length"
-                  />
-                  <TightButton type="submit">Confirm Change</TightButton>
+
+                  <br />
+                  <br />
+                  <IconButton type="submit">
+                     <StyledSave />
+                  </IconButton>
                </form>
-            </div>
+               <br />
+            </Paper>
          )}
          <>
-            <MedLineItem m={m} />
             {togglePreview && (
                <StyledPlayer
                   controls={true}
@@ -93,8 +117,12 @@ export default function MeditationLi({ m }) {
                />
             )}{" "}
             <ButtonGroup>
-               <TightButton onClick={handlePreview}>Preview</TightButton>{" "}
-               <ReverseTightButton onClick={handleEdit}>Edit</ReverseTightButton>{" "}
+               <TightButton onClick={handlePreview}>
+                  {!togglePreview ? "Preview" : "Close Preview"}
+               </TightButton>{" "}
+               <ReverseTightButton onClick={handleEdit}>
+                  {!toggleEdit ? "Edit" : "Cancel Edit"}
+               </ReverseTightButton>{" "}
                <TightButton onClick={handleDelete}>Delete</TightButton>{" "}
             </ButtonGroup>
          </>

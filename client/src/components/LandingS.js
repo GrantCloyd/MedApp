@@ -59,6 +59,8 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
       </TightCard>
    ))
 
+   console.log(favorites)
+
    const favoriteDisplay = favorites.map(m => (
       <li key={m.id}>
          <TightCard>
@@ -67,7 +69,11 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
                <CardHeader title={m.meditation.title} />
                {m.teacher_name} <br /> {m.meditation.est_length} minutes
             </CardContent>
-            <StudentMedButtons medId={m.meditation.id} teaId={m.meditation.teacher_id} />
+            <StudentMedButtons
+               medId={m.meditation.id}
+               teaId={m.meditation.teacher_id}
+               teaImg={m.teacher_image}
+            />
          </TightCard>
       </li>
    ))
@@ -79,7 +85,7 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
             <CardHeader title={m.title} />
             From: {m.teacher_name} <br /> {m.est_length} minutes
          </CardContent>
-         <StudentMedButtons medId={m.id} teaId={m.teacher_id} />{" "}
+         <StudentMedButtons medId={m.id} teaId={m.teacher_id} teaImg={m.teacher_image} />{" "}
       </TightCard>
    ))
 

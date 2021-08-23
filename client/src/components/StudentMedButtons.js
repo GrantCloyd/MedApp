@@ -17,7 +17,7 @@ const StyledNotFavIcon = styled(FavoriteBorderIcon)({
    color: `#BA1B1D`,
 })
 
-export default function StudentMedButtons({ medId, teaId }) {
+export default function StudentMedButtons({ medId, teaId, teaImg }) {
    const user = useSelector(state => state.student)
    const favMedsIds = user.favorites.map(f => f.meditation_id)
    const dispatch = useDispatch()
@@ -39,6 +39,8 @@ export default function StudentMedButtons({ medId, teaId }) {
       dispatch(removeFav(data))
    }
 
+   console.log(teaImg)
+
    return (
       <CardActions>
          {" "}
@@ -47,7 +49,7 @@ export default function StudentMedButtons({ medId, teaId }) {
          </IconButton>
          <IconButton onClick={() => history.push(`/teachers/${teaId}`)}>
             {" "}
-            <StyledFaceIcon />{" "}
+            <Avatar src={teaImg} />{" "}
          </IconButton>
          {favMedsIds.includes(medId) ? (
             <IconButton
