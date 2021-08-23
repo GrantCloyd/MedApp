@@ -34,31 +34,28 @@ export default function ViewTeacher() {
       getTeacher()
    }, [teacherId])
 
+   async function handleFollow() {
+      const configObj = createConfig("POST", {
+         student_id: user.id,
+         teacher_id: teacherId,
+      })
+
+      const res = await fetch(`/follows`, configObj)
+      const data = await res.json()
+
+      data.id ? dispatch(addFollow(data)) : setErrors(data.error)
+   }
+
+   async function handleUnfollow() {
+      const res = await fetch(`/follows/${follow.id}`, createConfig("DELETE"))
+      const data = await res.json()
+
+      data.id ? dispatch(removeFollow(data.id)) : setErrors(data.error)
+   }
+
    async function handleFollowOrUnfollow(e) {
       setErrors(false)
-      const bool = e.target.checked
-      if (bool) {
-         const configObj = createConfig("POST", {
-            student_id: user.id,
-            teacher_id: teacherId,
-         })
-         const res = await fetch(`/follows`, configObj)
-         const data = await res.json()
-         if (data.id) {
-            dispatch(addFollow(data))
-         } else {
-            setErrors(data.error)
-         }
-      } else {
-         const res = await fetch(`/follows/${follow.id}`, createConfig("DELETE"))
-         const data = await res.json()
-
-         if (data.id) {
-            dispatch(removeFollow(data.id))
-         } else {
-            setErrors(data.error)
-         }
-      }
+      e.target.checked ? handleFollow() : handleUnfollow()
    }
 
    const meditationsDisplay = teacher.meditations.map(m => (
