@@ -1,9 +1,8 @@
 import React, { useState } from "react"
-import { medTypes } from "../constants"
 import { updateMed, deleteMed } from "./store/teacherReducer"
 import { useDispatch } from "react-redux"
 import MedLineItem from "./MedLineItem"
-import { MenuItem, IconButton, InputLabel, Select, ButtonGroup, Paper } from "@material-ui/core"
+import { MenuItem, InputLabel, Select, ButtonGroup, Paper } from "@material-ui/core"
 import {
    TightCard,
    TightButton,
@@ -13,7 +12,7 @@ import {
    StyledTextField,
 } from "./styles"
 
-import { handleChange, createConfig, makeLinkForBlob } from "../functions"
+import { handleChange, createConfig, makeLinkForBlob, makeIconBtn } from "../functions"
 
 export default function MeditationLi({ m }) {
    let initialState = { ...m }
@@ -38,7 +37,6 @@ export default function MeditationLi({ m }) {
    async function handleDelete() {
       const res = await fetch(`meditations/${m.id}`, createConfig("DELETE"))
       const data = await res.json()
-      console.log(data)
 
       dispatch(deleteMed(data))
    }
@@ -100,9 +98,7 @@ export default function MeditationLi({ m }) {
 
                   <br />
                   <br />
-                  <IconButton type="submit">
-                     <StyledSave />
-                  </IconButton>
+                  {makeIconBtn(StyledSave, null, true)}
                </form>
                <br />
             </Paper>

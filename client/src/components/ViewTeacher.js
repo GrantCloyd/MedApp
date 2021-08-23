@@ -7,8 +7,7 @@ import { addFollow, removeFollow } from "./store/studentReducer"
 import { useDispatch } from "react-redux"
 import FollowInfo from "./FollowInfo"
 import { FormControlLabel, Grid } from "@material-ui/core"
-import { StyledSwitch, StyledTextField, secondaryColor, StyledPaper } from "./styles"
-import { styled } from "@material-ui/core/styles"
+import { StyledSwitch, StyledPaper } from "./styles"
 
 export default function ViewTeacher() {
    const teacherId = useParams().id
@@ -76,6 +75,7 @@ export default function ViewTeacher() {
             <h2>{teacher.name}</h2>
             <img
                src={teacher.image_url}
+               alt={teacher.name}
                style={{ height: "500px", width: "100%", objectFit: "cover" }}
             />
             <StyledPaper>

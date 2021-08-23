@@ -3,23 +3,9 @@ import { useHistory, Link } from "react-router-dom"
 import { handleChange, createConfig } from "../functions"
 import { loginT } from "./store/teacherReducer"
 import { loginS } from "./store/studentReducer"
-import {
-   TextField,
-   Container,
-   Card,
-   RadioGroup,
-   FormLabel,
-   FormControlLabel,
-} from "@material-ui/core"
+import { Container, Card, RadioGroup, FormLabel, FormControlLabel } from "@material-ui/core"
 import { useDispatch } from "react-redux"
-import {
-   StyledButton,
-   StyledTextField,
-   StyledRad,
-   StyledText,
-   CenterCon,
-   StyledLogo,
-} from "./styles"
+import { StyledButton, StyledTextField, StyledRad, CenterCon, StyledLogo } from "./styles"
 
 export default function LogInPage() {
    const initialState = {

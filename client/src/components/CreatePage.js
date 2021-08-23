@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"
-import { medTypes } from "../constants"
+import React, { useState } from "react"
 import { handleChange } from "../functions"
 import { addMed } from "./store/teacherReducer"
 import { useDispatch } from "react-redux"
@@ -13,39 +12,18 @@ import {
    DialogTitle,
    DialogContent,
    DialogContentText,
-   Select,
    MenuItem,
    IconButton,
    CardHeader,
    InputLabel,
 } from "@material-ui/core"
 import { styled } from "@material-ui/core/styles"
-import {
-   TightButton,
-   StyledSelect,
-   StyledTextField,
-   TightCard,
-   ReverseTightButton,
-   StyledArrow,
-   primaryColor,
-} from "./styles"
+import { TightButton, StyledSelect, StyledTextField, TightCard, ReverseTightButton } from "./styles"
 import CloudUploadIcon from "@material-ui/icons/CloudUpload"
-import PauseIcon from "@material-ui/icons/Pause"
-import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver"
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord"
-import AttachFileIcon from "@material-ui/icons/AttachFile"
-import RedoIcon from "@material-ui/icons/Redo"
-import CheckIcon from "@material-ui/icons/Check"
 import PageviewIcon from "@material-ui/icons/Pageview"
 import AddCircleIcon from "@material-ui/icons/AddCircle"
-
-const StyledPause = styled(PauseIcon)({
-   color: `${primaryColor}`,
-})
-
-const StyledRecordingIcon = styled(FiberManualRecordIcon)({
-   color: `#BA1B1D`,
-})
+import RecordingDialog from "./RecordingDialog"
+import { makeIconBtn } from "../functions"
 
 const StyledProg = styled(LinearProgress)({
    width: "50%",
@@ -65,85 +43,12 @@ export default function CreatePage() {
    const dispatch = useDispatch()
    const history = useHistory()
    const [prepRecord, setPrepRecord] = useState(false)
-   const [recordingState, setRecordingState] = useState(false)
-   const [mediaRecorder, setMediaRecorder] = useState(false)
-   const [mediaChunks, setMediaChunks] = useState([])
+
    const [newMed, setNewMed] = useState(initialState)
    const [success, setSuccess] = useState(false)
    const [errors, setErrors] = useState(false)
-   const [minutes, setMinutes] = useState(0)
-   const [seconds, setSeconds] = useState(0)
-   const [previewUrl, setPreviewUrl] = useState("")
    const [loading, setLoading] = useState(false)
-
-   async function prepForRecording() {
-      setPrepRecord(true)
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      setMediaRecorder(new MediaRecorder(stream, { mimeType: "audio/webm" }))
-      setRecordingState(true)
-   }
-
-   async function handleRecording() {
-      switch (recordingState) {
-         case true:
-            mediaRecorder.start()
-            setRecordingState("Recording")
-            setTimeout(() => setSeconds(1), 1000)
-            break
-         case "Recording":
-            mediaRecorder.stop()
-            mediaRecorder.ondataavailable = e => setMediaChunks(e.data)
-
-            setRecordingState("Recorded")
-            break
-         case "Recorded":
-            setNewMed({ ...newMed, audio_file: mediaChunks })
-
-            const objectURL = URL.createObjectURL(mediaChunks)
-            setPreviewUrl(objectURL)
-            setRecordingState("Uploaded")
-            break
-         case "Uploaded":
-            setPrepRecord(false)
-            setRecordingState(false)
-            setSeconds(0)
-            setMinutes(0)
-            setMediaChunks([])
-            prepForRecording()
-            break
-      }
-   }
-
-   const handlePauseResume = () => {
-      if (mediaRecorder.state === "paused") {
-         mediaRecorder.resume()
-
-         if (mediaRecorder.state === "inactive") {
-            setErrors("Recorder is inactive")
-         }
-      } else {
-         mediaRecorder.pause()
-      }
-   }
-
-   useEffect(() => {
-      let interval = setInterval(() => {
-         if (mediaRecorder.state === "recording") {
-            if (seconds >= 0) {
-               setSeconds(seconds + 1)
-            }
-            if (seconds === 59) {
-               setMinutes(minutes + 1)
-               setSeconds(0)
-            }
-         }
-         if (mediaRecorder.state === "paused" || mediaChunks.length > 0) {
-            setSeconds(seconds)
-            setMinutes(minutes)
-         }
-      }, 1000)
-      return () => clearInterval(interval)
-   }, [seconds])
+   const [attachedCustom, setAttachedCustom] = useState(false)
 
    const handleNewMed = e => handleChange(e, setNewMed, newMed)
    const handleFile = e => setNewMed({ ...newMed, audio_file: e.target.files[0] })
@@ -151,6 +56,7 @@ export default function CreatePage() {
    async function handleSubmit(e) {
       e.preventDefault()
       setLoading(true)
+
       const formData = new FormData()
       for (let key in newMed) {
          formData.append(key, newMed[key])
@@ -159,7 +65,6 @@ export default function CreatePage() {
       axios
          .post("http://localhost:3000/meditations", formData)
          .then(res => {
-            debugger
             dispatch(addMed(res.data))
          })
          .then(() => {
@@ -172,8 +77,6 @@ export default function CreatePage() {
    const handleStayOnPage = () => {
       setSuccess(false)
       setPrepRecord(false)
-      setRecordingState(false)
-      setSeconds(0)
    }
 
    return (
@@ -196,14 +99,9 @@ export default function CreatePage() {
                   </DialogContentText>
                </DialogContent>
                <DialogActions>
-                  <IconButton onClick={() => history.push("/profile")}>
-                     {" "}
-                     <PageviewIcon />
-                  </IconButton>
-                  <IconButton onClick={handleStayOnPage}>
-                     {" "}
-                     <AddCircleIcon />
-                  </IconButton>
+                  {makeIconBtn(PageviewIcon, () => history.push("/profile"))}
+
+                  {makeIconBtn(AddCircleIcon, handleStayOnPage)}
                </DialogActions>
             </Dialog>
          )}
@@ -261,7 +159,7 @@ export default function CreatePage() {
                <MenuItem value="Sleep">Sleep</MenuItem>
             </StyledSelect>
             <br />
-            {recordingState !== "Uploaded" ? (
+            {!attachedCustom ? (
                <>
                   <input
                      accept="audio/*"
@@ -287,50 +185,17 @@ export default function CreatePage() {
             <ReverseTightButton onClick={handleSubmit}>Submit</ReverseTightButton>
          </form>
          <br />
-         <TightButton onClick={prepForRecording}>Record File</TightButton>
+         <TightButton onClick={() => setPrepRecord(true)}>Record File</TightButton>
          <br />
          {prepRecord && (
-            <Dialog open={prepRecord}>
-               <DialogTitle>Recording Interface</DialogTitle>
-               <DialogContent>
-                  <p>
-                     {minutes} : {seconds >= 10 ? seconds : `0${seconds}`}{" "}
-                     {mediaRecorder.state === "paused" && "Paused"}
-                  </p>
-                  {recordingState === "Uploaded" && (
-                     <>
-                        <br />
-                        <audio width="50%" controls src={previewUrl} />
-                        <br />
-                     </>
-                  )}
-               </DialogContent>
-               <DialogActions>
-                  <IconButton onClick={handleRecording}>
-                     {recordingState === false ? (
-                        <RecordVoiceOverIcon />
-                     ) : recordingState === true ? (
-                        <FiberManualRecordIcon />
-                     ) : recordingState === "Recording" ? (
-                        <StyledRecordingIcon />
-                     ) : recordingState === "Recorded" ? (
-                        <AttachFileIcon />
-                     ) : (
-                        <RedoIcon />
-                     )}
-                  </IconButton>
-                  {recordingState === "Uploaded" && (
-                     <IconButton onClick={() => setPrepRecord(false)}>
-                        <CheckIcon />
-                     </IconButton>
-                  )}
-                  {mediaRecorder.state !== "inactive" && (
-                     <IconButton onClick={handlePauseResume}>
-                        <StyledArrow /> <StyledPause />
-                     </IconButton>
-                  )}
-               </DialogActions>
-            </Dialog>
+            <RecordingDialog
+               setErrors={setErrors}
+               setPrepRecord={setPrepRecord}
+               prepRecord={prepRecord}
+               setNewMed={setNewMed}
+               newMed={newMed}
+               setAttachedCustom={setAttachedCustom}
+            />
          )}
       </TightCard>
    )

@@ -4,7 +4,7 @@ import { createConfig } from "../functions"
 import { useSelector, useDispatch } from "react-redux"
 import { logoutT } from "./store/teacherReducer"
 import { logoutS } from "./store/studentReducer"
-import { Toolbar, Typography, IconButton, Menu, MenuItem } from "@material-ui/core"
+import { Toolbar, IconButton, Menu, MenuItem } from "@material-ui/core"
 import HomeIcon from "@material-ui/icons/Home"
 import ContactMailIcon from "@material-ui/icons/ContactMail"
 import { styled } from "@material-ui/core/styles"
@@ -14,6 +14,7 @@ import FindInPageIcon from "@material-ui/icons/FindInPage"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import AddCircleIcon from "@material-ui/icons/AddCircle"
 import { StyledAppBar, SmallLogo } from "./styles"
+import { makeIconBtn } from "../functions"
 
 const StyledMenuBtn = styled(IconButton)({
    marginRight: "38%",
@@ -24,8 +25,6 @@ export default function Navbar() {
    const dispatch = useDispatch()
    const history = useHistory()
    const [anchorEl, setAnchorEl] = useState(null)
-   // let lastId = ""
-   // if (user.type !== "teacher") lastId = user.plays[user.plays.length - 1].id
 
    async function handleLogOut() {
       const res = await fetch("/log_in", createConfig("DELETE"))
@@ -53,57 +52,39 @@ export default function Navbar() {
 
             <SmallLogo src="https://i.imgur.com/OS0kSRb.png?1" />
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-               <MenuItem onClick={handleClose}>
-                  <NavLink to="/landing">
+               <NavLink to="/landing">
+                  <MenuItem onClick={handleClose}> Home {makeIconBtn(HomeIcon, null)}</MenuItem>
+               </NavLink>
+               <NavLink to="/profile">
+                  <MenuItem onClick={handleClose}>
                      {" "}
-                     Home{" "}
-                     <IconButton>
-                        <HomeIcon />
-                     </IconButton>
-                  </NavLink>
-               </MenuItem>
-               <MenuItem onClick={handleClose}>
-                  <NavLink to="/profile"> Profile</NavLink>
-                  <IconButton>
-                     {" "}
-                     <AccountCircle />
-                  </IconButton>
-               </MenuItem>
+                     Profile {makeIconBtn(AccountCircle, null)}
+                  </MenuItem>
+               </NavLink>
                {user.type === "teacher" ? (
-                  <MenuItem onClick={handleClose}>
-                     <NavLink to="/create"> Create</NavLink>
-                     <IconButton>
-                        {" "}
-                        <AddCircleIcon />
-                     </IconButton>
-                  </MenuItem>
-               ) : (
-                  <MenuItem onClick={handleClose}>
-                     <NavLink to="/search"> Search </NavLink>
-                     <IconButton>
-                        {" "}
-                        <FindInPageIcon />
-                     </IconButton>
-                  </MenuItem>
-               )}
-               <MenuItem onClick={handleClose}>
-                  <NavLink to="/interact"> Interact</NavLink>
-                  <IconButton>
-                     {" "}
-                     <ContactMailIcon />
-                  </IconButton>
-               </MenuItem>
-               <MenuItem onClick={handleClose}>
-                  <NavLink to="/" onClick={handleLogOut}>
-                     {" "}
-                     Logout
+                  <NavLink to="/create">
+                     <MenuItem onClick={handleClose}>
+                        Create {makeIconBtn(AddCircleIcon, null)}
+                     </MenuItem>
                   </NavLink>
-                  <IconButton>
-                     {" "}
-                     <ExitToAppIcon />
-                  </IconButton>
-               </MenuItem>
+               ) : (
+                  <NavLink to="/search">
+                     <MenuItem onClick={handleClose}>
+                        Search {makeIconBtn(FindInPageIcon, null)}
+                     </MenuItem>
+                  </NavLink>
+               )}
+               <NavLink to="/interact">
+                  <MenuItem onClick={handleClose}>
+                     Interact
+                     {makeIconBtn(ContactMailIcon, null)}
+                  </MenuItem>
+               </NavLink>
             </Menu>
+            <NavLink style={{ marginLeft: "35%" }} to="/">
+               {" "}
+               {makeIconBtn(ExitToAppIcon, handleLogOut)}
+            </NavLink>
          </Toolbar>
       </StyledAppBar>
    )

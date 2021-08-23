@@ -158,13 +158,6 @@ export const StyledLogo = styled("img")({
    width: "50%",
 })
 
-export const Banner = (
-   <img
-      style={{ width: "100%", height: "150px" }}
-      src="https://images.unsplash.com/photo-1471520201477-47a62a269a87?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2250&q=80"
-   />
-)
-
 export const StyledPlayer = styled(ReactPlayer)({
    background: `linear-gradient(45deg, ${primaryColor} 30%, ${secondaryColor} 90%)`,
 })

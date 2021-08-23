@@ -13,9 +13,7 @@ import {
    DialogTitle,
    CardHeader,
    CardContent,
-   DialogContent,
    DialogActions,
-   Card,
 } from "@material-ui/core"
 import {
    TightButton,

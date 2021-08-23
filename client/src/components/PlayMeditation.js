@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
-import ReactPlayer from "react-player"
+import React, { useEffect, useState } from "react"
 import { makeLinkForBlob, createConfig } from "../functions"
 import { useSelector, useDispatch } from "react-redux"
 import { addPlay } from "./store/studentReducer"
@@ -7,16 +6,13 @@ import { useHistory, useParams } from "react-router-dom"
 import { styled } from "@material-ui/core/styles"
 import {
    CircularProgress,
-   Card,
    CardHeader,
    DialogActions,
    Dialog,
-   Slide,
    DialogTitle,
    DialogContent,
    DialogContentText,
    Box,
-   Typography,
 } from "@material-ui/core"
 import {
    primaryColor,
@@ -111,7 +107,6 @@ export default function PlayMeditation() {
                   <DialogContent>
                      <DialogContentText>{success}</DialogContentText>
                   </DialogContent>
-                  <DialogActions></DialogActions>
                </Dialog>
             </p>
          )}

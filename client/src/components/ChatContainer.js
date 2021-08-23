@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { handleChange, createConfig } from "../functions"
+import { handleChange, createConfig, makeIconBtn } from "../functions"
 import { useDispatch } from "react-redux"
 import { addMessage, deleteChat } from "./store/teacherReducer"
-import { IconButton, Avatar } from "@material-ui/core"
+import { Avatar } from "@material-ui/core"
 import {
    StyledSend,
    StyledCancel,
@@ -30,8 +30,6 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
    const [errors, setErrors] = useState(false)
    const dispatch = useDispatch()
 
-   console.log(c)
-
    const handleContent = e => handleChange(e, setMessage, message)
    async function handleMessageSubmit(e) {
       e.preventDefault()
@@ -39,7 +37,6 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
       const res = await fetch(`/messages`, createConfig("POST", message))
       const data = await res.json()
       setMessage(initialMessage)
-      console.log(data)
       if (data.id) {
          //dispatch(addMessage(data))
          handleAdd()
@@ -59,10 +56,7 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
          {" "}
          <TightPaper>
             {" "}
-            <IconButton>
-               {" "}
-               <StyledHelp />
-            </IconButton>{" "}
+            {makeIconBtn(StyledHelp, null)}
             {c.messages[0].username} asked: " {c.title} "
          </TightPaper>
          <ul>
@@ -93,16 +87,10 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
                type="textarea"
                placeholder="Respond"
             />
-            <IconButton type="submit">
-               {" "}
-               <StyledSend />{" "}
-            </IconButton>
+            {makeIconBtn(StyledSend, null, true)}
          </form>
          <br />
-         <IconButton onClick={() => handleCloseChat(c.id)}>
-            {" "}
-            <StyledCancel />
-         </IconButton>
+         {makeIconBtn(StyledCancel, () => handleCloseChat(c.id))}
       </>
    )
 }

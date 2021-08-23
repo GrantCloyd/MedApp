@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import MedLineItem from "./MedLineItem"
-import { medTypes } from "../constants"
 import { useHistory } from "react-router-dom"
 import { TightButton, StyledDropDown } from "./styles"
 import { InputLabel, MenuItem, Grid, FormControl } from "@material-ui/core"

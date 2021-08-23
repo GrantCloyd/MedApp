@@ -3,18 +3,10 @@ import { useSelector, useDispatch } from "react-redux"
 import { createConfig } from "../functions"
 import { removeFollow } from "./store/studentReducer"
 import { useHistory } from "react-router-dom"
-import { FormControlLabel, Switch } from "@material-ui/core"
+import { FormControlLabel } from "@material-ui/core"
 import StudentMedButtons from "./StudentMedButtons"
-import {
-   Card,
-   IconButton,
-   CardHeader,
-   CardContent,
-   Grid,
-   CardActions,
-   CardMedia,
-} from "@material-ui/core"
-import { TightCard, StyledSwitch, StyledButton } from "./styles"
+import { CardHeader, CardContent, Grid, CardActions, CardMedia } from "@material-ui/core"
+import { TightCard, StyledSwitch } from "./styles"
 
 export default function LandingS({ favorites, follows, most_pop_med }) {
    const followsTecherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
@@ -58,8 +50,6 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
          </CardActions>
       </TightCard>
    ))
-
-   console.log(favorites)
 
    const favoriteDisplay = favorites.map(m => (
       <li key={m.id}>

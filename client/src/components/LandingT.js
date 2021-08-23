@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 
 export default function LandingT({ chats, last_med }) {
    const [lastTime, setLastTime] = useState("")
-   let lastMedTime
 
    useEffect(() => {
       const currTime = new Date()
@@ -13,7 +12,7 @@ export default function LandingT({ chats, last_med }) {
       const phrase = string => `It's been ${string} since you last made new content`
 
       if (last_med.length > 0) {
-         lastMedTime = new Date(last_med[0].created_at)
+         let lastMedTime = new Date(last_med[0].created_at)
 
          const mLastDay = lastMedTime.getDate()
          const mLastMonth = lastMedTime.getMonth()
@@ -31,7 +30,7 @@ export default function LandingT({ chats, last_med }) {
             setLastTime(phrase(`${currDay - mLastDay} day(s)`))
          }
       }
-   }, [])
+   }, [last_med])
 
    return (
       <div>

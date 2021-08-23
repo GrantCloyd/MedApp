@@ -12,7 +12,7 @@ import PlayMeditation from "./components/PlayMeditation"
 import { Container } from "@material-ui/core"
 import { Route, Switch } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { gradient, Banner } from "./components/styles"
+import { gradient } from "./components/styles"
 
 function App() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))

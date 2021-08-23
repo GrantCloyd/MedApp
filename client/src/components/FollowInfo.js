@@ -8,10 +8,8 @@ import {
    StyledTextField,
    StyledSend,
    ReverseTightButton,
-   secondaryColor,
 } from "./styles"
 import {
-   IconButton,
    ButtonGroup,
    Dialog,
    DialogActions,
@@ -19,8 +17,8 @@ import {
    DialogContent,
    Snackbar,
 } from "@material-ui/core"
-
 import Alert from "@material-ui/lab/Alert"
+import { makeIconBtn } from "../functions"
 
 export default function FollowInfo({
    followMessage,
@@ -76,7 +74,6 @@ export default function FollowInfo({
    async function createDonation(e) {
       e.preventDefault()
 
-      console.log(donation)
       const res = await fetch(`/donations`, createConfig("POST", donation))
       const data = await res.json()
       if (data.id) {
@@ -139,13 +136,8 @@ export default function FollowInfo({
                   </form>
                </DialogContent>
                <DialogActions>
-                  <IconButton onClick={createDonation}>
-                     {" "}
-                     <StyledSend />{" "}
-                  </IconButton>
-                  <IconButton onClick={() => setToggleDonate(!toggleDonate)}>
-                     <StyledCancel />{" "}
-                  </IconButton>
+                  {makeIconBtn(StyledSend, createDonation)}
+                  {makeIconBtn(StyledCancel, () => setToggleDonate(!toggleDonate))}
                </DialogActions>
             </Dialog>
          )}
@@ -178,13 +170,8 @@ export default function FollowInfo({
                   <p>from: {userName}</p>
                </DialogContent>
                <DialogActions>
-                  <IconButton onClick={handleSubmitQuestion}>
-                     {" "}
-                     <StyledSend />{" "}
-                  </IconButton>
-                  <IconButton onClick={() => setToggleQuestion(!toggleQuestion)}>
-                     <StyledCancel />{" "}
-                  </IconButton>
+                  {makeIconBtn(StyledSend, handleSubmitQuestion)}
+                  {makeIconBtn(StyledCancel, () => setToggleQuestion(!toggleQuestion))}
                </DialogActions>
             </Dialog>
          )}

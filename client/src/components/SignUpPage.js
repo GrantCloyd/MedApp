@@ -2,14 +2,7 @@ import React, { useState } from "react"
 import { createConfig } from "../functions"
 import { handleChange } from "../functions"
 import { useHistory } from "react-router-dom"
-import {
-   TextField,
-   Container,
-   Card,
-   RadioGroup,
-   FormLabel,
-   FormControlLabel,
-} from "@material-ui/core"
+import { Container, Card, RadioGroup, FormLabel, FormControlLabel } from "@material-ui/core"
 import { StyledButton, StyledTextField, StyledRad, StyledLogo, CenterCon } from "./styles"
 
 export default function SignUpPage() {

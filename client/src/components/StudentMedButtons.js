@@ -5,9 +5,10 @@ import { addFavorite, removeFav } from "./store/studentReducer"
 import { useHistory } from "react-router"
 import { CardActions, IconButton, Avatar } from "@material-ui/core"
 import { styled } from "@material-ui/core/styles"
-import { primaryColor, secondaryColor, StyledFaceIcon, StyledArrow } from "./styles"
+import { StyledArrow } from "./styles"
 import FavoriteIcon from "@material-ui/icons/Favorite"
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder"
+import { makeIconBtn } from "../functions"
 
 const StyledFavIcon = styled(FavoriteIcon)({
    color: `#BA1B1D`,
@@ -39,31 +40,19 @@ export default function StudentMedButtons({ medId, teaId, teaImg }) {
       dispatch(removeFav(data))
    }
 
-   console.log(teaImg)
+   const findFavId = () => user.favorites.find(f => f.meditation_id === medId).id
 
    return (
       <CardActions>
          {" "}
-         <IconButton onClick={() => history.push(`/playingnow/${medId}`)}>
-            <StyledArrow />
-         </IconButton>
+         {makeIconBtn(StyledArrow, () => history.push(`/playingnow/${medId}`))}
          <IconButton onClick={() => history.push(`/teachers/${teaId}`)}>
             {" "}
-            <Avatar src={teaImg} />{" "}
+            <Avatar alt="teacher-prof" src={teaImg} />{" "}
          </IconButton>
-         {favMedsIds.includes(medId) ? (
-            <IconButton
-               onClick={() =>
-                  handleDeleteFav(user.favorites.find(f => f.meditation_id === medId).id)
-               }>
-               <StyledFavIcon />
-            </IconButton>
-         ) : (
-            <IconButton onClick={() => handleFavorite(medId)}>
-               {" "}
-               <StyledNotFavIcon />
-            </IconButton>
-         )}
+         {favMedsIds.includes(medId)
+            ? makeIconBtn(StyledFavIcon, () => handleDeleteFav(findFavId()))
+            : makeIconBtn(StyledNotFavIcon, () => handleFavorite(medId))}
       </CardActions>
    )
 }
