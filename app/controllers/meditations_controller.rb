@@ -28,7 +28,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid
      med = Meditation.find(params[:id])
      currentL = med.teacher.meditations.length
      last_med = med.teacher.meditations.order(created_at: :desc).slice(1)
-     
      med.destroy
      render json: {id: med.id, last_med: last_med}
    end

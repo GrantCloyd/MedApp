@@ -52,20 +52,18 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
    ))
 
    const favoriteDisplay = favorites.map(m => (
-      <li key={m.id}>
-         <TightCard>
-            <CardContent>
-               {" "}
-               <CardHeader title={m.meditation.title} />
-               {m.teacher_name} <br /> {m.meditation.est_length} minutes
-            </CardContent>
-            <StudentMedButtons
-               medId={m.meditation.id}
-               teaId={m.meditation.teacher_id}
-               teaImg={m.teacher_image}
-            />
-         </TightCard>
-      </li>
+      <TightCard key={m.id}>
+         <CardContent>
+            {" "}
+            <CardHeader title={m.meditation.title} />
+            {m.teacher_name} <br /> {m.meditation.est_length} minutes
+         </CardContent>
+         <StudentMedButtons
+            medId={m.meditation.id}
+            teaId={m.meditation.teacher_id}
+            teaImg={m.teacher_image}
+         />
+      </TightCard>
    ))
 
    const popularDisplay = [most_pop_med].map(m => (
@@ -85,7 +83,13 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
             <h4>Set up the teachers you'd like to follow and favorite meditations! </h4>
          )}
          <h3>Favorites:</h3>
-         {favoriteDisplay.length === 0 ? <p>No Favorites Yet </p> : <ul>{favoriteDisplay}</ul>}
+         {favoriteDisplay.length === 0 ? (
+            <p>No Favorites Yet </p>
+         ) : (
+            <Grid container direction="row" justifyContent="center" alignItems="center">
+               {favoriteDisplay}
+            </Grid>
+         )}
          <h3>Following:</h3>
          {followsDisplay.length === 0 ? (
             <p>No follows yet</p>

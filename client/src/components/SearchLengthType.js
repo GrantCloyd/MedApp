@@ -21,29 +21,29 @@ export default function SearchLengthType({ meditations }) {
       setTime(e.target.value)
    }
 
-   const handleFilter = (time, type) => {
-      const filteredType = () => {
-         if (type === "--select-one--") {
-            return meditations
-         } else {
-            return meditations.filter(m => m.med_type === type)
-         }
+   const filteredType = type => {
+      if (type === "--select-one--") {
+         return meditations
+      } else {
+         return meditations.filter(m => m.med_type === type)
       }
+   }
+   const filteredLength = (array, time) => {
+      if (+time === 0) {
+         return array
+      }
+      if (time < 30) {
+         return array.filter(m => m.est_length <= time && m.est_length >= time - 4)
+      }
+      if (time === 30) {
+         return array.filter(m => m.est_length <= time && m.est_length >= time - 9)
+      } else {
+         return array.filter(m => m.est_length <= time && m.est_length >= time - 14)
+      }
+   }
 
-      const filteredLength = () => {
-         if (+time === 0) {
-            return filteredType()
-         }
-         if (time < 30) {
-            return filteredType().filter(m => m.est_length <= time && m.est_length >= time - 4)
-         }
-         if (time === 30) {
-            return filteredType().filter(m => m.est_length <= time && m.est_length >= time - 9)
-         } else {
-            return filteredType().filter(m => m.est_length <= time && m.est_length >= time - 14)
-         }
-      }
-      const filtered = filteredLength().map(m => (
+   const handleFilter = (time, type) => {
+      const filtered = filteredLength(filteredType(type), time).map(m => (
          <MedLineItem clickHandler={handleSelection} key={m.id} m={m} />
       ))
       setFiltered(filtered)
