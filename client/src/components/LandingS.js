@@ -41,7 +41,7 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
                   <StyledSwitch
                      color="primary"
                      name="followSwitch"
-                     checked={id => followerStatus(id)}
+                     checked={followerStatus(f.teacher.id)}
                      onChange={() => handleUnfollow(f.id)}
                   />
                }

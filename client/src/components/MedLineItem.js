@@ -26,9 +26,8 @@ export default function MedLineItem({ m, clickHandler = null }) {
          condition={clickHandler}
          wrapper1={children => <TightCard>{children}</TightCard>}
          wrapper2={children => <Card>{children}</Card>}>
-         <p>
-            <StyledAvatar alt={m.teacher.name} src={m.teacher.image_url} />
-         </p>
+         <StyledAvatar alt={m.teacher.name} src={m.teacher.image_url} />
+         <br />
          <CardHeader title={m.title}> </CardHeader>
 
          <CardContent>

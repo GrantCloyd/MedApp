@@ -3,13 +3,13 @@ import { updateIncome } from "./store/teacherReducer"
 import { useSelector, useDispatch } from "react-redux"
 import MeditationLi from "./MeditationLi"
 import { createConfig } from "../functions"
-import { Grid, CardHeader } from "@material-ui/core"
-import { TightCard, TightButton } from "./styles"
+import { Grid, CardHeader, Paper, Dialog, DialogTitle, DialogContent } from "@material-ui/core"
+import { TightCard, TightButton, PaddedDialogContent } from "./styles"
 
 export default function TeacherProfile() {
    const user = useSelector(state => state.teacher)
    const dispatch = useDispatch()
-   const [errors, setMessage] = useState(false)
+   const [message, setMessage] = useState(false)
 
    const medDisplay = user.meditations.map(m => <MeditationLi key={m.id} m={m} />)
 
@@ -22,7 +22,7 @@ export default function TeacherProfile() {
          setTimeout(() => {
             setMessage(false)
             dispatch(updateIncome(data))
-         }, 1500)
+         }, 2200)
       } else {
          setMessage(`Your information has not been updated, ${data.error}`)
       }
@@ -46,13 +46,19 @@ export default function TeacherProfile() {
                      {user.most_donated_student.amount})
                   </p>{" "}
                   <p>Lifetime Income: ${Number(user.total_income).toFixed(2)}</p>
-                  {errors && <p>{errors}</p>}
+                  {message && (
+                     <Dialog open={message}>
+                        <DialogTitle> Withdrawl Information</DialogTitle>
+                        <PaddedDialogContent>{message}</PaddedDialogContent>
+                        <br />
+                     </Dialog>
+                  )}
                   {Number(user.income).toFixed(2) > 0 && (
-                     <>
+                     <Paper>
                         <p>Current Income: ${Number(user.income).toFixed(2)}</p>
                         <TightButton onClick={handleWithdraw}>Withdraw</TightButton>
-                        <p>Withdrawls are split 80/20 with Here|Now</p>
-                     </>
+                        <p>**Withdrawls are split 80/20 with Here|Now</p>
+                     </Paper>
                   )}
                </>
             ) : (

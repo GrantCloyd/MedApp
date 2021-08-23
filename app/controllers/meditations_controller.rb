@@ -14,7 +14,9 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid
 
    def create
       meditation = Meditation.create!(med_params)
-      render json: meditation
+      render json: meditation 
+   rescue ActiveSupport::MessageVerifier::InvalidSignature 
+    render json: {error: "make sure you have a title, description, length, type, and an attached audio file"}
    end
 
    def update 

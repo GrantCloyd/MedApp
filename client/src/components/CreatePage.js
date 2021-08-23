@@ -56,6 +56,7 @@ export default function CreatePage() {
    async function handleSubmit(e) {
       e.preventDefault()
       setLoading(true)
+      setErrors(false)
 
       const formData = new FormData()
       for (let key in newMed) {
@@ -65,12 +66,17 @@ export default function CreatePage() {
       axios
          .post("http://localhost:3000/meditations", formData)
          .then(res => {
-            dispatch(addMed(res.data))
+            if (res.data.id) {
+               dispatch(addMed(res.data))
+               setSuccess(true)
+               setNewMed(initialState)
+            }
+            if (res.data.error) {
+               setErrors(`Something went wrong, ${res.data.error}`)
+            }
          })
          .then(() => {
             setLoading(false)
-            setSuccess(true)
-            setNewMed(initialState)
          })
    }
 
