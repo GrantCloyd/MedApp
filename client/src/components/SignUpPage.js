@@ -3,7 +3,14 @@ import { createConfig } from "../functions"
 import { handleChange } from "../functions"
 import { useHistory } from "react-router-dom"
 import { Container, Card, RadioGroup, FormLabel, FormControlLabel } from "@material-ui/core"
-import { StyledButton, StyledTextField, StyledRad, StyledLogo, CenterCon } from "./styles"
+import {
+   StyledButton,
+   StyledTextField,
+   StyledRad,
+   StyledLogo,
+   CenterLogo,
+   CenterCon,
+} from "./styles"
 
 export default function SignUpPage() {
    const initialState = {
@@ -40,8 +47,10 @@ export default function SignUpPage() {
       <Card>
          <CenterCon>
             <p>
-               {" "}
-               <StyledLogo src="https://i.imgur.com/OS0kSRb.png?1" />
+               <CenterLogo>
+                  {" "}
+                  <StyledLogo src="https://i.imgur.com/OS0kSRb.png?1" />
+               </CenterLogo>
             </p>
             <h2>Sign Up Here!</h2>
             {errors && <p>{errors}</p>}

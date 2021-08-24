@@ -157,6 +157,7 @@ export const TightPaper = styled(Paper)({
 
 export const StyledLogo = styled("img")({
    width: "50%",
+   marginRight: "150x",
 })
 
 export const StyledPlayer = styled(ReactPlayer)({
@@ -193,4 +194,8 @@ export const StyledOutlineBtn = styled(Button)({
    width: "35%",
    color: `${primaryColor}`,
    marginLeft: "5%",
+})
+
+export const CenterLogo = styled("div")({
+   marginLeft: "-12%",
 })

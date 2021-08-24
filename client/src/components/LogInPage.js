@@ -12,8 +12,18 @@ import {
    CenterCon,
    StyledOutlineBtn,
    StyledLogo,
+   CenterLogo,
 } from "./styles"
 import { teacherGuest, studentGuest } from "./store/guestUsers"
+import { styled } from "@material-ui/core/styles"
+
+const CenteringHeaderDiv = styled("div")({
+   marginLeft: "3%",
+})
+
+const CenteringGuestDiv = styled("div")({
+   marginLeft: "-4.5%",
+})
 
 export default function LogInPage() {
    const initialState = {
@@ -61,14 +71,14 @@ export default function LogInPage() {
    return (
       <Card>
          <CenterCon>
-            <p>
+            <CenterLogo>
                {" "}
                <StyledLogo src="https://i.imgur.com/OS0kSRb.png?1" />
-            </p>
-
-            <h2>Log-In </h2>
+            </CenterLogo>
+            <CenteringHeaderDiv>
+               <h2>Log-In Here!</h2>
+            </CenteringHeaderDiv>
             {errors && <p>{errors}</p>}
-
             <form onSubmit={handleLogIn}>
                <StyledTextField
                   onChange={handleLogInChange}
@@ -108,22 +118,25 @@ export default function LogInPage() {
                      />
                   </RadioGroup>
                </Container>
-               <StyledButton type="submit">Submit</StyledButton>
-            </form>
-            <p>
-               {" "}
-               Don't have a login? <Link to="/signup">Sign up here! </Link>{" "}
-            </p>
-            <StyledOutlineBtn
-               onClick={() => {
-                  handleGuest("teacher")
-               }}>
-               Continue as Guest Teacher
-            </StyledOutlineBtn>
-            <br />
-            <StyledOutlineBtn onClick={() => handleGuest("student")}>
-               Continue as Guest Student
-            </StyledOutlineBtn>
+               <CenteringGuestDiv>
+                  <StyledButton type="submit">Submit</StyledButton>
+               </CenteringGuestDiv>
+            </form>{" "}
+            <CenteringGuestDiv>
+               <p>
+                  Don't have a login? <Link to="/signup">Sign up here! </Link>{" "}
+               </p>
+               <StyledOutlineBtn
+                  onClick={() => {
+                     handleGuest("teacher")
+                  }}>
+                  Continue as Guest Teacher
+               </StyledOutlineBtn>
+               <br />
+               <StyledOutlineBtn onClick={() => handleGuest("student")}>
+                  Continue as Guest Student
+               </StyledOutlineBtn>
+            </CenteringGuestDiv>
          </CenterCon>
       </Card>
    )
