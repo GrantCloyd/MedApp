@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
-
 import { CardHeader, CardMedia, ButtonGroup, CardContent, Grid } from "@material-ui/core"
 import { TightButton, ReverseTightButton, TightCard } from "./styles"
+import { styled } from "@material-ui/core/styles"
+
+const TeacherPictureSmall = styled(CardMedia)({
+   height: "200px",
+})
 
 export default function SearchTeacher({ meditations }) {
    const teachers = meditations
@@ -24,7 +28,7 @@ export default function SearchTeacher({ meditations }) {
    const teachersDisplay = sortedTeachers.map(t => (
       <TightCard onClick={() => history.push(`/teachers/${t.id}`)} key={t.id}>
          <CardHeader title={t.name} />
-         <CardMedia style={{ height: "200px" }} alt={t.name} image={t.image_url} />
+         <TeacherPictureSmall alt={t.name} image={t.image_url} />
          <CardContent>
             Listens: {t.total_listens} <br /> Meditations: {t.med_number}
          </CardContent>

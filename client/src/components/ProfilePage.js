@@ -25,6 +25,13 @@ import {
 } from "./styles"
 import MailOutlineIcon from "@material-ui/icons/MailOutline"
 import PermIdentityIcon from "@material-ui/icons/PermIdentity"
+import { styled } from "@material-ui/core/styles"
+
+const ProfileImage = styled("img")({
+   height: "30%",
+   width: "30%",
+   objectFit: "contain",
+})
 
 export default function ProfilePage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
@@ -66,7 +73,7 @@ export default function ProfilePage() {
          {user.type === "teacher" && (
             <>
                {" "}
-               <img alt={user.image_name} src={user.image_url} />{" "}
+               <ProfileImage alt={user.image_name} src={user.image_url} />{" "}
             </>
          )}
          <br />

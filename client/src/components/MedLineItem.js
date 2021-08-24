@@ -18,6 +18,10 @@ const StyledAvatar = styled(Avatar)({
    marginLeft: "8px",
 })
 
+const PaddedPaper = styled(Paper)({
+   padding: "10px",
+})
+
 const ConditionalWrapper = ({ condition, wrapper1, wrapper2, children }) =>
    condition ? wrapper1(children) : wrapper2(children)
 
@@ -33,10 +37,10 @@ export default function MedLineItem({ m, clickHandler = null }) {
          <CardHeader title={m.title}> </CardHeader>
 
          <CardContent>
-            <Paper style={{ padding: "10px" }}>
+            <PaddedPaper>
                {" "}
                Type: {m.med_type} <br /> <br /> <StyledInfo /> {m.description}
-            </Paper>{" "}
+            </PaddedPaper>{" "}
             {makeIconBtn(TimerIcon, null)}
             {m.est_length} minutes{" "}
             {clickHandler === null && m.listens !== undefined && (

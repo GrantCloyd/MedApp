@@ -1,21 +1,14 @@
 import React, { useState } from "react"
 import { handleChange, createConfig, makeIconBtn } from "../functions"
-
 import { Avatar } from "@material-ui/core"
 import {
    StyledSend,
    StyledCancel,
    TightCard,
    TightPaper,
-   primaryColor,
    StyledTextField,
+   StyledHelp,
 } from "./styles"
-import LiveHelpIcon from "@material-ui/icons/LiveHelp"
-import { styled } from "@material-ui/core/styles"
-
-const StyledHelp = styled(LiveHelpIcon)({
-   color: `${primaryColor}`,
-})
 
 export default function ChatContainer({ handleDelete, handleAdd, userType, userName, c }) {
    const initialMessage = {

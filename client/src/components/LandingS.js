@@ -7,6 +7,11 @@ import { FormControlLabel } from "@material-ui/core"
 import StudentMedButtons from "./StudentMedButtons"
 import { CardHeader, CardContent, Grid, CardActions, CardMedia } from "@material-ui/core"
 import { TightCard, StyledSwitch } from "./styles"
+import { styled } from "@material-ui/core/styles"
+
+const TeacherImage = styled(CardMedia)({
+   height: "300px",
+})
 
 export default function LandingS({ favorites, follows, most_pop_med }) {
    const followsTecherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
@@ -28,11 +33,7 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
       <TightCard>
          <div onClick={() => history.push(`/teachers/${f.teacher.id}`)}>
             <CardHeader title={f.teacher.name} />
-            <CardMedia
-               style={{ height: "300px" }}
-               alt={f.teacher.name}
-               image={f.teacher.image_url.toString()}
-            />
+            <TeacherImage alt={f.teacher.name} image={f.teacher.image_url.toString()} />
          </div>
          <CardActions>
             {" "}

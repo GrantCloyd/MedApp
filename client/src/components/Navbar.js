@@ -24,6 +24,10 @@ const StyledExit = styled(ExitToAppIcon)({
    color: "white",
 })
 
+const ExitLink = styled(NavLink)({
+   marginLeft: "35%",
+})
+
 export default function Navbar() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
    const dispatch = useDispatch()
@@ -85,10 +89,7 @@ export default function Navbar() {
                   </MenuItem>
                </NavLink>
             </Menu>
-            <NavLink style={{ marginLeft: "35%" }} to="/">
-               {" "}
-               {makeIconBtn(StyledExit, handleLogOut)}
-            </NavLink>
+            <ExitLink to="/"> {makeIconBtn(StyledExit, handleLogOut)}</ExitLink>
          </Toolbar>
       </StyledAppBar>
    )

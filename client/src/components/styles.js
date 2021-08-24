@@ -18,6 +18,7 @@ import SendIcon from "@material-ui/icons/Send"
 import BlockIcon from "@material-ui/icons/Block"
 import ReactPlayer from "react-player"
 import SaveIcon from "@material-ui/icons/Save"
+import LiveHelpIcon from "@material-ui/icons/LiveHelp"
 
 export const primaryColor = "#56A3A6"
 export const secondaryColor = "#21CBF3"
@@ -178,4 +179,8 @@ export const PaddedDialogContent = styled(DialogContent)({
    padding: "30px 90px",
 
    width: "65%",
+})
+
+export const StyledHelp = styled(LiveHelpIcon)({
+   color: `${primaryColor}`,
 })
