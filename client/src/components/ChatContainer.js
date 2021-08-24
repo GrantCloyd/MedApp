@@ -29,7 +29,6 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
       const data = await res.json()
       setMessage(initialMessage)
       if (data.id) {
-         //dispatch(addMessage(data))
          handleAdd()
       } else {
          setErrors(`Something went wrong: ${data.error}`)

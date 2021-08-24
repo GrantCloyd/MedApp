@@ -23,7 +23,7 @@ export default function StudentProfile() {
 
    return (
       <div>
-         <TightPaper>
+         <TightPaper elevation={2}>
             <h2>Stats:</h2>
             {user.total_listens > 0 ? (
                <p> Total Sessions: {user.total_listens}</p>
@@ -32,19 +32,16 @@ export default function StudentProfile() {
             )}
             <p>Total Time Meditated: {user.total_time} minutes </p>
          </TightPaper>
-         <h3>Recent Sessions:</h3>
-         {mostRecent}
-         <TightButton onClick={() => setShowRecent(!showRecent)}>Show More Recent</TightButton>
-         {showRecent && <ul>{recentMeds}</ul>}
+
          <h3>Donations</h3>
          {user.donations.length > 0 ? (
-            <TightPaper>
+            <TightPaper elevation={2}>
                {" "}
                <p> Total: ${Number(user.total_donations).toFixed(2)}</p>
-               <p> Number of Donations:{user.donations.length}</p>
+               <p> Number of Donations: {user.donations.length}</p>
                <p>
                   Most Donated by Amount to a Teacher: {user.most_donated_by_amount.teacher_name} ($
-                  {Number(user.most_donated_by_amount.amount).toFixed(2)} )
+                  {Number(user.most_donated_by_amount.amount).toFixed(2)})
                </p>
                <p>
                   {" "}
@@ -55,6 +52,10 @@ export default function StudentProfile() {
          ) : (
             <p>You've made no donations yet</p>
          )}
+         <h3>Recent Sessions:</h3>
+         {mostRecent}
+         <TightButton onClick={() => setShowRecent(!showRecent)}>Show More Recent</TightButton>
+         {showRecent && <ul>{recentMeds}</ul>}
       </div>
    )
 }

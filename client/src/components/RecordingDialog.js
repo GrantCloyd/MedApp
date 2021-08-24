@@ -8,6 +8,7 @@ import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord"
 import AttachFileIcon from "@material-ui/icons/AttachFile"
 import RedoIcon from "@material-ui/icons/Redo"
 import CheckIcon from "@material-ui/icons/Check"
+import CloseIcon from "@material-ui/icons/Close"
 import { styled } from "@material-ui/core/styles"
 
 const StyledPause = styled(PauseIcon)({
@@ -60,12 +61,19 @@ export default function RecordingDialog({
    }
 
    const redoRecording = () => {
-      setPrepRecord(false)
+      setPrepRecord(true)
       setRecordingState(false)
       setSeconds(0)
       setMinutes(0)
       setMediaChunks([])
       prepForRecording()
+      setAttachedCustom(false)
+   }
+
+   const handleCancelRecording = () => {
+      setPrepRecord(false)
+      setMediaChunks([])
+      setAttachedCustom(false)
    }
 
    async function handleRecording() {
@@ -153,6 +161,7 @@ export default function RecordingDialog({
                   <StyledArrow /> <StyledPause />
                </IconButton>
             )}
+            {makeIconBtn(CloseIcon, handleCancelRecording)}
          </DialogActions>
       </Dialog>
    )

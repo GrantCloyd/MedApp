@@ -43,7 +43,6 @@ export default function CreatePage() {
    const dispatch = useDispatch()
    const history = useHistory()
    const [prepRecord, setPrepRecord] = useState(false)
-
    const [newMed, setNewMed] = useState(initialState)
    const [success, setSuccess] = useState(false)
    const [errors, setErrors] = useState(false)
@@ -88,7 +87,6 @@ export default function CreatePage() {
    return (
       <TightCard>
          <CardHeader title="Create and Upload" />
-
          {loading && (
             <p>
                <StyledProg />{" "}
@@ -106,7 +104,6 @@ export default function CreatePage() {
                </DialogContent>
                <DialogActions>
                   {makeIconBtn(PageviewIcon, () => history.push("/profile"))}
-
                   {makeIconBtn(AddCircleIcon, handleStayOnPage)}
                </DialogActions>
             </Dialog>

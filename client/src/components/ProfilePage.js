@@ -84,23 +84,29 @@ export default function ProfilePage() {
                   <DialogTitle>Edit Details</DialogTitle>
                   <PaddedDialogContent>
                      <form onSubmit={handleSubmit}>
-                        <StyledTextField
-                           fullWidth
-                           onChange={handleProfileChange}
-                           type="text"
-                           label="Name"
-                           value={profileEdit.name}
-                           name="name"
-                        />{" "}
-                        <br />
-                        <StyledTextField
-                           fullWidth
-                           onChange={handleProfileChange}
-                           type="text"
-                           label="Email"
-                           value={profileEdit.email}
-                           name="email"
-                        />
+                        {user.name !== "guest" ? (
+                           <>
+                              <StyledTextField
+                                 fullWidth
+                                 onChange={handleProfileChange}
+                                 type="text"
+                                 label="Name"
+                                 value={profileEdit.name}
+                                 name="name"
+                              />{" "}
+                              <br />
+                              <StyledTextField
+                                 fullWidth
+                                 onChange={handleProfileChange}
+                                 type="text"
+                                 label="Email"
+                                 value={profileEdit.email}
+                                 name="email"
+                              />
+                           </>
+                        ) : (
+                           <p>*Name and email cannot be edited as a guest* </p>
+                        )}
                         {user.type === "teacher" && (
                            <>
                               <StyledTextField
@@ -173,6 +179,7 @@ export default function ProfilePage() {
                <TightButton onClick={() => setToggleEdit(!toggleEdit)}>Edit Info</TightButton>
             </TightCard>
          )}
+         <br />
          {user.type === "teacher" ? <TeacherProfile /> : <StudentProfile />}
       </div>
    )

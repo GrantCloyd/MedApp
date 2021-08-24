@@ -184,3 +184,13 @@ export const PaddedDialogContent = styled(DialogContent)({
 export const StyledHelp = styled(LiveHelpIcon)({
    color: `${primaryColor}`,
 })
+
+export const StyledOutlineBtn = styled(Button)({
+   border: `1px solid ${secondaryColor}`,
+   background: "transparent",
+   boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
+   padding: "8px 5px",
+   width: "35%",
+   color: `${primaryColor}`,
+   marginLeft: "5%",
+})

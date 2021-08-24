@@ -5,7 +5,15 @@ import { loginT } from "./store/teacherReducer"
 import { loginS } from "./store/studentReducer"
 import { Container, Card, RadioGroup, FormLabel, FormControlLabel } from "@material-ui/core"
 import { useDispatch } from "react-redux"
-import { StyledButton, StyledTextField, StyledRad, CenterCon, StyledLogo } from "./styles"
+import {
+   StyledButton,
+   StyledTextField,
+   StyledRad,
+   CenterCon,
+   StyledOutlineBtn,
+   StyledLogo,
+} from "./styles"
+import { teacherGuest, studentGuest } from "./store/guestUsers"
 
 export default function LogInPage() {
    const initialState = {
@@ -21,19 +29,32 @@ export default function LogInPage() {
    const handleLogInChange = e => handleChange(e, setLogIn, logIn)
    const history = useHistory()
 
-   async function handleLogIn(e) {
+   async function handleLogIn(e, guest = null) {
       e.preventDefault()
       setErrors(false)
+
       const configObj = createConfig("POST", logIn)
 
       const res = await fetch("/log_in", configObj)
       const data = await res.json()
       if (data.id) {
          logIn.type === "teacher" ? dispatch(loginT(data)) : dispatch(loginS(data))
-
          history.push("/landing")
       } else {
          setErrors("Password and/or email do not match")
+      }
+   }
+
+   async function handleGuest(guest) {
+      setErrors(false)
+      const configObj = createConfig("POST", guest === "teacher" ? teacherGuest : studentGuest)
+      const res = await fetch("/log_in", configObj)
+      const data = await res.json()
+      if (data.id) {
+         guest === "teacher" ? dispatch(loginT(data)) : dispatch(loginS(data))
+         history.push("/landing")
+      } else {
+         setErrors("Something went wrong")
       }
    }
 
@@ -72,14 +93,12 @@ export default function LogInPage() {
                <Container size="med">
                   <FormLabel component="legend">User Type</FormLabel>
 
-                  <RadioGroup name="userType">
+                  <RadioGroup name="type" value={logIn.type}>
                      <FormControlLabel
                         onChange={handleLogInChange}
                         control={<StyledRad color="default" />}
-                        id="teacher"
                         value="teacher"
                         label="Teacher"
-                        name="type"
                      />
                      <FormControlLabel
                         onChange={handleLogInChange}
@@ -95,6 +114,16 @@ export default function LogInPage() {
                {" "}
                Don't have a login? <Link to="/signup">Sign up here! </Link>{" "}
             </p>
+            <StyledOutlineBtn
+               onClick={() => {
+                  handleGuest("teacher")
+               }}>
+               Continue as Guest Teacher
+            </StyledOutlineBtn>
+            <br />
+            <StyledOutlineBtn onClick={() => handleGuest("student")}>
+               Continue as Guest Student
+            </StyledOutlineBtn>
          </CenterCon>
       </Card>
    )
