@@ -97,8 +97,8 @@ export default function SignUpPage() {
                      />
 
                      <FormControlLabel
-                        control={<StyledRad color="default" />}
                         onChange={handleSignUpChange}
+                        control={<StyledRad color="default" />}
                         label="Student"
                         value="student"
                         name="type"

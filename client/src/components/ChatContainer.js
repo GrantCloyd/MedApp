@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { handleChange, createConfig, makeIconBtn } from "../functions"
-import { useDispatch } from "react-redux"
-import { addMessage, deleteChat } from "./store/teacherReducer"
+
 import { Avatar } from "@material-ui/core"
 import {
    StyledSend,
@@ -28,7 +27,6 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
    }
    const [message, setMessage] = useState(initialMessage)
    const [errors, setErrors] = useState(false)
-   const dispatch = useDispatch()
 
    const handleContent = e => handleChange(e, setMessage, message)
    async function handleMessageSubmit(e) {

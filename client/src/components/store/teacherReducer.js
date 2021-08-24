@@ -63,11 +63,15 @@ export const teacherSlice = createSlice({
       updateIncome: (state, action) => {
          state.income = action.payload.income
       },
+      hideDonation: (state, action) => {
+         return { ...state, donations: state.donations.filter(d => d.id !== action.payload) }
+      },
    },
 })
 
 export const {
    loginT,
+   hideDonation,
    updateIncome,
    setChatsT,
    updateMed,

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { setChatsS } from "./store/studentReducer"
-import { setChatsT } from "./store/teacherReducer"
+import { setChatsT, hideDonation } from "./store/teacherReducer"
 import ChatContainer from "./ChatContainer"
+import { TightPaper } from "./styles"
+import { makeIconBtn } from "../functions"
+import CheckIcon from "@material-ui/icons/Check"
 
 export default function InteractPage() {
    let user = useSelector(state => (state.student.name === "" ? state.teacher : state.student))
-   const chats = user.chats
+
    const dispatch = useDispatch()
    const [fetchChats, setFetchChats] = useState([])
    const [addMessage, setAddMessage] = useState(false)
@@ -26,14 +29,17 @@ export default function InteractPage() {
       getData()
    }, [addMessage, deleteMessage])
 
+   const handleHideDonation = id => dispatch(hideDonation(id))
+
    const donationsDisplay = user.donations.map(d => (
       <div key={d.id}>
-         <hr />
-         <p>
-            Name: {d.username} || Amount: ${Number(d.amount).toFixed(2)}
-         </p>
-         <p>Message: {d.message}</p>
-         <hr />
+         <TightPaper elevation={3}>
+            <p>
+               From : {d.username} (${Number(d.amount).toFixed(2)})
+            </p>
+            <p>Message: {d.message}</p>
+            {makeIconBtn(CheckIcon, () => handleHideDonation(d.id))}
+         </TightPaper>
       </div>
    ))
 
@@ -64,7 +70,7 @@ export default function InteractPage() {
          {user.type === "teacher" && <h3>Donations</h3>}
          {user.type !== "student" ? (
             user.donations.length > 0 ? (
-               donationsDisplay
+               <>{donationsDisplay}</>
             ) : (
                <p>No donations yet</p>
             )

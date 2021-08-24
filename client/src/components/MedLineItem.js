@@ -4,6 +4,7 @@ import { TightCard, primaryColor, StyledArrow } from "./styles"
 import TimerIcon from "@material-ui/icons/Timer"
 import InfoIcon from "@material-ui/icons/Info"
 import { styled } from "@material-ui/core/styles"
+import { makeIconBtn } from "../functions"
 
 const StyledInfo = styled(InfoIcon)({
    color: `${primaryColor}`,
@@ -28,6 +29,7 @@ export default function MedLineItem({ m, clickHandler = null }) {
          wrapper2={children => <Card>{children}</Card>}>
          <StyledAvatar alt={m.teacher.name} src={m.teacher.image_url} />
          <br />
+         <br />
          <CardHeader title={m.title}> </CardHeader>
 
          <CardContent>
@@ -35,9 +37,7 @@ export default function MedLineItem({ m, clickHandler = null }) {
                {" "}
                Type: {m.med_type} <br /> <br /> <StyledInfo /> {m.description}
             </Paper>{" "}
-            <IconButton>
-               <TimerIcon />
-            </IconButton>
+            {makeIconBtn(TimerIcon, null)}
             {m.est_length} minutes{" "}
             {clickHandler === null && m.listens !== undefined && (
                <>

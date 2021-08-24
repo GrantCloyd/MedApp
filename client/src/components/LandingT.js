@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
-import { TightButton, TightPaper } from "./styles"
+import { createConfig } from "../functions"
+import { updateIncome } from "./store/teacherReducer"
+import { useSelector, useDispatch } from "react-redux"
+import { Dialog, DialogTitle } from "@material-ui/core"
+import { TightPaper, TightButton, PaddedDialogContent } from "./styles"
 
 export default function LandingT({ chats, last_med }) {
+   const user = useSelector(state => state.teacher)
    const [lastTime, setLastTime] = useState("")
    const history = useHistory()
+   const [message, setMessage] = useState(false)
+   const dispatch = useDispatch()
 
    useEffect(() => {
       const currTime = new Date()
@@ -34,13 +41,28 @@ export default function LandingT({ chats, last_med }) {
       }
    }, [last_med])
 
+   async function handleWithdraw() {
+      setMessage(false)
+      const res = await fetch(`/teachers/${user.id}`, createConfig("PATCH", { income: 0 }))
+      const data = await res.json()
+      if (data.id) {
+         setMessage(`You've successfully withdrawn: $${(Number(user.income) * 0.8).toFixed(2)}`)
+         setTimeout(() => {
+            setMessage(false)
+            dispatch(updateIncome(data))
+         }, 2200)
+      } else {
+         setMessage(`Your information has not been updated, ${data.error}`)
+      }
+   }
+
    return (
       <div>
          <h3>Updates:</h3>
          <TightPaper>
             {chats.length > 0 && chats[0].title.length > 0 ? (
                <p>
-                  You have ${chats.length} open question{chats.length > 1 && "s"}
+                  You have {chats.length} open question{chats.length > 1 && "s"}
                   <br /> <br />
                   <TightButton onClick={() => history.push("/interact")}>
                      Go to Messages
@@ -64,6 +86,26 @@ export default function LandingT({ chats, last_med }) {
             )}
             <TightButton onClick={() => history.push("/create")}>Make Something New</TightButton>{" "}
          </TightPaper>
+
+         {message && (
+            <Dialog open={message}>
+               <DialogTitle> Withdrawl Information</DialogTitle>
+               <PaddedDialogContent>{message}</PaddedDialogContent>
+               <br />
+            </Dialog>
+         )}
+         {Number(user.income).toFixed(2) > 0 && (
+            <TightPaper>
+               <p>Current Income: ${Number(user.income).toFixed(2)}</p>
+               <TightButton onClick={handleWithdraw}>Withdraw</TightButton>
+               <p>**Withdrawls are split 80/20 with Here|Now</p>
+            </TightPaper>
+         )}
+         {Number(user.income).toFixed(2) <= 0.0 && (
+            <TightPaper>
+               <p>You have no new income</p>
+            </TightPaper>
+         )}
       </div>
    )
 }
