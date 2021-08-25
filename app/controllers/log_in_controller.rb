@@ -26,8 +26,9 @@ class LogInController < ApplicationController
      teacher = Teacher.find_by(id: session[:teacher_id])
      if !student.nil? 
        render json: student
-     else
+     elsif !teacher.nil?
        render json: teacher
+     else render head: :no_content
      end
     end
 
