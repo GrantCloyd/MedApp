@@ -7,6 +7,6 @@ class Meditation < ApplicationRecord
     belongs_to :teacher
     has_many :plays, dependent: :destroy
     has_many :favorites
-    has_one_attached :audio_file
+    has_one_attached :audio_file, service: :s3
 
 end
