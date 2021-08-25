@@ -46,10 +46,10 @@ export default function LandingT({ chats, last_med }) {
             setLastTime(phrase("over a month"))
          } else if (currMonth > mLastMonth && currDay <= mLastDay) {
             setLastTime(
-               phrase(`${30 - currDay + mLastDay} day${30 - currDay + mLastDay > 1 && "s"}`)
+               phrase(`${30 - currDay + mLastDay} day${30 - currDay + mLastDay > 1 ? "s" : ""}`)
             )
          } else {
-            setLastTime(phrase(`${currDay - mLastDay} day${currDay - mLastDay > 1 && "s"}`))
+            setLastTime(phrase(`${currDay - mLastDay} day${currDay - mLastDay > 1 ? "s" : ""}`))
          }
       }
    }, [last_med])
