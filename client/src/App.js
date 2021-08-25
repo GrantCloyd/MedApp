@@ -41,13 +41,13 @@ function App() {
       handleRefresh()
    }, [])
 
-   if (user.name === "") {
+   if (user.name === "" || user.name === undefined) {
       return (
          <StyledDiv>
             <br />
             <Switch>
                <Container maxWidth="sm">
-                  <Route path="/" exact component={LogInPage} />
+                  <Route path="/" component={LogInPage} />
                   <Route path="/signup" exact component={SignUpPage} />
                </Container>
             </Switch>
