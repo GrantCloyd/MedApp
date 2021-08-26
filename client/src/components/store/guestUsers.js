@@ -4,7 +4,7 @@ export const teacherGuest = {
    type: "teacher",
 }
 export const studentGuest = {
-   email: "guest",
+   email: "guestS",
    password: "guest",
    type: "student",
 }

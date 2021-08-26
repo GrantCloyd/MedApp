@@ -47,7 +47,7 @@ function App() {
             <br />
             <Switch>
                <Container maxWidth="sm">
-                  <Route path="/" component={LogInPage} />
+                  <Route exact path="/" component={LogInPage} />
                   <Route path="/signup" exact component={SignUpPage} />
                </Container>
             </Switch>
