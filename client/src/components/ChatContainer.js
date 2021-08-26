@@ -59,6 +59,7 @@ export default function ChatContainer({ handleDelete, handleAdd, userType, userN
                         {m.username === userName ? "You wrote:" : `From: ${m.username}`} <br />{" "}
                         <br />
                         {m.username === userName ? m.content : `Message: ${m.content}`}
+                        <p />
                      </TightCard>
                   </li>
                   <br />

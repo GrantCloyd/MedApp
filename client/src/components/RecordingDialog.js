@@ -129,10 +129,12 @@ export default function RecordingDialog({
       <Dialog open={prepRecord}>
          <DialogTitle>Recording Interface</DialogTitle>
          <DialogContent>
-            <p>
-               {minutes} : {seconds >= 10 ? seconds : `0${seconds}`}{" "}
-               {mediaRecorder.state === "paused" && "Paused"}
-            </p>
+            <div align="center">
+               <p>
+                  {minutes} : {seconds >= 10 ? seconds : `0${seconds}`}{" "}
+                  {mediaRecorder.state === "paused" && "Paused"}
+               </p>
+            </div>
             {recordingState === "Uploaded" && (
                <>
                   <br />
