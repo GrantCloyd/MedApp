@@ -4,8 +4,8 @@ import { createConfig } from "../functions"
 import { removeFollow } from "./store/studentReducer"
 import { useHistory } from "react-router-dom"
 import { FormControlLabel } from "@material-ui/core"
-import StudentMedButtons from "./StudentMedButtons"
-import { CardHeader, CardContent, Grid, CardActions, CardMedia } from "@material-ui/core"
+import FavoriteCard from "./FavoriteCard"
+import { CardHeader, Grid, CardActions, CardMedia } from "@material-ui/core"
 import { TightCard, StyledSwitch } from "./styles"
 import { styled } from "@material-ui/core/styles"
 
@@ -52,31 +52,9 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
       </TightCard>
    ))
 
-   const favoriteDisplay = favorites.map(m => (
-      <TightCard key={m.id}>
-         <CardContent>
-            {" "}
-            <CardHeader title={m.meditation.title} />
-            {m.teacher_name} <br /> {m.meditation.est_length} minutes
-         </CardContent>
-         <StudentMedButtons
-            medId={m.meditation.id}
-            teaId={m.meditation.teacher_id}
-            teaImg={m.teacher_image}
-         />
-      </TightCard>
-   ))
+   const favoriteDisplay = favorites.map(m => <FavoriteCard {...m} key={m.id} />)
 
-   const popularDisplay = [most_pop_med].map(m => (
-      <TightCard>
-         <CardContent>
-            {" "}
-            <CardHeader title={m.title} />
-            From: {m.teacher_name} <br /> {m.est_length} minutes
-         </CardContent>
-         <StudentMedButtons medId={m.id} teaId={m.teacher_id} teaImg={m.teacher_image} />{" "}
-      </TightCard>
-   ))
+   const popularDisplay = [most_pop_med].map(m => <FavoriteCard {...m} key={m.id} />)
 
    return (
       <div>
