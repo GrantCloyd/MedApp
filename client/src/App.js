@@ -34,6 +34,7 @@ function App() {
       async function handleRefresh() {
          const res = await fetch("/me")
          const data = await res.json()
+         console.log(data)
          if (data !== null) {
             data.image_url ? dispatch(loginT(data)) : dispatch(loginS(data))
          }
