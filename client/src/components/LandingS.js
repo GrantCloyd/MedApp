@@ -54,7 +54,7 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
 
    const favoriteDisplay = favorites.map(m => <FavoriteCard {...m} key={m.id} />)
 
-   const popularDisplay = [most_pop_med].map(m => <FavoriteCard {...m} key={m.id} />)
+   // const popularDisplay = [most_pop_med].map(m => <FavoriteCard {...m} key={m.id} />)
 
    return (
       <div>
@@ -78,8 +78,8 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
             </Grid>
          )}
 
-         <h3>Most Popular Meditation:</h3>
-         {popularDisplay}
+         {/* <h3>Most Popular Meditation:</h3>
+         {popularDisplay} */}
       </div>
    )
 }

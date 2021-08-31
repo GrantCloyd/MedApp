@@ -17,12 +17,12 @@ class StudentSerializer < ActiveModel::Serializer
 
    def recent_plays
      plays = object.plays.order(created_at: :desc).limit(5)
-     recent_plays = plays.collect {|p| PlaySerializer.new(p)} unless plays.length == 0
+     recent_plays = plays.collect {|p| PlaySerializer.new(p)} 
  
    end
 
    def total_donations
-      object.donations.sum(:amount) unless object.donations.length == 0
+      object.donations.sum(:amount) 
    end
 
    def most_donated_teacher
