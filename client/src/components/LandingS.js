@@ -14,8 +14,8 @@ const TeacherImage = styled(CardMedia)({
 })
 
 export default function LandingS({ favorites, follows, most_pop_med }) {
-   const followsTecherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
-   const followerStatus = id => followsTecherId.includes(id)
+   const followsTeacherId = useSelector(state => state.student.follows).map(f => f.teacher_id)
+   const followerStatus = id => followsTeacherId.includes(id)
    const dispatch = useDispatch()
    const history = useHistory()
 
