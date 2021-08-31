@@ -12,18 +12,17 @@ class StudentSerializer < ActiveModel::Serializer
   end
 
   def total_time
-     object.plays.sum(:length)
+     object.plays.sum(:length) 
   end
 
    def recent_plays
      plays = object.plays.order(created_at: :desc).limit(5)
-    
-     recent_plays = plays.collect {|p| PlaySerializer.new(p)} 
+     recent_plays = plays.collect {|p| PlaySerializer.new(p)} unless plays.length == 0
  
    end
 
    def total_donations
-      object.donations.sum(:amount)
+      object.donations.sum(:amount) unless object.donations.length == 0
    end
 
    def most_donated_teacher
@@ -48,7 +47,7 @@ class StudentSerializer < ActiveModel::Serializer
 
   def most_pop_med 
     med = Meditation.all.max_by {|m| m.plays.length}
-   PopSerializer.new(med)
+   PopSerializer.new(med) unless med == nil 
    end 
 
    def plays_id 
