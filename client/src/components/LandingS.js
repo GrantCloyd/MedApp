@@ -29,30 +29,38 @@ export default function LandingS({ favorites, follows, most_pop_med }) {
       }
    }
 
-   const followsDisplay = follows.map(f => (
-      <TightCard>
-         <div onClick={() => history.push(`/teachers/${f.teacher.id}`)}>
-            <CardHeader title={f.teacher.name} />
-            <TeacherImage alt={f.teacher.name} image={f.teacher.image_url.toString()} />
-         </div>
-         <CardActions>
-            {" "}
-            <FormControlLabel
-               control={
-                  <StyledSwitch
-                     color="primary"
-                     name="followSwitch"
-                     checked={followerStatus(f.teacher.id)}
-                     onChange={() => handleUnfollow(f.id)}
-                  />
-               }
-               label={followerStatus ? "Following" : "Not Following"}
-            />
-         </CardActions>
-      </TightCard>
-   ))
+   let followsDisplay = []
 
-   const favoriteDisplay = favorites.map(m => <FavoriteCard {...m} key={m.id} />)
+   if (follows.length > 0) {
+      followsDisplay = follows.map(f => (
+         <TightCard>
+            <div onClick={() => history.push(`/teachers/${f.teacher.id}`)}>
+               <CardHeader title={f.teacher.name} />
+               <TeacherImage alt={f.teacher.name} image={f.teacher.image_url.toString()} />
+            </div>
+            <CardActions>
+               {" "}
+               <FormControlLabel
+                  control={
+                     <StyledSwitch
+                        color="primary"
+                        name="followSwitch"
+                        checked={followerStatus(f.teacher.id)}
+                        onChange={() => handleUnfollow(f.id)}
+                     />
+                  }
+                  label={followerStatus ? "Following" : "Not Following"}
+               />
+            </CardActions>
+         </TightCard>
+      ))
+   }
+
+   let favoriteDisplay = []
+
+   if (favorites.length > 0) {
+      favoriteDisplay = favorites.map(m => <FavoriteCard {...m} key={m.id} />)
+   }
 
    // const popularDisplay = [most_pop_med].map(m => <FavoriteCard {...m} key={m.id} />)
 
