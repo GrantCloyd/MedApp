@@ -63,7 +63,7 @@ export default function CreatePage() {
       }
 
       axios
-         .post("http://localhost:3000/meditations", formData)
+         .post("https://herenowmedapp.herokuapp.com/meditations", formData)
          .then(res => {
             if (res.data.id) {
                dispatch(addMed(res.data))
